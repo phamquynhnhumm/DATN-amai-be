@@ -1,10 +1,10 @@
-package com.example.amainbe;
+package com.example.amaibe;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AmainBeApplicationTests {
+class AmaiBeApplicationTests {
 
     @Test
     void contextLoads() {

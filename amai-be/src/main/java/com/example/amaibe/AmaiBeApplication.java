@@ -1,13 +1,13 @@
-package com.example.amainbe;
+package com.example.amaibe;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AmainBeApplication {
+public class AmaiBeApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AmainBeApplication.class, args);
+        SpringApplication.run(AmaiBeApplication.class, args);
     }
 
 }
