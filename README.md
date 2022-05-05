@@ -1,6 +1,6 @@
 # Hệ thống quản lý quán trà sữa order QR và tích hợp Chatbox
 
-# Người dùng vãn lai
+# Người dùng vãng lai
 * Xem món
 * Tìm kiếm món
 * Đăng ký
