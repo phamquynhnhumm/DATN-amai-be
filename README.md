@@ -13,7 +13,7 @@
 * Xem, sửa thông tin tài khoản
 * Quên mật khẩu
 * Đăng nhập, đăng xuất
-
+* Chat với của hàng
 # Nhân viên
 * Đang nhập, đăng xuất
 * Thêm, sửa, xóa, tìm kiếm món
