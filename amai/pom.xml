@@ -17,6 +17,12 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
+        <!-- https://mavenlibs.com/maven/dependency/org.seasar.doma.boot/doma-spring-boot-starter -->
+        <dependency>
+            <groupId>org.seasar.doma.boot</groupId>
+            <artifactId>doma-spring-boot-starter</artifactId>
+            <version>1.6.0</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jdbc</artifactId>
