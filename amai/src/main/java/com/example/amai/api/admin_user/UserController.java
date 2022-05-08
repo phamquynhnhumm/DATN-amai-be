@@ -18,7 +18,7 @@ public class UserController {
     private UserService userService;
 
     /**
-     * Danh sách user
+     * Danh sách người dùng
      *
      * @return
      */
@@ -29,10 +29,10 @@ public class UserController {
     }
 
     /**
-     * Xóa món (cập nhật cơ xóa isDelete = true
+     * Xóa người dùng (cập nhật cơ xóa isDelete = true
      *
-     * @param id ID món
-     * @return Món đã được cập nhật cờ xóa
+     * @param id ID người dùng
+     * @return người dùng đã được cập nhật cờ xóa
      */
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Users> deleteUser(@PathVariable("id") Integer id) {
@@ -47,10 +47,10 @@ public class UserController {
     }
 
     /**
-     * Hàm Xem chi tiết một món
+     * Hàm Xem chi tiết một người dùng
      *
-     * @param id Id của món
-     * @return trả về thông tin món nếu tìm kiếm thấy Ngược lại trả về NOT
+     * @param id Id của người dùng
+     * @return trả về thông tin người dùng nếu tìm kiếm thấy Ngược lại trả về NOT
      */
     @GetMapping("/{id}")
     public ResponseEntity<Users> findById(@PathVariable("id") Integer id) {
@@ -59,7 +59,7 @@ public class UserController {
     }
 
     /**
-     * Thêm mới món
+     * Thêm mới người dùng
      *
      * @param users
      * @return
@@ -73,7 +73,7 @@ public class UserController {
     }
 
     /**
-     * Cập nhật món
+     * Cập nhật người dùng
      *
      * @param users
      * @return
