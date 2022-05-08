@@ -57,13 +57,15 @@ public class Account {
     @Enumerated(EnumType.STRING)
     private ERole role;
 
+    /**
+     * Mật khẩu
+     */
     private String password;
 
     /**
      * Danh sách order {{@link Oder}}
      */
     @OneToMany(mappedBy = "account")
-    @JsonIgnore
     List<Oder> ordersList;
 
     @OneToOne(mappedBy = "account")
