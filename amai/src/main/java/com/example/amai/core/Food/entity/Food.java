@@ -14,6 +14,9 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+/**
+ * Món
+ */
 public class Food {
     /**
      * ID dịch vụ

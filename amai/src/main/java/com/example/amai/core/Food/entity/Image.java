@@ -1,5 +1,6 @@
 package com.example.amai.core.Food.entity;
 
+import com.example.amai.core.admin_user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,10 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class image {
+/**
+ * Ảnh
+ */
+public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -55,4 +59,5 @@ public class image {
      * Id món
      */
     private int idFood;
+
 }

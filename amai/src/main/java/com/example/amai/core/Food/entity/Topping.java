@@ -13,6 +13,9 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+/**
+ * Đồ kèm theo món
+ */
 public class Topping {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
