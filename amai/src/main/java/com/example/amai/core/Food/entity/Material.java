@@ -25,7 +25,7 @@ public class Material {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
 
     /**
      * Người tạo
@@ -79,7 +79,7 @@ public class Material {
     /**
      * Mô tả
      */
-    private String content;
+    private String name;
 
     /**
      * Khối lượng nhập vào

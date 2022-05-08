@@ -27,7 +27,7 @@ public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
 
     /**
      * Người tạo
@@ -112,6 +112,6 @@ public class Food {
      * Danh mục món {@link Food}
      */
     @ManyToOne
-    @JoinColumn(name = "food_id")
+    @JoinColumn(name = "foodCategory_id")
     private FoodCategory foodCategory;
 }

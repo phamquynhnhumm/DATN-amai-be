@@ -20,7 +20,7 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
 
     /**
      * Người tạo
@@ -54,10 +54,6 @@ public class Image {
      */
     private String name;
 
-    /**
-     * Id món
-     */
-    private int idFood;
 
     /**
      * món {@link Food}
