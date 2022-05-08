@@ -66,6 +66,7 @@ public class Account {
      * Danh sách order {{@link Oder}}
      */
     @OneToMany(mappedBy = "account")
+    @JsonIgnore
     List<Oder> ordersList;
 
     @OneToOne(mappedBy = "account")
