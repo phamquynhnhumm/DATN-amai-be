@@ -1,9 +1,7 @@
 package com.example.amai.api.admin_user;
 
 import com.example.amai.core.admin_user.entity.Account;
-import com.example.amai.core.admin_user.entity.Users;
 import com.example.amai.core.admin_user.service.AccountService;
-import com.example.amai.core.admin_user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +32,7 @@ public class AccountController {
      * Xóa tài khoản (cập nhật cơ xóa isDelete = true
      *
      * @param userName userName người dùng
-     * @return người dùng đã được cập nhật cờ xóa
+     * @return tài khoản đã được cập nhật cờ xóa
      */
     @DeleteMapping("delete/{userName}")
     public ResponseEntity<Account> deleteUser(@PathVariable("userName") String userName) {
@@ -52,7 +50,7 @@ public class AccountController {
      * Hàm Xem chi tiết một người dùng
      *
      * @param userName userName của người dùng
-     * @return trả về thông tin người dùng nếu tìm kiếm thấy Ngược lại trả về NOT
+     * @return trả về thông tin tài khoản nếu tìm kiếm thấy Ngược lại trả về NOT
      */
     @GetMapping("/{userName}")
     public ResponseEntity<Account> findById(@PathVariable("userName") String userName) {
@@ -89,5 +87,3 @@ public class AccountController {
         return new ResponseEntity<>(accountService.save(account), HttpStatus.OK);
     }
 }
-
-
