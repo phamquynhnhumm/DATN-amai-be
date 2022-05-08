@@ -1,4 +1,4 @@
-package com.example.amai.core.suppliner.entity;
+package com.example.amai.core.Food.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,17 +8,17 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-/**
- * Nhà cung cấp
- */
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class suppliner {
+/**
+ * Chi tiết món
+ */
+public class FoodDetail {
     /**
-     * ID nhà cung cấp
+     * ID dịch vụ
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,24 +53,21 @@ public class suppliner {
     private Boolean isDeleted;
 
     /**
-     * Tên nhà cung cấp
+     * Tên nguyên liệu
+     * material Id nguyên liệu {{@link Material}}
      */
-    @Column(name = "name")
-    private String name;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Material material;
 
     /**
-     * Email nhà cung cấp
+     * món {@link Food}
      */
-    private String email;
+    @ManyToOne
+    @JoinColumn(name = "food_id")
+    private Food food;
 
     /**
-     * Địa chỉ nhà cung cấp
+     * Khối lượng sử dyngf
      */
-    private String address;
-
-    /**
-     * Số điện thoại nhà cung cấp
-     */
-    private int phone;
-
+    private Float kg;
 }

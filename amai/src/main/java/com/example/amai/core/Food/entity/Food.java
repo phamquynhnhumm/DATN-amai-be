@@ -1,5 +1,7 @@
 package com.example.amai.core.Food.entity;
 
+import com.example.amai.core.order.entity.OrderDetail;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Entity
@@ -54,7 +57,7 @@ public class Food {
     private Boolean isDeleted;
 
     /**
-     * Tên dịch vụ
+     * Tên món
      */
     @Column(name = "name")
     private String name;
@@ -70,7 +73,7 @@ public class Food {
     private Float price;
 
     /**
-     * Mô tả
+     * Mô  tả cách pha chế
      */
     private String describe;
 
@@ -83,4 +86,32 @@ public class Food {
      * Trạng thái
      */
     private String status;
+
+    /**
+     * Danh sách ảnh của món {@link Image}
+     */
+    @OneToMany(mappedBy = "food")
+    @JsonIgnore
+    private List<Image> imageList;
+
+    /**
+     * Danh sách chi tiết đặt món {@link OrderDetail}
+     */
+    @OneToMany(mappedBy = "food")
+    @JsonIgnore
+    private List<OrderDetail> orderDetailList;
+
+    /**
+     * Danh sách chi tiết nguyên liệu {@link FoodDetail}
+     */
+    @OneToMany(mappedBy = "food")
+    @JsonIgnore
+    private List<FoodDetail> foodDetailList;
+
+    /**
+     * Danh mục món {@link Food}
+     */
+    @ManyToOne
+    @JoinColumn(name = "food_id")
+    private FoodCategory foodCategory;
 }

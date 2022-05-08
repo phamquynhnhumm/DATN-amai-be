@@ -1,5 +1,7 @@
-package com.example.amai.core.Food.entity;
+package com.example.amai.core.suppliner.entity;
 
+import com.example.amai.core.Food.entity.Material;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -14,9 +17,12 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 /**
- * Đồ kèm theo món
+ * Nhà cung cấp
  */
-public class Topping {
+public class Supplier {
+    /**
+     * ID nhà cung cấp
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -50,12 +56,32 @@ public class Topping {
     private Boolean isDeleted;
 
     /**
-     * Tên Topping
+     * Tên nhà cung cấp
      */
+    @Column(name = "name")
     private String name;
 
     /**
-     * Gía
+     * Email nhà cung cấp
      */
-    private int idFood;
+    private String email;
+
+    /**
+     * Địa chỉ nhà cung cấp
+     */
+    private String address;
+
+    /**
+     * Số điện thoại nhà cung cấp
+     */
+    private int phone;
+
+    /**
+     * Danh sách nguyên liệu cung cấp {@link Material}
+     */
+    @OneToMany(mappedBy = "supplierList")
+    @JsonIgnore
+    List<Material> materialList;
+
+
 }

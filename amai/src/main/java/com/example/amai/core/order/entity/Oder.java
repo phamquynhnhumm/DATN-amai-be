@@ -1,6 +1,8 @@
 package com.example.amai.core.order.entity;
 
 import com.example.amai.core.admin_user.entity.Account;
+import com.example.amai.core.order.entity.contans.EStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,13 +10,17 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Order {
+/**
+ * Đặt món
+ */
+public class Oder {
 
     /**
      * ID đặt món
@@ -57,4 +63,47 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "account")
     private Account account;
+
+
+    /**
+     * Địa chỉ đặt món
+     */
+    private String address;
+
+    /**
+     * Số điện thoại đặt món
+     */
+    private String phone;
+
+    /**
+     * Tên người nhận
+     */
+    private String fullName;
+
+    /**
+     * Mã QR đặt món
+     */
+    private String qrcode;
+
+    /**
+     * Trạng thái đặt món {@link EStatus}
+     */
+    private EStatus status;
+
+    /**
+     * Danh sách chi tiết đặt món{@link OrderDetail}
+     */
+    @OneToMany(mappedBy = "orders")
+    @JsonIgnore
+    private List<OrderDetail> orderDetailList;
+
+    /**
+     * Tổng tiền
+     */
+    private Float money;
+
+    /**
+     * Số lượng
+     */
+    private int quantity;
 }

@@ -1,7 +1,7 @@
 package com.example.amai.core.admin_user.entity;
 
 import com.example.amai.core.admin_user.entity.contans.ERole;
-import com.example.amai.core.order.entity.Order;
+import com.example.amai.core.order.entity.Oder;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +22,6 @@ import java.util.List;
  */
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String userName;
 
     /**
@@ -61,9 +60,13 @@ public class Account {
     private String password;
 
     /**
-     * Danh sách order {{@link Order}}
+     * Danh sách order {{@link Oder}}
      */
     @OneToMany(mappedBy = "account")
     @JsonIgnore
-    List<Order> orderList;
+    List<Oder> ordersList;
+
+    @OneToOne(mappedBy = "account")
+    @JsonIgnore
+    private Users user;
 }

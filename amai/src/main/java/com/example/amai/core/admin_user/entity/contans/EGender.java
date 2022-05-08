@@ -3,8 +3,10 @@
  */
 package com.example.amai.core.admin_user.entity.contans;
 
+import com.example.amai.core.admin_user.entity.Users;
+
 /**
- *  Lớp chứa kiểu dữ liệu cố định của giới tính {@link com.example.amai.core.admin_user.entity.User}
+ *  Lớp chứa kiểu dữ liệu cố định của giới tính {@link Users}
  */
 public enum EGender {
     /**

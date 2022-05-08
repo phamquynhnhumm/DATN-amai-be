@@ -1,5 +1,6 @@
 package com.example.amai.core.Food.entity;
 
+import com.example.amai.core.suppliner.entity.Supplier;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -52,4 +53,41 @@ public class Material {
      */
     @Column(name = "is_deleted")
     private Boolean isDeleted;
+
+    /**
+     * Danh mục nhà cung cấp {@link Supplier}
+     */
+    @ManyToOne
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplierList;
+
+    /**
+     * Đơn vị tính
+     */
+    private String unit;
+
+    /**
+     * Số lượng
+     */
+    private Integer quantity;
+
+    /**
+     * Giá nhập
+     */
+    private Float price;
+
+    /**
+     * Mô tả
+     */
+    private String content;
+
+    /**
+     * Khối lượng nhập vào
+     */
+    private Float importKg;
+
+    /**
+     * Khối lượng còn lại
+     */
+    private Float remainingKg;
 }

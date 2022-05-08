@@ -1,6 +1,5 @@
 package com.example.amai.core.Food.entity;
 
-import com.example.amai.core.admin_user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -60,4 +59,10 @@ public class Image {
      */
     private int idFood;
 
+    /**
+     * món {@link Food}
+     */
+    @ManyToOne
+    @JoinColumn(name = "food_id")
+    private Food food;
 }
