@@ -88,13 +88,6 @@ public class Food {
     private String status;
 
     /**
-     * Danh sách ảnh của món {@link Image}
-     */
-    @OneToMany(mappedBy = "food")
-    @JsonIgnore
-    private List<Image> imageList;
-
-    /**
      * Danh sách chi tiết đặt món {@link OrderDetail}
      */
     @OneToMany(mappedBy = "food")
@@ -114,4 +107,9 @@ public class Food {
     @ManyToOne
     @JoinColumn(name = "foodCategory_id")
     private FoodCategory foodCategory;
+
+    /**
+     * Ảnh món
+     */
+    private String Image;
 }
