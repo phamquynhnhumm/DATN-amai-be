@@ -74,7 +74,7 @@ public class Supplier {
     /**
      * Số điện thoại nhà cung cấp
      */
-    private int phone;
+    private String phone;
 
     /**
      * Danh sách nguyên liệu cung cấp {@link Material}
@@ -82,6 +82,5 @@ public class Supplier {
     @OneToMany(mappedBy = "supplierList")
     @JsonIgnore
     List<Material> materialList;
-
 
 }
