@@ -1,7 +1,7 @@
 package com.example.amai.core.order.entity;
 
 import com.example.amai.core.admin_user.entity.Account;
-import com.example.amai.core.order.entity.contans.EStatus;
+import com.example.amai.core.order.entity.contans.EStatusOrder;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -86,9 +86,10 @@ public class Oder {
     private String qrcode;
 
     /**
-     * Trạng thái đặt món {@link EStatus}
+     * Trạng thái đặt món {@link EStatusOrder}
      */
-    private EStatus status;
+    @Enumerated(EnumType.STRING)
+    private EStatusOrder status;
 
     /**
      * Danh sách chi tiết đặt món{@link OrderDetail}

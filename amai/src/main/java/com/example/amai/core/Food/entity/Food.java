@@ -1,5 +1,6 @@
 package com.example.amai.core.Food.entity;
 
+import com.example.amai.core.Food.entity.contans.EStatusFood;
 import com.example.amai.core.order.entity.OrderDetail;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -83,9 +84,10 @@ public class Food {
     private int quanity;
 
     /**
-     * Trạng thái
+     * Trạng thái món {@link EStatusFood}
      */
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private EStatusFood status;
 
     /**
      * Danh sách chi tiết đặt món {@link OrderDetail}

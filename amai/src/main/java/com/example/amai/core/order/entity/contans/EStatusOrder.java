@@ -3,7 +3,7 @@ package com.example.amai.core.order.entity.contans;
 /**
  * Trạng thái order
  */
-public enum EStatus {
+public enum EStatusOrder {
     /**
      * Đơn hàng đang chờ xác nhận
      */

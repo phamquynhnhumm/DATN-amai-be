@@ -1,6 +1,7 @@
 package com.example.amai.core.order.entity;
 
 import com.example.amai.core.Food.entity.Food;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
