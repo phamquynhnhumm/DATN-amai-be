@@ -1,5 +1,6 @@
 package com.example.amai.core.Food.entity;
 
+import com.example.amai.core.listener.Listener;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@EntityListeners(Listener.class)
 @Getter
 @Setter
 @AllArgsConstructor

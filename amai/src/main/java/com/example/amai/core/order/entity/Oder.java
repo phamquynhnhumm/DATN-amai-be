@@ -1,6 +1,7 @@
 package com.example.amai.core.order.entity;
 
 import com.example.amai.core.admin_user.entity.Account;
+import com.example.amai.core.listener.Listener;
 import com.example.amai.core.order.entity.contans.EStatusOrder;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@EntityListeners(Listener.class)
 @Getter
 @Setter
 @AllArgsConstructor
