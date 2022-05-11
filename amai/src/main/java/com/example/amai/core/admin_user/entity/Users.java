@@ -73,7 +73,7 @@ public class Users {
     /**
      * Thời gian tạo
      */
-    private LocalDate createAt;
+    private String createAt;
     /**
      * Người cập nhật
      */
@@ -83,7 +83,7 @@ public class Users {
     /**
      * Thời gian cập nhật
      */
-    private LocalDate updateAt;
+    private String updateAt;
 
     /**
      * Cờ xóa

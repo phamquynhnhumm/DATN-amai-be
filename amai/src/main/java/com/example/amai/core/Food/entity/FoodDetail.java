@@ -36,7 +36,7 @@ public class FoodDetail {
     /**
      * Thời gian tạo
      */
-    private LocalDate createAt;
+    private String createAt;
     /**
      * Người cập nhật
      */
@@ -46,7 +46,7 @@ public class FoodDetail {
     /**
      * Thời gian cập nhật
      */
-    private LocalDate updateAt;
+    private String updateAt;
 
     /**
      * Cờ xóa

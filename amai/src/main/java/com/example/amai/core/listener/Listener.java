@@ -8,6 +8,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import java.lang.annotation.Annotation;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Lớp thực hiện trước khi trương tác với table danh mục
@@ -25,16 +26,21 @@ public class Listener implements EntityListeners {
     }
 
     /**
+     * format ngày giờ
+     */
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy");
+
+    /**
      * Thực hiện trước khi thêm mới danh mục
      *
      * @param foodCategory Thông tin đưa vào câu truy vấn
      */
     @PrePersist
     public void preInser(FoodCategory foodCategory) {
-        foodCategory.setCreateAt(LocalDateTime.now());
-        foodCategory.setUpdateAt(LocalDateTime.now());
-        foodCategory.setCreatedBy("thêm mới");
-        foodCategory.setUpdatedBy("thêm mới");
+        foodCategory.setCreateAt(LocalDateTime.now().format(formatter));
+        foodCategory.setUpdateAt(LocalDateTime.now().format(formatter));
+        foodCategory.setCreatedBy("quynhnhu");
+        foodCategory.setUpdatedBy("quynhnhu");
         foodCategory.setIsDeleted(false);
     }
 
@@ -45,7 +51,7 @@ public class Listener implements EntityListeners {
      */
     @PreUpdate
     public void preUpdate(FoodCategory foodCategory) {
-        foodCategory.setUpdateAt(LocalDateTime.now());
-        foodCategory.setUpdatedBy("cập nhật");
+        foodCategory.setUpdateAt(LocalDateTime.now().format(formatter));
+        foodCategory.setUpdatedBy("tientran");
     }
 }

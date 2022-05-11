@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class FoodCategory {
     /**
      * Thời gian tạo
      */
-    private LocalDateTime  createAt;
+    private String createAt;
     /**
      * Người cập nhật
      */
@@ -48,7 +49,7 @@ public class FoodCategory {
     /**
      * Thời gian cập nhật
      */
-    private LocalDateTime updateAt;
+    private String updateAt;
 
     /**
      * Cờ xóa
