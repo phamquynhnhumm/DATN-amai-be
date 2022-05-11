@@ -1,6 +1,7 @@
 package com.example.amai.core.suppliner.entity;
 
 import com.example.amai.core.Food.entity.Material;
+import com.example.amai.core.listener.Listener;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@EntityListeners(Listener.class)
 @Getter
 @Setter
 @AllArgsConstructor

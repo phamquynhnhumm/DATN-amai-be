@@ -1,5 +1,6 @@
 package com.example.amai.core.Food.entity;
 
+import com.example.amai.core.listener.Listener;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,10 +8,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@EntityListeners(Listener.class)
 @Getter
 @Setter
 @AllArgsConstructor
@@ -36,7 +38,7 @@ public class FoodCategory {
     /**
      * Thời gian tạo
      */
-    private LocalDate createAt;
+    private LocalDateTime  createAt;
     /**
      * Người cập nhật
      */
@@ -46,7 +48,7 @@ public class FoodCategory {
     /**
      * Thời gian cập nhật
      */
-    private LocalDate updateAt;
+    private LocalDateTime updateAt;
 
     /**
      * Cờ xóa

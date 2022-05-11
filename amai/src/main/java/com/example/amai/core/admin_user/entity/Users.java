@@ -4,16 +4,17 @@
 package com.example.amai.core.admin_user.entity;
 
 import com.example.amai.core.admin_user.entity.contans.EGender;
+import com.example.amai.core.listener.Listener;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.seasar.doma.In;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@EntityListeners(Listener.class)
 @Getter
 @Setter
 @AllArgsConstructor

@@ -1,6 +1,7 @@
 package com.example.amai.core.Food.entity;
 
 import com.example.amai.core.Food.entity.contans.EStatusFood;
+import com.example.amai.core.listener.Listener;
 import com.example.amai.core.order.entity.OrderDetail;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 
 
 @Entity
+@EntityListeners(Listener.class)
 @Getter
 @Setter
 @AllArgsConstructor
