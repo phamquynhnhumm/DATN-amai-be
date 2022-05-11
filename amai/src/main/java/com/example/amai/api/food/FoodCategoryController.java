@@ -47,6 +47,25 @@ public class FoodCategoryController {
     }
 
     /**
+     * Hoàn tác việc xóa danh mục ( sửa từ trạng thái đã xóa thành không xóa)
+     *
+     * @param id
+     * @return
+     */
+
+    @PutMapping("undelete/{id}")
+    public ResponseEntity<FoodCategory> undeleteFood(@PathVariable("id") Integer id) {
+        FoodCategory foodCategory = foodCategoryService.getById(id).orElse(null);
+        if (foodCategory.equals(null)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            foodCategory.setIsDeleted(false);
+            foodCategoryService.save(foodCategory);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
+    /**
      * Hàm Xem chi tiết một danh mục món
      *
      * @param id Id danh mục món
