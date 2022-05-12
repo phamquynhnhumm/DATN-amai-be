@@ -60,6 +60,25 @@ public class FoodController {
     }
 
     /**
+     * Hoàn tác việc xóa món ( sửa từ trạng thái đã xóa thành không xóa)
+     *
+     * @param id
+     * @return
+     */
+
+    @PutMapping("undelete/{id}")
+    public ResponseEntity<Food> undeleteFood(@PathVariable("id") Integer id) {
+        Food food = foodService.getById(id).orElse(null);
+        if (food.equals(null)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            food.setIsDeleted(false);
+            foodService.save(food);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
+    /**
      * Hàm Xem chi tiết một món
      *
      * @param id Id của món
