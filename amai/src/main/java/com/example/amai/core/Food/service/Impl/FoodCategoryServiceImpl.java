@@ -34,4 +34,9 @@ public class FoodCategoryServiceImpl implements FoodCategoryService {
     public List<FoodCategory> findByIsDeleted(boolean idDelete) {
         return foodCategoryRepository.findByIsDeleted(idDelete);
     }
+
+    @Override
+    public List<FoodCategory> findAllByIsDeletedAndName(boolean isDelete, String name) {
+        return foodCategoryRepository.findAllByIsDeletedAndName(isDelete,name);
+    }
 }

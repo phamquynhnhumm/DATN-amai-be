@@ -33,7 +33,6 @@ public class FoodCategory {
     /**
      * Người tạo
      */
-    @Column(name = "created_by")
     private String createdBy;
 
     /**
@@ -43,7 +42,6 @@ public class FoodCategory {
     /**
      * Người cập nhật
      */
-    @Column(name = "updated_by")
     private String updatedBy;
 
     /**
@@ -54,7 +52,6 @@ public class FoodCategory {
     /**
      * Cờ xóa
      */
-    @Column(name = "is_deleted")
     private Boolean isDeleted;
 
     /**
