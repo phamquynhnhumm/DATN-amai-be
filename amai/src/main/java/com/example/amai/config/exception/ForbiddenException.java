@@ -1,10 +1,13 @@
 package com.example.amai.config.exception;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 /**
  * Người dùng không có quyền truy cập vào chức năng
  */
-public class ForbiddenException extends RuntimeException
-{
+@ResponseStatus(value = HttpStatus.FORBIDDEN)
+public class ForbiddenException extends RuntimeException {
     /**
      * Thông báo mặc định khi người dùng không có quyền truy cập
      */

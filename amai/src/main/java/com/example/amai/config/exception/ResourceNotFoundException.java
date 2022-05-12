@@ -1,9 +1,13 @@
 package com.example.amai.config.exception;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 /**
  * Tài nguyên không tồn tại
  */
-public class ResourceNotFoundException extends RuntimeException {
+//@ResponseStatus(value = HttpStatus.NOT_FOUND)
+public class ResourceNotFoundException extends RuntimeException{
     /**
      * Thông báo mặc định khi tài nguyên không tìm thấy
      */
