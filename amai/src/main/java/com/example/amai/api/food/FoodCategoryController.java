@@ -18,16 +18,25 @@ public class FoodCategoryController {
     private FoodCategoryService foodCategoryService;
 
     /**
-     * Danh sách danh mục món
+     * Danh sách danh mục món tồn tại
      *
      * @return
      */
     @GetMapping
     public ResponseEntity<List<FoodCategory>> finAll() {
-        List<FoodCategory> foodCategoryList = foodCategoryService.getAll();
+        List<FoodCategory> foodCategoryList = foodCategoryService.findByIsDeletedFalse();
         return foodCategoryList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodCategoryList, HttpStatus.OK);
     }
-
+    /**
+     * Danh sách danh mục đã bị xóa
+     *
+     * @return
+     */
+    @GetMapping
+    public ResponseEntity<List<FoodCategory>> finAllDelete() {
+        List<FoodCategory> foodCategoryList = foodCategoryService.findByIsDeletedTrue();
+        return foodCategoryList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodCategoryList, HttpStatus.OK);
+    }
     /**
      * Xóa danh mục món (cập nhật cơ xóa isDelete = true
      *

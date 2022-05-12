@@ -29,4 +29,14 @@ public class FoodCategoryServiceImpl implements FoodCategoryService {
     public FoodCategory save(FoodCategory entity) {
         return foodCategoryRepository.save(entity);
     }
+
+    @Override
+    public List<FoodCategory> findByIsDeletedTrue() {
+        return foodCategoryRepository.findByIsDeletedTrue();
+    }
+
+    @Override
+    public List<FoodCategory> findByIsDeletedFalse() {
+        return foodCategoryRepository.findByIsDeletedFalse();
+    }
 }
