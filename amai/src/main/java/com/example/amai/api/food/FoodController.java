@@ -1,6 +1,7 @@
 package com.example.amai.api.food;
 
 import com.example.amai.core.Food.entity.Food;
+import com.example.amai.core.Food.entity.FoodCategory;
 import com.example.amai.core.Food.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,17 @@ public class FoodController {
         return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
     }
 
+
+    /**
+     * Danh sách món  (1 true : Đã xóa , 0 false: Tồn tại )
+     *
+     * @return
+     */
+    @GetMapping("/all/{isdelete}")
+    public ResponseEntity<List<Food>> finAllIsDelete(@PathVariable("isdelete") boolean isdelete) {
+        List<Food> foodCategoryList = foodService.findByIsDeleted(isdelete);
+        return foodCategoryList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodCategoryList, HttpStatus.OK);
+    }
     /**
      * Xóa món (cập nhật cơ xóa isDelete = true
      *

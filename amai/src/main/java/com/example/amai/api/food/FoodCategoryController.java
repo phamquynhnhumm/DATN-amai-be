@@ -18,25 +18,27 @@ public class FoodCategoryController {
     private FoodCategoryService foodCategoryService;
 
     /**
-     * Danh sách danh mục món tồn tại
+     * Danh sách danh mục món cả đã xóa và chưa bị xóa
      *
      * @return
      */
     @GetMapping
     public ResponseEntity<List<FoodCategory>> finAll() {
-        List<FoodCategory> foodCategoryList = foodCategoryService.findByIsDeletedFalse();
+        List<FoodCategory> foodCategoryList = foodCategoryService.getAll();
         return foodCategoryList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodCategoryList, HttpStatus.OK);
     }
+
     /**
-     * Danh sách danh mục đã bị xóa
+     * Danh sách danh mục  (1 true : Đã xóa , 0 false: Tồn tại )
      *
      * @return
      */
-    @GetMapping
-    public ResponseEntity<List<FoodCategory>> finAllDelete() {
-        List<FoodCategory> foodCategoryList = foodCategoryService.findByIsDeletedTrue();
+    @GetMapping("/all/{isdelete}")
+    public ResponseEntity<List<FoodCategory>> finAllIsDelete(@PathVariable("isdelete") boolean isdelete) {
+        List<FoodCategory> foodCategoryList = foodCategoryService.findByIsDeleted(isdelete);
         return foodCategoryList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodCategoryList, HttpStatus.OK);
     }
+
     /**
      * Xóa danh mục món (cập nhật cơ xóa isDelete = true
      *
@@ -103,7 +105,7 @@ public class FoodCategoryController {
     /**
      * Cập nhật danh mục món ăn
      *
-     * @param foodCategory
+     * @param foodCategory  danh mục món truyền vào
      * @return
      */
     @PutMapping("")

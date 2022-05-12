@@ -28,4 +28,10 @@ public class FoodDetailServiceImpl implements FoodDetailService {
     public FoodDetail save(FoodDetail entity) {
         return foodDetailRepository.save(entity);
     }
+
+
+    @Override
+    public List<FoodDetail> findByIsDeleted(boolean idDelete) {
+        return foodDetailRepository.findByIsDeleted(idDelete);
+    }
 }

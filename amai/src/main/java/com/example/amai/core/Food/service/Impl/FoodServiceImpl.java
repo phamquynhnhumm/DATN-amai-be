@@ -28,4 +28,9 @@ public class FoodServiceImpl implements FoodService {
     public Food save(Food entity) {
         return foodRepository.save(entity);
     }
+
+    @Override
+    public List<Food> findByIsDeleted(boolean idDelete) {
+        return foodRepository.findByIsDeleted(idDelete);
+    }
 }

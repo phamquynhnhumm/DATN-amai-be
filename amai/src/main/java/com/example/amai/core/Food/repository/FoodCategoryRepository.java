@@ -7,16 +7,10 @@ import java.util.List;
 
 public interface FoodCategoryRepository extends JpaRepository<FoodCategory, Integer> {
     /**
-     * List ra những danh mục món đã bị xóa
+     * Danh sách danh mục món
      *
-     * @return Danh mục món đã bị xóa
+     * @param idDelete true = 1 = đã xóa, false =0= chưa xóa
+     * @return
      */
-    List<FoodCategory> findByIsDeletedTrue();
-
-    /**
-     * Hiển thị danh sách danh mục món còn tồn tại
-     *
-     * @return Danh mục món chưa bị xóa
-     */
-    List<FoodCategory> findByIsDeletedFalse();
+    List<FoodCategory> findByIsDeleted(boolean idDelete);
 }
