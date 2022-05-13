@@ -1,5 +1,6 @@
 package com.example.amai.api.food;
 
+import com.example.amai.core.Food.entity.Food;
 import com.example.amai.core.Food.entity.FoodCategory;
 import com.example.amai.core.Food.entity.FoodDetail;
 import com.example.amai.core.Food.service.FoodDetailService;
@@ -54,6 +55,25 @@ public class FoodDetailController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
             foodDetail.setIsDeleted(true);
+            foodDetailService.save(foodDetail);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
+    /**
+     * Hoàn tác việc xóa chi tiết( sửa từ trạng thái đã xóa thành không xóa)
+     *
+     * @param id
+     * @return
+     */
+
+    @PutMapping("undelete/{id}")
+    public ResponseEntity<FoodDetail> undeleteFood(@PathVariable("id") Integer id) {
+        FoodDetail foodDetail = foodDetailService.getById(id).orElse(null);
+        if (foodDetail.equals(null)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            foodDetail.setIsDeleted(false);
             foodDetailService.save(foodDetail);
             return new ResponseEntity<>(HttpStatus.OK);
         }
