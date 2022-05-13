@@ -4,7 +4,8 @@
 package com.example.amai.core.admin_user.entity;
 
 import com.example.amai.core.admin_user.entity.contans.EGender;
-import com.example.amai.core.listener.Listener;
+import com.example.amai.core.Food.entity.listener.FoodCategoryListener;
+import com.example.amai.core.admin_user.entity.listener.UserListener;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@EntityListeners(Listener.class)
+@EntityListeners(UserListener.class)
 @Getter
 @Setter
 @AllArgsConstructor

@@ -98,6 +98,7 @@ public class FoodController {
      */
     @PostMapping
     public ResponseEntity<Food> createFood(@RequestBody Food food) {
+        System.out.println(food);
         if (food.equals(null)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

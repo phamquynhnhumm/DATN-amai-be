@@ -1,4 +1,4 @@
-package com.example.amai.core.listener;
+package com.example.amai.core.Food.entity.listener;
 
 import com.example.amai.core.Food.entity.FoodCategory;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
  * Lớp thực hiện trước khi trương tác với table danh mục
  */
 @Service
-public class Listener implements EntityListeners {
+public class FoodCategoryListener implements EntityListeners {
     @Override
     public Class[] value() {
         return new Class[0];
@@ -40,7 +40,7 @@ public class Listener implements EntityListeners {
         foodCategory.setCreateAt(LocalDateTime.now().format(formatter));
         foodCategory.setUpdateAt(LocalDateTime.now().format(formatter));
         foodCategory.setCreatedBy("quynhnhu");
-        foodCategory.setUpdatedBy("quynhnhu");
+        foodCategory.setUpdatedBy("thuthuy");
         foodCategory.setIsDeleted(false);
     }
 

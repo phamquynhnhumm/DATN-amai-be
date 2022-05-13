@@ -1,8 +1,9 @@
 package com.example.amai.core.order.entity;
 
 import com.example.amai.core.admin_user.entity.Account;
-import com.example.amai.core.listener.Listener;
+import com.example.amai.core.Food.entity.listener.FoodCategoryListener;
 import com.example.amai.core.order.entity.contans.EStatusOrder;
+import com.example.amai.core.order.entity.listener.OrderListener;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,11 +11,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@EntityListeners(Listener.class)
+@EntityListeners(OrderListener.class)
 @Getter
 @Setter
 @AllArgsConstructor

@@ -1,7 +1,7 @@
 package com.example.amai.core.Food.entity;
 
 import com.example.amai.core.Food.entity.contans.EStatusFood;
-import com.example.amai.core.listener.Listener;
+import com.example.amai.core.Food.entity.listener.FoodListener;
 import com.example.amai.core.order.entity.OrderDetail;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -10,12 +10,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.List;
 
-
 @Entity
-@EntityListeners(Listener.class)
+@EntityListeners(FoodListener.class)
 @Getter
 @Setter
 @AllArgsConstructor
@@ -35,7 +33,6 @@ public class Food {
     /**
      * Người tạo
      */
-    @Column(name = "created_by")
     private String createdBy;
 
     /**
@@ -45,7 +42,6 @@ public class Food {
     /**
      * Người cập nhật
      */
-    @Column(name = "updated_by")
     private String updatedBy;
 
     /**
@@ -56,13 +52,11 @@ public class Food {
     /**
      * Cờ xóa
      */
-    @Column(name = "is_deleted")
     private Boolean isDeleted;
 
     /**
      * Tên món
      */
-    @Column(name = "name")
     private String name;
 
     /**
