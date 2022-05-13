@@ -11,6 +11,9 @@ import java.lang.annotation.Annotation;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Lớp thực hiện trước khi trương tác với table tài khoản
+ */
 @Service
 public class AccountListener  implements EntityListeners {
     @Override

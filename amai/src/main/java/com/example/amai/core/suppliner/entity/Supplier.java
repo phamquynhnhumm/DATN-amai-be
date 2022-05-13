@@ -2,6 +2,7 @@ package com.example.amai.core.suppliner.entity;
 
 import com.example.amai.core.Food.entity.Material;
 import com.example.amai.core.Food.entity.listener.FoodCategoryListener;
+import com.example.amai.core.suppliner.entity.listener.SupplierListener;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +13,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@EntityListeners(FoodCategoryListener.class)
+@EntityListeners(SupplierListener.class)
 @Getter
 @Setter
 @AllArgsConstructor

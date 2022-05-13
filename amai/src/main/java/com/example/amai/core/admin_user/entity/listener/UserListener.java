@@ -1,6 +1,5 @@
 package com.example.amai.core.admin_user.entity.listener;
 
-import com.example.amai.core.Food.entity.FoodCategory;
 import com.example.amai.core.admin_user.entity.Users;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Lớp thực hiện trước khi trương tác với table danh mục
+ * Lớp thực hiện trước khi trương tác với table người dùng
  */
 @Service
 public class UserListener implements EntityListeners {

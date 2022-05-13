@@ -1,6 +1,6 @@
 package com.example.amai.core.Food.entity;
 
-import com.example.amai.core.Food.entity.listener.FoodCategoryListener;
+import com.example.amai.core.Food.entity.listener.FoodDetailListener;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@EntityListeners(FoodCategoryListener.class)
+@EntityListeners(FoodDetailListener.class)
 @Getter
 @Setter
 @AllArgsConstructor
