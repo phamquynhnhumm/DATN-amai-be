@@ -1,10 +1,8 @@
 package com.example.amai.api.food;
 
-import com.example.amai.core.Food.entity.Food;
 import com.example.amai.core.Food.entity.FoodCategory;
 import com.example.amai.core.Food.service.FoodCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.Repository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -127,7 +125,8 @@ public class FoodCategoryController {
      * @return Danh mục món tìm kiếm thấy
      */
     @GetMapping("/search")
-    public ResponseEntity<List<FoodCategory>> searchName(@RequestParam("isDelete") boolean isDelete, @RequestParam("name") String name) {
+    public ResponseEntity<List<FoodCategory>> searchName(@RequestParam("isDelete") boolean isDelete,
+                                                         @RequestParam("name") String name) {
         List<FoodCategory> foodCategoryList = foodCategoryService.findAllByIsDeletedAndName(isDelete, name);
         return foodCategoryList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodCategoryList, HttpStatus.OK);
     }

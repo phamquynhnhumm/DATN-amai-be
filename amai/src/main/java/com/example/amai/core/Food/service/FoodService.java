@@ -1,8 +1,6 @@
 package com.example.amai.core.Food.service;
 
 import com.example.amai.core.Food.entity.Food;
-import com.example.amai.core.Food.entity.FoodCategory;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,5 +30,5 @@ public interface FoodService extends IService<Food, Integer> {
      * @param name
      * @return
      */
-    List<Food> findAllByFoodIsDeletedAndName(boolean isDelete, String name, String status, String unit, String foodCategoryName);
+    List<Food> findAllByFoodIsDeletedAndName(boolean isDelete, String name, String unit,String foodCategoryName);
 }

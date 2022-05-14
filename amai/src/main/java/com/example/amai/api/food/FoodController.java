@@ -1,10 +1,8 @@
 package com.example.amai.api.food;
 
 import com.example.amai.core.Food.entity.Food;
-import com.example.amai.core.Food.entity.FoodCategory;
 import com.example.amai.core.Food.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -132,21 +130,20 @@ public class FoodController {
         return new ResponseEntity<>(foodService.save(food), HttpStatus.OK);
     }
 
-
     /**
      * Tìm kiếm danh mục theo tên và trạng thái xóa
      *
      * @param isDelete trạng thái xóa hoặc ko xoad ( 1 đã xóa ; 0 tồn tại)
-     * @param name     Tên danh mục
+     * @param name Tên danh mục
      * @return Danh mục món tìm kiếm thấy
      */
     @GetMapping("/search")
-    public ResponseEntity<List<Food>> searchName(@RequestParam("isDelete") boolean isDelete,
-                                                 @RequestParam("name") String name,
-                                                 @RequestParam("status") String status,
+    public ResponseEntity<List<Food>> searcFood(@RequestParam("isDelete") boolean isDelete,
+                                                 @RequestParam("name")String name,
                                                  @RequestParam("unit") String unit,
-                                                 @RequestParam("foodCategoryName") String foodCategoryName) {
-        List<Food> foodCategoryList = foodService.findAllByFoodIsDeletedAndName(isDelete, name, status, unit, foodCategoryName);
-        return foodCategoryList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodCategoryList, HttpStatus.OK);
+                                                 @RequestParam("foodCategoryName") String foodCategoryName
+    ) {
+        List<Food> foodList = foodService.findAllByFoodIsDeletedAndName(isDelete, name, unit,foodCategoryName);
+        return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(foodList, HttpStatus.OK);
     }
 }

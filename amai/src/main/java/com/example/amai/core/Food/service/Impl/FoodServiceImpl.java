@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -40,8 +41,7 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public List<Food> findAllByFoodIsDeletedAndName(boolean isDelete, String name, String status, String unit, String foodCategoryName) {
-        return foodRepository.findAllByFoodIsDeletedAndName(isDelete,name,status,unit,foodCategoryName);
+    public List<Food> findAllByFoodIsDeletedAndName(boolean isDelete, String name,String unit,String foodCategoryName) {
+        return foodRepository.findAllByFoodIsDeletedAndName(isDelete,name,unit,foodCategoryName);
     }
-
 }
