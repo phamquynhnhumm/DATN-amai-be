@@ -84,5 +84,4 @@ public class Supplier {
     @OneToMany(mappedBy = "supplierList")
     @JsonIgnore
     List<Material> materialList;
-
 }
