@@ -38,8 +38,8 @@ public class FoodController {
      */
     @GetMapping("/all/{isdelete}")
     public ResponseEntity<List<Food>> finAllIsDelete(@PathVariable("isdelete") boolean isdelete) {
-        List<Food> foodCategoryList = foodService.findByIsDeleted(isdelete);
-        return foodCategoryList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodCategoryList, HttpStatus.OK);
+        List<Food> foodList = foodService.findByIsDeleted(isdelete);
+        return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
     }
     /**
      * Xóa món (cập nhật cơ xóa isDelete = true
@@ -88,6 +88,18 @@ public class FoodController {
     public ResponseEntity<Food> findById(@PathVariable("id") Integer id) {
         Food food = foodService.getById(id).orElse(null);
         return food.equals(null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(food, HttpStatus.OK);
+    }
+
+    /**
+     * Tìm kiếm món theo danh mục món
+     *
+     * @param idFoodCategory Id của danh mục
+     * @return trả về thông tin món nếu tìm kiếm thấy Ngược lại trả về NOT
+     */
+    @GetMapping("/findByFoodcategoryId/{idFoodCategory}")
+    public ResponseEntity<List<Food>> findAllByFoodCategory_Id(@PathVariable("idFoodCategory") Integer idFoodCategory) {
+        List<Food> foodList = foodService.findAllByFoodCategory_Id(idFoodCategory);
+        return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
     }
 
     /**

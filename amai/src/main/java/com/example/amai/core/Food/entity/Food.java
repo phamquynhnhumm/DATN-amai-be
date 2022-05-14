@@ -69,10 +69,6 @@ public class Food {
      */
     private Float price;
 
-    /**
-     * Mô  tả cách pha chế
-     */
-    private String describe;
 
     /**
      * Số lượng
@@ -109,5 +105,5 @@ public class Food {
     /**
      * Ảnh món
      */
-    private String Image;
+    private String image;
 }

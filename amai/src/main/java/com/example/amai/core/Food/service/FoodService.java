@@ -14,4 +14,11 @@ public interface FoodService extends IService<Food, Integer> {
      * @return
      */
     List<Food> findByIsDeleted(boolean idDelete);
+
+    /**
+     * Tìm kiếm món theo danh mục món
+     * @param idFoodCategory id danh mục món
+     * @return list món có cùng id danh mục
+     */
+    List<Food> findAllByFoodCategory_Id(Integer idFoodCategory);
 }
