@@ -130,4 +130,19 @@ public class FoodController {
         }
         return new ResponseEntity<>(foodService.save(food), HttpStatus.OK);
     }
+
+
+
+    /**
+     * Tìm kiếm danh mục theo tên và trạng thái xóa
+     *
+     * @param isDelete trạng thái xóa hoặc ko xoad ( 1 đã xóa ; 0 tồn tại)
+     * @param name     Tên danh mục
+     * @return Danh mục món tìm kiếm thấy
+     */
+    @GetMapping("/search")
+    public ResponseEntity<List<Food>> searchName(@RequestParam("isDelete") boolean isDelete, @RequestParam("name") String name) {
+        List<Food> foodCategoryList = foodService.findAllByFoodIsDeletedAndName(isDelete, name);
+        return foodCategoryList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodCategoryList, HttpStatus.OK);
+    }
 }
