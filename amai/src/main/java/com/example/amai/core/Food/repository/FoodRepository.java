@@ -31,6 +31,6 @@ public interface FoodRepository extends JpaRepository<Food, Integer> {
     /**
      * Tìm kiếm theo tên danh mục và trạng thái isdelete
      */
-    @Query(value = "select * from food as fc where fc.is_deleted = :isDelete and fc.name like %:name% ", nativeQuery = true)
-    List<Food> findAllByFoodIsDeletedAndName(@Param("isDelete") boolean isDelete, @Param("name") String name);
+    @Query(value = "select * from food as f inner join food_category as fc on f.food_category_id = fc.id  where f.is_deleted = :isDelete and f.name like %:name%  and f.status like %:status% and f.unit like %:unit% and fc.name like %:foodCategoryName% ", nativeQuery = true)
+    List<Food> findAllByFoodIsDeletedAndName(@Param("isDelete") boolean isDelete, @Param("name") String name,  @Param("status") String status, @Param("unit") String unit, @Param("foodCategoryName") String foodCategoryName);
 }
