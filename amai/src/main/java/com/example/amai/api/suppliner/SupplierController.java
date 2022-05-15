@@ -118,7 +118,6 @@ public class SupplierController {
         return new ResponseEntity<>(supplierService.save(supplier), HttpStatus.OK);
     }
 
-
     /**
      * Tìm kiếm danh mục theo tên và trạng thái xóa
      *
@@ -136,4 +135,3 @@ public class SupplierController {
         return supplierList.isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(supplierList, HttpStatus.OK);
     }
 }
-

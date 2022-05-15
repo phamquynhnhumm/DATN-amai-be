@@ -87,5 +87,3 @@ public class OrderDetailController {
         return new ResponseEntity<>(orderDetailService.save(orderDetail), HttpStatus.OK);
     }
 }
-
-

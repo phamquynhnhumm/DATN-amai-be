@@ -131,4 +131,3 @@ public class FoodCategoryController {
         return foodCategoryList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodCategoryList, HttpStatus.OK);
     }
 }
-
