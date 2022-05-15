@@ -57,7 +57,8 @@ public class FoodDetail {
      * Tên nguyên liệu
      * material Id nguyên liệu {{@link Material}}
      */
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "material_id")
     private Material material;
 
     /**

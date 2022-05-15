@@ -96,7 +96,7 @@ public class FoodDetailController {
      * @return
      */
     @PostMapping
-    public ResponseEntity<FoodDetail> createFood(@RequestBody FoodDetail foodDetail) {
+    public ResponseEntity<FoodDetail> createFoodDetail(@RequestBody FoodDetail foodDetail) {
         if (foodDetail.equals(null)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

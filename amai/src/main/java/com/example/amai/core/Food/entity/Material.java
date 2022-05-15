@@ -2,12 +2,14 @@ package com.example.amai.core.Food.entity;
 
 import com.example.amai.core.Food.entity.listener.MaterialListener;
 import com.example.amai.core.suppliner.entity.Supplier;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @EntityListeners(MaterialListener.class)
@@ -91,4 +93,8 @@ public class Material {
      * Khối lượng còn lại
      */
     private Float remainingKg;
+
+    @OneToMany(mappedBy = "material")
+    @JsonIgnore
+    private List<FoodDetail> foodDetailList;
 }
