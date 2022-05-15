@@ -78,7 +78,7 @@ public class Material {
     private Float price;
 
     /**
-     * Mô tả
+     * Tên nguyên liệu
      */
     private String name;
 

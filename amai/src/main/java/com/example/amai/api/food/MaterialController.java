@@ -47,7 +47,7 @@ public class MaterialController {
      * @return Nguyên liệu đã được cập nhật cờ xóa
      */
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<Material> deleteFood(@PathVariable("id") Integer id) {
+    public ResponseEntity<Material> deleteMaterial(@PathVariable("id") Integer id) {
         Material material = materialService.getById(id).orElse(null);
         if (material.equals(null)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -66,7 +66,7 @@ public class MaterialController {
      */
 
     @PutMapping("undelete/{id}")
-    public ResponseEntity<Material> undeleteFood(@PathVariable("id") Integer id) {
+    public ResponseEntity<Material> undeleteMaterial(@PathVariable("id") Integer id) {
         Material material = materialService.getById(id).orElse(null);
         if (material.equals(null)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -96,7 +96,7 @@ public class MaterialController {
      * @return trả về thông tin món nếu tìm kiếm thấy Ngược lại trả về NOT
      */
     @GetMapping("/findBySupplierId/{idSupplier}")
-    public ResponseEntity<List<Material>> findAllByFoodCategory_Id(@PathVariable("idSupplier") Integer idSupplier) {
+    public ResponseEntity<List<Material>> findAllBySupplier_Id(@PathVariable("idSupplier") Integer idSupplier) {
         List<Material> materialList = materialService.findAllBySupplierList_Id(idSupplier);
         return materialList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(materialList, HttpStatus.OK);
     }
@@ -108,7 +108,7 @@ public class MaterialController {
      * @return
      */
     @PostMapping
-    public ResponseEntity<Material> createFood(@RequestBody Material material) {
+    public ResponseEntity<Material> createMaterial(@RequestBody Material material) {
         if (material.equals(null)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -122,7 +122,7 @@ public class MaterialController {
      * @return
      */
     @PutMapping("")
-    public ResponseEntity<Material> editFood(@RequestBody Material material) {
+    public ResponseEntity<Material> editMaterial(@RequestBody Material material) {
         Optional<Material> materialOptional = materialService.getById(material.getId());
         if (!materialOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -134,11 +134,11 @@ public class MaterialController {
      * Tìm kiếm theo nguyên liệu theo tên , trạng thái isdelete, đơn vị tính, nhà cung cấp
      *
      * @param isDelete trạng thái xóa hoặc ko xoad ( 1 đã xóa ; 0 tồn tại)
-     * @param name     Tên nguyên liệu
+     * @param name Tên nguyên liệu
      * @return nguyên liệu tìm kiếm thấy
      */
     @GetMapping("/search")
-    public ResponseEntity<List<Material>> searcFood(@RequestParam("isDelete") boolean isDelete,
+    public ResponseEntity<List<Material>> searcMaterial(@RequestParam("isDelete") boolean isDelete,
                                                 @RequestParam("name") String name,
                                                 @RequestParam("unit") String unit,
                                                 @RequestParam("supplierName") String supplierName
