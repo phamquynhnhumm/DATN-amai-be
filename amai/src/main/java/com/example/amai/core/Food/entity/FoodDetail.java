@@ -68,7 +68,7 @@ public class FoodDetail {
     private Food food;
 
     /**
-     * Khối lượng sử dyngf
+     * Khối lượng sử dụng
      */
     private Float kg;
 }

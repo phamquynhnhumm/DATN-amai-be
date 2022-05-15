@@ -1,10 +1,10 @@
 package com.example.amai.api.food;
 
-import com.example.amai.core.Food.entity.Food;
-import com.example.amai.core.Food.entity.FoodCategory;
 import com.example.amai.core.Food.entity.FoodDetail;
+import com.example.amai.core.Food.entity.Material;
 import com.example.amai.core.Food.service.FoodDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -118,5 +118,24 @@ public class FoodDetailController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(foodDetailService.save(foodDetail), HttpStatus.OK);
+    }
+
+    /**
+     * Tìm kiếm chi tiết món theo tên món và tên nguyên liệu
+     * @param isDeleteFoodDetail trạng thái chi tiết món
+     * @param isDeleteFood trạng thái món
+     * @param isDeleteMaterial trạng thái nguyên liệu
+     * @param nameFood Tên món
+     * @param nameMaterial tên nguyên liệu
+     * @return danh sách chi tiết nguyên liệu thỏa mãn điều kiện
+     */
+    @GetMapping("/search")
+    public ResponseEntity<List<FoodDetail>> searcFoodDetailFoodandMaterial(@RequestParam("isDeleteFoodDetail") boolean isDeleteFoodDetail,
+                                                          @RequestParam("isDeleteFood") boolean isDeleteFood,
+                                                          @RequestParam("isDeleteMaterial") boolean isDeleteMaterial,
+                                                          @RequestParam("nameFood") String nameFood,
+                                                          @RequestParam("nameMaterial") String nameMaterial) {
+        List<FoodDetail> foodDetailList = foodDetailService.findAllByFoodDetaillFoodNameAndMaterialNam(isDeleteFoodDetail,isDeleteFood,isDeleteMaterial,nameFood,nameMaterial);
+        return foodDetailList.isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(foodDetailList, HttpStatus.OK);
     }
 }

@@ -34,4 +34,9 @@ public class FoodDetailServiceImpl implements FoodDetailService {
     public List<FoodDetail> findByIsDeleted(boolean idDelete) {
         return foodDetailRepository.findByIsDeleted(idDelete);
     }
+
+    @Override
+    public List<FoodDetail> findAllByFoodDetaillFoodNameAndMaterialNam(boolean isDeleteFoodDetail, boolean isDeleteFood, boolean isDeleteMaterial, String nameFood, String nameMaterial) {
+        return foodDetailRepository.findAllByFoodDetaillFoodNameAndMaterialNam(isDeleteFoodDetail, isDeleteFood, isDeleteMaterial,nameFood,nameMaterial);
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.amai.core.Food.service;
 
+import com.example.amai.core.Food.entity.FoodDetail;
 import com.example.amai.core.Food.entity.Material;
 import org.springframework.stereotype.Service;
 
