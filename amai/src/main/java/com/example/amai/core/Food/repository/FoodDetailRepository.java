@@ -22,11 +22,11 @@ public interface FoodDetailRepository extends JpaRepository<FoodDetail, Integer>
     @Query(value = "select * from food_detail as fd " +
             "inner join food as f on fd.food_id = f.id " +
             "inner join material as m on fd.material_id = m.id " +
-            "where fd.is_deleted =:isDeleteFoodDetail" +
-            " and f.is_deleted =:isDeleteFood" +
-            " and m.is_deleted =:isDeleteMaterial" +
-            " and f.name =:nameFood " +
-            "and m.name=:nameMaterial", nativeQuery = true)
+            "where fd.is_deleted = :isDeleteFoodDetail" +
+            " and f.is_deleted = :isDeleteFood" +
+            " and m.is_deleted = :isDeleteMaterial" +
+            " and f.name  like %:nameFood% " +
+            "and m.name like %:nameMaterial%", nativeQuery = true)
     List<FoodDetail> findAllByFoodDetaillFoodNameAndMaterialNam(@Param("isDeleteFoodDetail") boolean isDeleteFoodDetail,
                                                                 @Param("isDeleteFood") boolean isDeleteFood,
                                                                 @Param("isDeleteMaterial") boolean isDeleteMaterial,
