@@ -139,11 +139,27 @@ public class FoodController {
      */
     @GetMapping("/search")
     public ResponseEntity<List<Food>> searcFood(@RequestParam("isDelete") boolean isDelete,
-                                                 @RequestParam("name")String name,
-                                                 @RequestParam("unit") String unit,
-                                                 @RequestParam("foodCategoryName") String foodCategoryName
+                                                @RequestParam("name") String name,
+                                                @RequestParam("unit") String unit,
+                                                @RequestParam("foodCategoryName") String foodCategoryName
     ) {
-        List<Food> foodList = foodService.findAllByFoodIsDeletedAndName(isDelete, name, unit,foodCategoryName);
+        List<Food> foodList = foodService.findAllByFoodIsDeletedAndName(isDelete, name, unit, foodCategoryName);
+        return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(foodList, HttpStatus.OK);
+    }
+
+
+    /**
+     * Danh sách món cú cùng một nguyên liệu
+     *
+     * @param isDelete trạng thái xóa của món
+     * @param id Id nguyên liệu
+     * @return
+     */
+    @GetMapping("/searchfindBymaterial")
+    public ResponseEntity<List<Food>> findAllByMaterialIsDeletedAndName(@RequestParam("isDelete") boolean isDelete,
+                                                                        @RequestParam("id") Integer id
+    ) {
+        List<Food> foodList = foodService.findAllByFoodByIsdeleteAndMaterial(isDelete, id);
         return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(foodList, HttpStatus.OK);
     }
 }
