@@ -6,4 +6,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface AccountService extends IService<Account, String> {
+    boolean changePassword(Account account);
+    Boolean existsByUserName(String username);
 }

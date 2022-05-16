@@ -16,8 +16,8 @@ import java.util.List;
 @EntityListeners(FoodCategoryListener.class)
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 /**
  * Tài khoản
  */
@@ -73,4 +73,13 @@ public class Account {
     @OneToOne(mappedBy = "account")
     @JsonIgnore
     private Users user;
+
+    public boolean getEnable() {
+        return this.enable;
+    }
+
+    /**
+     * Trạng thái tài khoản (true: cho phép truy cập, false: đã bị khóa)
+     */
+    private boolean enable;
 }

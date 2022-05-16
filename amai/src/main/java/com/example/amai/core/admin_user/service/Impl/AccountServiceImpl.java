@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 @Service
 public class AccountServiceImpl implements AccountService {
 
@@ -28,5 +27,15 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Account save(Account entity) {
         return accountRepository.save(entity);
+    }
+
+    @Override
+    public boolean changePassword(Account account) {
+        return false;
+    }
+
+    @Override
+    public Boolean existsByUserName(String username) {
+        return accountRepository.existsByUserName(username);
     }
 }

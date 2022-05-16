@@ -4,6 +4,7 @@
 package com.example.amai.core.admin_user.entity;
 
 import com.example.amai.core.admin_user.entity.contans.EGender;
+import com.example.amai.core.admin_user.entity.contans.Provider;
 import com.example.amai.core.admin_user.entity.listener.UserListener;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,6 +27,33 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    /**
+     * Người tạo
+     */
+    @Column(name = "created_by")
+    private String createdBy;
+
+    /**
+     * Thời gian tạo
+     */
+    private String createAt;
+    /**
+     * Người cập nhật
+     */
+    @Column(name = "updated_by")
+    private String updatedBy;
+
+    /**
+     * Thời gian cập nhật
+     */
+    private String updateAt;
+
+    /**
+     * Cờ xóa
+     */
+    @Column(name = "is_deleted")
+    private Boolean isDeleted;
 
     /**
      * Họ tên
@@ -59,35 +87,15 @@ public class Users {
     private String image;
 
     /**
+     * Xác nhận loại tài khoản gg, facebook hay tài khoản đăng nhập
+     */
+    @Enumerated(EnumType.STRING)
+    private Provider provider;
+
+    /**
      * Tên tài khoản
      * account là username (tên tài khoản) {{@link Account}}
      */
     @OneToOne(cascade = CascadeType.ALL)
     private Account account;
-    /**
-     * Người tạo
-     */
-    @Column(name = "created_by")
-    private String createdBy;
-
-    /**
-     * Thời gian tạo
-     */
-    private String createAt;
-    /**
-     * Người cập nhật
-     */
-    @Column(name = "updated_by")
-    private String updatedBy;
-
-    /**
-     * Thời gian cập nhật
-     */
-    private String updateAt;
-
-    /**
-     * Cờ xóa
-     */
-    @Column(name = "is_deleted")
-    private Boolean isDeleted;
 }
