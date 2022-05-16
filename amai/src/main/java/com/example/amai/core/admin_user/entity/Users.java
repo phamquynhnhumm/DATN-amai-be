@@ -4,7 +4,6 @@
 package com.example.amai.core.admin_user.entity;
 
 import com.example.amai.core.admin_user.entity.contans.EGender;
-import com.example.amai.core.Food.entity.listener.FoodCategoryListener;
 import com.example.amai.core.admin_user.entity.listener.UserListener;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
