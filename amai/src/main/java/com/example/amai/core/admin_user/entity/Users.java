@@ -5,6 +5,8 @@ package com.example.amai.core.admin_user.entity;
 
 import com.example.amai.core.admin_user.entity.contans.EGender;
 import com.example.amai.core.admin_user.entity.contans.Provider;
+import com.example.amai.core.admin_user.entity.listener.UserListener;
+import com.example.amai.core.suppliner.entity.listener.SupplierListener;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,6 +14,7 @@ import java.time.LocalDate;
 
 //@EntityListeners(UserListener.class)
 @Entity
+@EntityListeners(UserListener.class)
 @Getter
 @Setter
 @NoArgsConstructor

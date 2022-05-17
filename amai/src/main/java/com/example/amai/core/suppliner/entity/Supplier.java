@@ -1,7 +1,6 @@
 package com.example.amai.core.suppliner.entity;
 
 import com.example.amai.core.Food.entity.Material;
-import com.example.amai.core.Food.entity.listener.FoodCategoryListener;
 import com.example.amai.core.suppliner.entity.listener.SupplierListener;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -33,7 +32,6 @@ public class Supplier {
     /**
      * Người tạo
      */
-    @Column(name = "created_by")
     private String createdBy;
 
     /**
@@ -43,7 +41,6 @@ public class Supplier {
     /**
      * Người cập nhật
      */
-    @Column(name = "updated_by")
     private String updatedBy;
 
     /**
@@ -54,13 +51,11 @@ public class Supplier {
     /**
      * Cờ xóa
      */
-    @Column(name = "is_deleted")
     private Boolean isDeleted;
 
     /**
      * Tên nhà cung cấp
      */
-    @Column(name = "name")
     private String name;
 
     /**
