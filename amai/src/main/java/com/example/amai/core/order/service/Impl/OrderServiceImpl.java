@@ -1,5 +1,6 @@
 package com.example.amai.core.order.service.Impl;
 
+import com.example.amai.core.Food.entity.FoodDetail;
 import com.example.amai.core.order.entity.Oder;
 import com.example.amai.core.order.repository.OrderRepository;
 import com.example.amai.core.order.service.OrderService;
@@ -32,5 +33,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Oder> findByIsDeleted(boolean idDelete) {
         return orderRepository.findByIsDeleted(idDelete);
+    }
+
+    @Override
+    public List<FoodDetail> findAllSerachOder(boolean isDeleteOder, boolean isDeleteAccount, boolean fullName, String userName, String address, String phone) {
+        return orderRepository.findAllSerachOder(isDeleteOder, isDeleteAccount, fullName, userName, address, phone);
     }
 }
