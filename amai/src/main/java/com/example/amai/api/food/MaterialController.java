@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin
-@RequestMapping("api/material")
+@RequestMapping("api/admin/material")
 public class MaterialController {
     @Autowired
     private MaterialService materialService;

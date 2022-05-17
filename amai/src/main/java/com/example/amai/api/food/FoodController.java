@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin
-@RequestMapping("api/food")
+@RequestMapping("api/admin/food")
 public class FoodController {
 
     @Autowired

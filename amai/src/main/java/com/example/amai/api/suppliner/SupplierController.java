@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin
-@RequestMapping("api/supplier")
+@RequestMapping("api/admin/supplier")
 public class SupplierController {
 
     @Autowired
