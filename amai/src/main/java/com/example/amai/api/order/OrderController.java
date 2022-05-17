@@ -3,7 +3,6 @@ package com.example.amai.api.order;
 import com.example.amai.core.order.entity.Oder;
 import com.example.amai.core.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -137,13 +136,13 @@ public class OrderController {
      * @return nguyên liệu tìm kiếm thấy
      */
     @GetMapping("/search")
-    public ResponseEntity<List<Oder>> searcMaterial(@RequestParam("isDeleteOder") boolean isDeleteOder,
+    public ResponseEntity<List<Oder>> searchOder(@RequestParam("isDeleteOder") boolean isDeleteOder,
                                                     @RequestParam("isDeleteAccount") boolean isDeleteAccount,
                                                     @RequestParam("fullName") String fullName,
                                                     @RequestParam("userName") String userName,
                                                     @RequestParam("address") String address,
-                                                    @RequestParam("phone") String phone
-    ) {
+                                                    @RequestParam("phone") String phone) {
+        System.out.println(isDeleteAccount + address + fullName);
         List<Oder> oderList = orderService.findAllSerachOder(isDeleteOder,isDeleteAccount,fullName,userName,address,phone);
         return oderList.isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(oderList, HttpStatus.OK);
     }
