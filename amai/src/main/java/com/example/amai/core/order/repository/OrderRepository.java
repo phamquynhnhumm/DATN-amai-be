@@ -1,6 +1,5 @@
 package com.example.amai.core.order.repository;
 
-import com.example.amai.core.Food.entity.FoodDetail;
 import com.example.amai.core.order.entity.Oder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -25,12 +24,12 @@ public interface OrderRepository extends JpaRepository<Oder, Integer> {
             "and ac.user_name  like  %:userName% " +
             "and  address  like  %:address%" +
             "and phone  like  %:phone%;", nativeQuery = true)
-    List<FoodDetail> findAllSerachOder(@Param("isDeleteOder") boolean isDeleteOder,
-                                       @Param("isDeleteAccount") boolean isDeleteAccount,
-                                       @Param("fullName") boolean fullName,
-                                       @Param("userName") String userName,
-                                       @Param("address") String address,
-                                       @Param("phone") String phone);
+    List<Oder> findAllSerachOder(@Param("isDeleteOder") boolean isDeleteOder,
+                                 @Param("isDeleteAccount") boolean isDeleteAccount,
+                                 @Param("fullName") String fullName,
+                                 @Param("userName") String userName,
+                                 @Param("address") String address,
+                                 @Param("phone") String phone);
 
 }
 
