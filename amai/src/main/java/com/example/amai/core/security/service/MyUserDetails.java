@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Collections;
-@Service
+
 public class MyUserDetails implements UserDetails {
     private static final long serialVersionUID = 1L;
 
@@ -23,12 +23,12 @@ public class MyUserDetails implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public MyUserDetails(Users user) {
-        this.fullName = user.getFullName();
-        this.account = user.getAccount();
-        this.email = user.getEmail();
-        this.phone = user.getPhone();
-        this.authorities = Collections.singleton(new SimpleGrantedAuthority(user.getAccount().getRole().toString()));
+    public MyUserDetails(Users users) {
+        this.fullName = users.getFullName();
+        this.account = users.getAccount();
+        this.email = users.getEmail();
+        this.phone = users.getPhone();
+        this.authorities = Collections.singleton(new SimpleGrantedAuthority(users.getAccount().getRole().toString()));
     }
 
     @Override

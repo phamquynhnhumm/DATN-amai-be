@@ -5,24 +5,18 @@ package com.example.amai.core.admin_user.entity;
 
 import com.example.amai.core.admin_user.entity.contans.EGender;
 import com.example.amai.core.admin_user.entity.contans.Provider;
-import com.example.amai.core.admin_user.entity.listener.UserListener;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
+//@EntityListeners(UserListener.class)
 @Entity
-@EntityListeners(UserListener.class)
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-/**
- * Người dùng
- */
+@AllArgsConstructor
+@Table(name = "users")
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +25,6 @@ public class Users {
     /**
      * Người tạo
      */
-    @Column(name = "created_by")
     private String createdBy;
 
     /**
@@ -41,7 +34,6 @@ public class Users {
     /**
      * Người cập nhật
      */
-    @Column(name = "updated_by")
     private String updatedBy;
 
     /**
@@ -52,7 +44,6 @@ public class Users {
     /**
      * Cờ xóa
      */
-    @Column(name = "is_deleted")
     private Boolean isDeleted;
 
     /**
