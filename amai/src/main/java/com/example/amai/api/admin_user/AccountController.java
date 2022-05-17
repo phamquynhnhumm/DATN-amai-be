@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/account")
+@RequestMapping("api/account")
 public class AccountController {
     @Autowired
     private AccountService accountService;

@@ -12,20 +12,35 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository userReponsitory;
+
+    @Override
+    public Boolean isEmailExists(String email) {
+        return userReponsitory.existsByEmail(email);
+    }
+
+    @Override
+    public Boolean isPhoneExists(String phone) {
+        return userReponsitory.existsByPhone(phone);
+    }
+
+    @Override
+    public Optional<Users> findByEmail(String email) {
+        return userReponsitory.findByEmail(email);
+    }
 
     @Override
     public List<Users> getAll() {
-        return userRepository.findAll();
+        return userReponsitory.findUserByIsDeletedFalse();
     }
 
     @Override
     public Optional<Users> getById(Integer id) {
-        return userRepository.findById(id);
+        return userReponsitory.findById(id);
     }
 
     @Override
-    public Users save(Users entity) {
-        return userRepository.save(entity);
+    public Users save(Users user) {
+        return userReponsitory.save(user);
     }
 }

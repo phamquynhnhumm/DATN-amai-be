@@ -2,26 +2,29 @@ package com.example.amai.api.admin_user;
 
 import com.example.amai.core.admin_user.service.AccountService;
 import com.example.amai.core.admin_user.service.UserService;
-import com.example.amai.core.security.service.MyUserDetailService;
-import com.example.amai.core.security.util.JwtUtil;
+import com.example.amai.core.security.dto.user.LoginRequest;
+import com.example.amai.core.security.dto.user.LoginResponse;
+import com.example.amai.core.security.jwt.JwtUtil;
+import com.example.amai.core.security.service.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
+import javax.validation.Valid;
+
 @CrossOrigin
+@RestController
 @RequestMapping("api")
 public class HomeController {
     @Autowired
     private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private MyUserDetailService userDetailsService;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -32,11 +35,36 @@ public class HomeController {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    @GetMapping("user")
-    public String user() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName();
-        return ("xin chao " + name + " tai khoan use");
+    @PostMapping("/login")
+    private ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest, BindingResult bindResult) {
+
+        if (bindResult.hasErrors()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            Authentication authentication = authenticationManager
+                    .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+
+            String jwt = jwtUtil.generateJwtToken(userDetails);
+
+            return ResponseEntity.ok(new LoginResponse(jwt, userDetails.getFullName(), userDetails.getUsername(),
+                    userDetails.getAuthorities().toString()));
+        }
+    }
+
+    @PostMapping("/register")
+    private ResponseEntity<?> register() {
+        return null;
+    }
+
+    @PostMapping("/logout")
+    private ResponseEntity<?> logout() {
+        return null;
     }
 }

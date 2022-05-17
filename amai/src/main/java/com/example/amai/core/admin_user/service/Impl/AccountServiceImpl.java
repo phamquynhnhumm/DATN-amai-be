@@ -10,32 +10,31 @@ import java.util.List;
 import java.util.Optional;
 @Service
 public class AccountServiceImpl implements AccountService {
-
     @Autowired
-    private AccountRepository accountRepository;
+    private AccountRepository accountReponsitory;
+
+    @Override
+    public Boolean isUsernameExists(String username) {
+        return accountReponsitory.existsByUserName(username);
+    }
+
+    @Override
+    public Optional<Account> findById(String username) {
+        return accountReponsitory.findById(username);
+    }
 
     @Override
     public List<Account> getAll() {
-        return accountRepository.findAll();
+        return accountReponsitory.findAccountByIsDeletedFalse();
     }
 
     @Override
     public Optional<Account> getById(String id) {
-        return accountRepository.findById(id);
+        return accountReponsitory.findById(id);
     }
 
     @Override
-    public Account save(Account entity) {
-        return accountRepository.save(entity);
-    }
-
-    @Override
-    public boolean changePassword(Account account) {
-        return false;
-    }
-
-    @Override
-    public Boolean existsByUserName(String username) {
-        return accountRepository.existsByUserName(username);
+    public Account save(Account account) {
+        return accountReponsitory.save(account);
     }
 }
