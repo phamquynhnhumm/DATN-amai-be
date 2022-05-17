@@ -14,12 +14,11 @@ import java.util.Optional;
 @CrossOrigin
 @RequestMapping("api/order")
 public class OrderController {
-
     @Autowired
     private OrderService orderService;
 
     /**
-     * Danh sách order
+     * Danh sách nguyên liệu
      *
      * @return
      */
@@ -29,14 +28,26 @@ public class OrderController {
         return oderList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(oderList, HttpStatus.OK);
     }
 
+
     /**
-     * Xóa order (cập nhật cơ xóa isDelete = true
+     * Danh sách nguyên liệu  (1 true : Đã xóa , 0 false: Tồn tại )
      *
-     * @param id ID order
-     * @return order đã được cập nhật cờ xóa
+     * @return
+     */
+    @GetMapping("/all/{isdelete}")
+    public ResponseEntity<List<Oder>> finAllIsDelete(@PathVariable("isdelete") boolean isdelete) {
+        List<Oder> oderList = orderService.findByIsDeleted(isdelete);
+        return oderList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(oderList, HttpStatus.OK);
+    }
+
+    /**
+     * Xóa đơn hàng (cập nhật cơ xóa isDelete = true
+     *
+     * @param id ID đơn hàng
+     * @return đơn hàng đã được cập nhật cờ xóa
      */
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<Oder> deleteFood(@PathVariable("id") Integer id) {
+    public ResponseEntity<Oder> deleteOrder(@PathVariable("id") Integer id) {
         Oder oder = orderService.getById(id).orElse(null);
         if (oder.equals(null)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -48,25 +59,56 @@ public class OrderController {
     }
 
     /**
-     * Hàm Xem chi tiết một order
+     * Hoàn tác việc xóa đơn hàng ( sửa từ trạng thái đã xóa thành không xóa)
      *
-     * @param id Id của order
-     * @return trả về thông tin order nếu tìm kiếm thấy Ngược lại trả về NOT
+     * @param id
+     * @return
+     */
+
+    @PutMapping("undelete/{id}")
+    public ResponseEntity<Oder> undeleteOrder(@PathVariable("id") Integer id) {
+        Oder oder = orderService.getById(id).orElse(null);
+        if (oder.equals(null)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            oder.setIsDeleted(false);
+            orderService.save(oder);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
+    /**
+     * Hàm Xem chi tiết đơn hàng
+     *
+     * @param id Id của nguyên liệu
+     * @return trả về thông tin nguyên liệu nếu tìm kiếm thấy Ngược lại trả về NOT
      */
     @GetMapping("/{id}")
     public ResponseEntity<Oder> findById(@PathVariable("id") Integer id) {
         Oder oder = orderService.getById(id).orElse(null);
         return oder.equals(null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(oder, HttpStatus.OK);
     }
-
+//
+//    /**
+//     * Tìm kiếm nguyên liệu theo nhà cung cấp
+//     *
+//     * @param idSupplier Id nhà cung cấp
+//     * @return trả về thông tin món nếu tìm kiếm thấy Ngược lại trả về NOT
+//     */
+//    @GetMapping("/findBySupplierId/{idSupplier}")
+//    public ResponseEntity<List<Material>> findAllBySupplier_Id(@PathVariable("idSupplier") Integer idSupplier) {
+//        List<Material> materialList = materialService.findAllBySupplierList_Id(idSupplier);
+//        return materialList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(materialList, HttpStatus.OK);
+//    }
+//
     /**
-     * Thêm mới order
+     * Thêm mới đơn hàng
      *
      * @param oder
      * @return
      */
     @PostMapping
-    public ResponseEntity<Oder> createFood(@RequestBody Oder oder) {
+    public ResponseEntity<Oder> createOrder(@RequestBody Oder oder) {
         if (oder.equals(null)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -74,17 +116,34 @@ public class OrderController {
     }
 
     /**
-     * Cập nhật order
+     * Cập nhật đơn hàng
      *
      * @param oder
      * @return
      */
     @PutMapping("")
-    public ResponseEntity<Oder> editFood(@RequestBody Oder oder) {
+    public ResponseEntity<Oder> updteOrder(@RequestBody Oder oder) {
         Optional<Oder> oderOptional = orderService.getById(oder.getId());
         if (!oderOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(orderService.save(oder), HttpStatus.OK);
     }
+
+//    /**
+//     * Tìm kiếm theo nguyên liệu theo tên , trạng thái isdelete, đơn vị tính, nhà cung cấp
+//     *
+//     * @param isDelete trạng thái xóa hoặc ko xoad ( 1 đã xóa ; 0 tồn tại)
+//     * @param name Tên nguyên liệu
+//     * @return nguyên liệu tìm kiếm thấy
+//     */
+//    @GetMapping("/search")
+//    public ResponseEntity<List<Material>> searcMaterial(@RequestParam("isDelete") boolean isDelete,
+//                                                        @RequestParam("name") String name,
+//                                                        @RequestParam("unit") String unit,
+//                                                        @RequestParam("supplierName") String supplierName
+//    ) {
+//        List<Material> materialList = orderService.findAllByMaterialIsDeletedAndName(isDelete, name, unit, supplierName);
+//        return materialList.isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(materialList, HttpStatus.OK);
+//    }
 }
