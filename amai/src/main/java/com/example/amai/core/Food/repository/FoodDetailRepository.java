@@ -1,5 +1,6 @@
 package com.example.amai.core.Food.repository;
 
+import com.example.amai.core.Food.entity.Food;
 import com.example.amai.core.Food.entity.FoodDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,6 +16,8 @@ public interface FoodDetailRepository extends JpaRepository<FoodDetail, Integer>
      * @return
      */
     List<FoodDetail> findByIsDeleted(boolean idDelete);
+
+    List<FoodDetail> findByIsDeletedAndFood_IsDeletedAndMaterial_IsDeleted(boolean idDeleteFoodDetail, boolean idDeleteFood, boolean isDeleteMaterail);
 
     /**
      * Tìm kiếm chi tiết món theo món và nguyên liệu

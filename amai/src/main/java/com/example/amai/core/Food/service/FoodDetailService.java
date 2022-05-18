@@ -15,6 +15,8 @@ public interface FoodDetailService extends IService<FoodDetail, Integer> {
      */
     List<FoodDetail> findByIsDeleted(boolean idDelete);
 
+    List<FoodDetail> findByIsDeletedAndFood_IsDeletedAndMaterial_IsDeleted(boolean idDeleteFoodDetail, boolean idDeleteFood, boolean isDeleteMaterail);
+
     /**
      * Tìm kiếm chi tiết món theo tên món và tên nguyên liệu
      *

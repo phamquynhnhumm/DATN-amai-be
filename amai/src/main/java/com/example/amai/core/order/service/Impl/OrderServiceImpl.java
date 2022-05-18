@@ -28,9 +28,10 @@ public class OrderServiceImpl implements OrderService {
     public Oder save(Oder entity) {
         return orderRepository.save(entity);
     }
+
     @Override
-    public List<Oder> findByIsDeleted(boolean idDelete) {
-        return orderRepository.findByIsDeleted(idDelete);
+    public List<Oder> findByIsDeleted(boolean idDeleteOder, boolean issDeleteAccount) {
+        return orderRepository.findByIsDeletedAnAndAccount_IsDeleted(idDeleteOder, issDeleteAccount);
     }
 
     @Override

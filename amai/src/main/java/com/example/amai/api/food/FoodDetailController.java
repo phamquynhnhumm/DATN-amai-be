@@ -36,10 +36,10 @@ public class FoodDetailController {
      */
     @GetMapping("/all/{isdelete}")
     public ResponseEntity<List<FoodDetail>> finAllIsDelete(@PathVariable("isdelete") boolean isdelete) {
-        List<FoodDetail> foodCategoryList = foodDetailService.findByIsDeleted(isdelete);
+        List<FoodDetail> foodCategoryList = foodDetailService.findByIsDeletedAndFood_IsDeletedAndMaterial_IsDeleted(isdelete, false, false);
         return foodCategoryList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodCategoryList, HttpStatus.OK);
     }
-
+    
     /**
      * Xóa chi tiết món (cập nhật cơ xóa isDelete = true
      *

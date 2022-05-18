@@ -35,7 +35,7 @@ public class OrderDetailController {
      * @return orderDetail đã được cập nhật cờ xóa
      */
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<OrderDetail> deleteFood(@PathVariable("id") Integer id) {
+    public ResponseEntity<OrderDetail> deleteOrderDetail(@PathVariable("id") Integer id) {
         OrderDetail orderDetail = orderDetailService.getById(id).orElse(null);
         if (orderDetail.equals(null)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -65,7 +65,7 @@ public class OrderDetailController {
      * @return
      */
     @PostMapping
-    public ResponseEntity<OrderDetail> createFood(@RequestBody OrderDetail orderDetail) {
+    public ResponseEntity<OrderDetail> createOrderDetail(@RequestBody OrderDetail orderDetail) {
         if (orderDetail.equals(null)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -79,7 +79,7 @@ public class OrderDetailController {
      * @return
      */
     @PutMapping("")
-    public ResponseEntity<OrderDetail> editFood(@RequestBody OrderDetail orderDetail) {
+    public ResponseEntity<OrderDetail> editOrderDetail(@RequestBody OrderDetail orderDetail) {
         Optional<OrderDetail> oderOptional = orderDetailService.getById(orderDetail.getId());
         if (!oderOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

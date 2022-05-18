@@ -30,13 +30,13 @@ public class OrderController {
 
 
     /**
-     * Danh sách nguyên liệu  (1 true : Đã xóa , 0 false: Tồn tại )
+     * Danh sách nguyên liệu khi  (1 true : Đã xóa , 0 false: Tồn tại )
      *
      * @return
      */
     @GetMapping("/all/{isdelete}")
     public ResponseEntity<List<Oder>> finAllIsDelete(@PathVariable("isdelete") boolean isdelete) {
-        List<Oder> oderList = orderService.findByIsDeleted(isdelete);
+        List<Oder> oderList = orderService.findByIsDeleted(isdelete, false);
         return oderList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(oderList, HttpStatus.OK);
     }
 

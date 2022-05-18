@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public interface OrderService extends IService<Oder, Integer> {
-    List<Oder> findByIsDeleted(boolean idDelete);
+    List<Oder> findByIsDeleted(boolean idDeleteOder, boolean issDeleteAccount);
 
     List<Oder> findAllSerachOder(boolean isDeleteOder, boolean isDeleteAccount, String fullName, String userName, String address, String phone);
 }
