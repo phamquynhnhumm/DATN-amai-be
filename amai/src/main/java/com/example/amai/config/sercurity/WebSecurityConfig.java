@@ -64,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/login").permitAll()
 //                Phân quyền phía admin
                 .antMatchers("/api/home").permitAll()
-                .antMatchers("/api/admin/food/**").hasAnyRole("MANAGEMENT")
+                .antMatchers("/api/admin/food/**").hasAnyRole("MANAGEMENT","ADMIN")
                 .antMatchers("/api/admin/foodcategory/**").hasAnyRole("MANAGEMENT","ADMIN")
                 .antMatchers("/api/admin/fooddetail/**").hasAnyRole("MANAGEMENT","ADMIN")
                 .antMatchers("/api/admin/material/**").hasAnyRole("MANAGEMENT","ADMIN")
@@ -77,6 +77,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/address").hasRole("CUSTOMER")
                 .antMatchers("/api/pay").hasRole("CUSTOMER")
                 .antMatchers("/api/account").hasRole("CUSTOMER")
+//                Phân quyền phía admin
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
