@@ -9,6 +9,7 @@ import java.util.Optional;
 @Service
 public interface UserService extends IService<Users, Integer> {
     Boolean isEmailExists(String email);
+    Users getByUserName(String username);
 
     Boolean isPhoneExists(String phone);
 

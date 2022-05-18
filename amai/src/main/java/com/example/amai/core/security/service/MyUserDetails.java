@@ -1,60 +1,36 @@
 package com.example.amai.core.security.service;
 
 import com.example.amai.core.admin_user.entity.Account;
-import com.example.amai.core.admin_user.entity.Users;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MyUserDetails implements UserDetails {
-    private static final long serialVersionUID = 1L;
+    private final Account account;
 
-    private String fullName;
-
-    private Account account;
-
-    private String email;
-
-    private String phone;
-
-    private Collection<? extends GrantedAuthority> authorities;
-
-    public MyUserDetails(Users users) {
-        this.fullName = users.getFullName();
-        this.account = users.getAccount();
-        this.email = users.getEmail();
-        this.phone = users.getPhone();
-        this.authorities = Collections.singleton(new SimpleGrantedAuthority(users.getAccount().getRole().toString()));
+    public MyUserDetails(Account account) {
+        this.account = account;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        authorities.add(new SimpleGrantedAuthority(account.getRole().toString()));
         return authorities;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     @Override
     public String getPassword() {
-        return account.getPassword();
+        return this.account.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return account.getUserName();
-    }
-
-    public String getPhone() {
-        return phone;
+        return this.account.getUserName();
     }
 
     @Override
@@ -74,6 +50,6 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.account.getEnable();
     }
 }

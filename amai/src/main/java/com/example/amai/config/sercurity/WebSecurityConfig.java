@@ -59,7 +59,7 @@ public class WebSecurityConfig extends  WebSecurityConfigurerAdapter {
 //        Chưa phân quyền
 //        http.csrf().disable();
 //        http.authorizeRequests().anyRequest().permitAll();
-        http.csrf().disable()
+      http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/login").permitAll()
 //                Phân quyền phía user
@@ -79,4 +79,3 @@ public class WebSecurityConfig extends  WebSecurityConfigurerAdapter {
                 .addFilterBefore(this.jwtRequestFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }
-

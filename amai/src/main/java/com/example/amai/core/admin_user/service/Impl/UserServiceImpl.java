@@ -20,9 +20,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Users getByUserName(String username) {
+        return userReponsitory.findByAccount_UserName(username);
+    }
+
+    @Override
     public Boolean isPhoneExists(String phone) {
         return userReponsitory.existsByPhone(phone);
     }
+
 
     @Override
     public Optional<Users> findByEmail(String email) {

@@ -4,6 +4,7 @@ import com.example.amai.core.security.service.MyUserDetails;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -14,10 +15,10 @@ public class JwtUtil {
 
     private static final String SECRET_KEY = "secret";
 
-    private static final long TIME_TOKEN = 1000 * 60 *60 *12;
+    private static final long TIME_TOKEN = 1000 * 60 * 60 * 12;
 
-    public String generateJwtToken(MyUserDetails userPrincipal) {
-        return generateTokenFromEmail(userPrincipal.getEmail());
+    public String generateJwtToken(UserDetails userDetails) {
+        return generateTokenFromEmail(userDetails.getUsername());
     }
 
     public String generateTokenFromEmail(String email) {
@@ -28,6 +29,10 @@ public class JwtUtil {
     }
 
     public String getEmailFromJwtToken(String token) {
+        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getSubject();
+    }
+
+    public String getUseNameFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getSubject();
     }
 
