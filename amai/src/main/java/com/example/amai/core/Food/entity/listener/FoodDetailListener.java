@@ -1,6 +1,8 @@
 package com.example.amai.core.Food.entity.listener;
 
 import com.example.amai.core.Food.entity.FoodDetail;
+import com.example.amai.core.security.service.MyUserDetails;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityListeners;
@@ -36,8 +38,9 @@ public class FoodDetailListener implements EntityListeners {
     public void preInser(FoodDetail foodDetail) {
         foodDetail.setCreateAt(LocalDateTime.now().format(formatter));
         foodDetail.setUpdateAt(LocalDateTime.now().format(formatter));
-        foodDetail.setCreatedBy("quynhnhu");
-        foodDetail.setUpdatedBy("thuthuy");
+        MyUserDetails userRequest = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        foodDetail.setCreatedBy(userRequest.getAccount());
+        foodDetail.setUpdatedBy(userRequest.getAccount());
         foodDetail.setIsDeleted(false);
     }
 
@@ -49,7 +52,8 @@ public class FoodDetailListener implements EntityListeners {
     @PreUpdate
     public void preUpdate(FoodDetail foodDetail) {
         foodDetail.setUpdateAt(LocalDateTime.now().format(formatter));
-        foodDetail.setUpdatedBy("tientran");
+        MyUserDetails userRequest = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        foodDetail.setUpdatedBy(userRequest.getAccount());
     }
 }
 

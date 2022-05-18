@@ -1,6 +1,8 @@
 package com.example.amai.core.admin_user.entity.listener;
 
 import com.example.amai.core.admin_user.entity.Account;
+import com.example.amai.core.security.service.MyUserDetails;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityListeners;
@@ -40,8 +42,9 @@ public class AccountListener  implements EntityListeners {
     public void preInser(Account account) {
         account.setCreateAt(LocalDateTime.now().format(formatter));
         account.setUpdateAt(LocalDateTime.now().format(formatter));
-        account.setCreatedBy("quynhnhu");
-        account.setUpdatedBy("thuthuy");
+        MyUserDetails userRequest = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        account.setCreatedBy(userRequest.getAccount().getUserName());
+        account.setUpdatedBy(userRequest.getAccount().getUserName());
         account.setIsDeleted(false);
     }
 
@@ -54,6 +57,7 @@ public class AccountListener  implements EntityListeners {
     @PreUpdate
     public void preUpdate(Account account) {
         account.setUpdateAt(LocalDateTime.now().format(formatter));
-        account.setUpdatedBy("tientran");
+        MyUserDetails userRequest = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        account.setUpdatedBy(userRequest.getAccount().getUserName());
     }
 }

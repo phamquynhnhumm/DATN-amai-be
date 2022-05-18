@@ -1,6 +1,8 @@
 package com.example.amai.core.suppliner.entity.listener;
 
+import com.example.amai.core.security.service.MyUserDetails;
 import com.example.amai.core.suppliner.entity.Supplier;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityListeners;
@@ -40,8 +42,9 @@ public class SupplierListener implements EntityListeners {
     public void preInser(Supplier supplier) {
         supplier.setCreateAt(LocalDateTime.now().format(formatter));
         supplier.setUpdateAt(LocalDateTime.now().format(formatter));
-        supplier.setCreatedBy("quynhnhu");
-        supplier.setUpdatedBy("thuthuy");
+        MyUserDetails userRequest = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        supplier.setCreatedBy(userRequest.getAccount());
+        supplier.setUpdatedBy(userRequest.getAccount());
         supplier.setIsDeleted(false);
     }
 
@@ -54,6 +57,7 @@ public class SupplierListener implements EntityListeners {
     @PreUpdate
     public void preUpdate(Supplier supplier) {
         supplier.setUpdateAt(LocalDateTime.now().format(formatter));
-        supplier.setUpdatedBy("tientran");
+        MyUserDetails userRequest = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        supplier.setUpdatedBy(userRequest.getAccount());
     }
 }

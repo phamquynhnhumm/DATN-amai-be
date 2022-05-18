@@ -1,6 +1,5 @@
 package com.example.amai.core.security.jwt;
 
-import com.example.amai.core.security.service.MyUserDetails;
 import com.example.amai.core.security.service.MyUserDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,8 +23,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtUtil jwtUtil;
-
-    private static final Logger logger = LoggerFactory.getLogger(JwtRequestFilter.class);
 
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
@@ -72,16 +69,5 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             // pass the request along the filter chain
             filterChain.doFilter(request, response);
         }
-    }
-
-
-    private String parseJwt(HttpServletRequest request) {
-        String headerAuth = request.getHeader("Authorization");
-
-        if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
-            return headerAuth.substring(7, headerAuth.length());
-        }
-
-        return null;
     }
 }

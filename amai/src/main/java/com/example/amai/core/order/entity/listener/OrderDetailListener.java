@@ -1,6 +1,8 @@
 package com.example.amai.core.order.entity.listener;
 
 import com.example.amai.core.order.entity.OrderDetail;
+import com.example.amai.core.security.service.MyUserDetails;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityListeners;
@@ -40,8 +42,9 @@ public class OrderDetailListener implements EntityListeners {
     public void preInser(OrderDetail orderDetail) {
         orderDetail.setCreateAt(LocalDateTime.now().format(formatter));
         orderDetail.setUpdateAt(LocalDateTime.now().format(formatter));
-        orderDetail.setCreatedBy("quynhnhu");
-        orderDetail.setUpdatedBy("thuthuy");
+        MyUserDetails userRequest = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        orderDetail.setCreatedBy(userRequest.getAccount());
+        orderDetail.setUpdatedBy(userRequest.getAccount());
         orderDetail.setIsDeleted(false);
     }
 
@@ -54,7 +57,8 @@ public class OrderDetailListener implements EntityListeners {
     @PreUpdate
     public void preUpdate(OrderDetail orderDetail) {
         orderDetail.setUpdateAt(LocalDateTime.now().format(formatter));
-        orderDetail.setUpdatedBy("tientran");
+        MyUserDetails userRequest = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        orderDetail.setUpdatedBy(userRequest.getAccount());
     }
 }
 

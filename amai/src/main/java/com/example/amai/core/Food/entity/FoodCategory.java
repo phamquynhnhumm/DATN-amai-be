@@ -1,6 +1,7 @@
 package com.example.amai.core.Food.entity;
 
 import com.example.amai.core.Food.entity.listener.FoodCategoryListener;
+import com.example.amai.core.admin_user.entity.Account;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,7 +32,9 @@ public class FoodCategory {
     /**
      * Người tạo
      */
-    private String createdBy;
+    @ManyToOne
+    @JoinColumn(name = "created_by_user_name")
+    private Account createdBy;
 
     /**
      * Thời gian tạo
@@ -40,7 +43,9 @@ public class FoodCategory {
     /**
      * Người cập nhật
      */
-    private String updatedBy;
+    @ManyToOne
+    @JoinColumn(name = "updated_by_user_name")
+    private Account updatedBy;
 
     /**
      * Thời gian cập nhật
