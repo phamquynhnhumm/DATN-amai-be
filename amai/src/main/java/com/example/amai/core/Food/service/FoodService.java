@@ -11,10 +11,12 @@ public interface FoodService extends IService<Food, Integer> {
     /**
      * Danh sách món
      *
-     * @param idDelete true = 1 = đã xóa, false =0= chưa xóa
+     * @param idDeleteFood true = 1 = đã xóa, false =0= chưa xóa
      * @return
      */
-    List<Food> findByIsDeleted(boolean idDelete);
+    List<Food> findByIsDeleted(boolean idDeleteFood, boolean idDeleteFoodCategory);
+
+    List<Food> findByIsDeletedFood(boolean idDelete);
 
     /**
      * Tìm kiếm món theo danh mục món
