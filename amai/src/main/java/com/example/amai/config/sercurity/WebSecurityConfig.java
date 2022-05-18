@@ -20,7 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends  WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     @Bean
@@ -29,7 +29,7 @@ public class WebSecurityConfig extends  WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public AuthEntryPointJwt entryPointJwt(){
+    public AuthEntryPointJwt entryPointJwt() {
         return new AuthEntryPointJwt();
     }
 
@@ -62,17 +62,21 @@ public class WebSecurityConfig extends  WebSecurityConfigurerAdapter {
       http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/login").permitAll()
-//                Phân quyền phía user
+//                Phân quyền phía admin
                 .antMatchers("/api/home").permitAll()
-                .antMatchers("/api/admin/food/**").permitAll()
+                .antMatchers("/api/admin/food/**").hasAnyRole("MANAGEMENT")
+                .antMatchers("/api/admin/foodcategory/**").hasAnyRole("MANAGEMENT","ADMIN")
+                .antMatchers("/api/admin/fooddetail/**").hasAnyRole("MANAGEMENT","ADMIN")
+                .antMatchers("/api/admin/material/**").hasAnyRole("MANAGEMENT","ADMIN")
+                .antMatchers("/api/admin/order/**").hasAnyRole("MANAGEMENT","ADMIN")
+                .antMatchers("/api/admin/orderdetail/**").hasAnyRole("MANAGEMENT","ADMIN")
+                .antMatchers("/api/admin/supplier/**").hasAnyRole("MANAGEMENT","ADMIN")
+//              Phân quyền phía user
                 .antMatchers("/api/oder").hasRole("CUSTOMER")
                 .antMatchers("/api/cart").hasRole("CUSTOMER")
                 .antMatchers("/api/address").hasRole("CUSTOMER")
                 .antMatchers("/api/pay").hasRole("CUSTOMER")
                 .antMatchers("/api/account").hasRole("CUSTOMER")
-//                Phân quyền phía admin
-//                .antMatchers("/api/admin/**").hasAnyRole("MANAGEMENT", "ADMIN")
-                .antMatchers(HttpMethod.PUT, "/api/users/account/password").hasAnyRole("USER", "ADMIN", "EMPLOYEE")
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()

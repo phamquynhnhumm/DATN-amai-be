@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin
 @RequestMapping("api/admin/foodcategory")
+@CrossOrigin
 public class FoodCategoryController {
     @Autowired
     private FoodCategoryService foodCategoryService;
