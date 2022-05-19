@@ -70,6 +70,10 @@ public class Users {
      * Số điện thoại
      */
     private String phone;
+    /**
+     * Địa chỉ
+     */
+    private String address;
 
     /**
      * Giới tính người dùng {@link EGender}

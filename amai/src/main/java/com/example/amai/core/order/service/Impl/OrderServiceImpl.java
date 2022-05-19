@@ -31,12 +31,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Oder> findByIsDeleted(boolean idDeleteOder, boolean issDeleteAccount) {
-        return orderRepository.findByIsDeletedAnAndAccount_IsDeleted(idDeleteOder, issDeleteAccount);
+        return orderRepository.findByIsDeletedAndAccount_IsDeleted(idDeleteOder, issDeleteAccount);
     }
 
     @Override
     public List<Oder> findAllSerachOder(boolean isDeleteOder, boolean isDeleteAccount, String fullName, String userName, String address, String phone) {
         return orderRepository.findAllSerachOder(isDeleteOder, isDeleteAccount, fullName, userName, address, phone);
     }
-
 }
