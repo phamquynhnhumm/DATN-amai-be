@@ -36,7 +36,7 @@ public class foodUserController {
      */
     @GetMapping("/allFood/{idFoodCategory}")
     public ResponseEntity<List<Food>> finAllIsDeleteandFoodCategory(@PathVariable("idFoodCategory") Integer idFoodCategory) {
-        List<Food> foodList = foodService.findByIsDeletedAndFoodCategory_Id(false, false, idFoodCategory);
+        List<Food> foodList = foodService.findByIsDeletedAndFoodCategory_Id(false,false,idFoodCategory);
         return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
     }
 
