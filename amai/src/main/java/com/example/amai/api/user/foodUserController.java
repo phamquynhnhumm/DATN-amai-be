@@ -34,10 +34,9 @@ public class foodUserController {
      *
      * @return
      */
-    @GetMapping("/allFood/{idDeleteFood}/{idDeleteFoodCategory}")
-    public ResponseEntity<List<Food>> finAllIsDeleteandFoodCategory(@PathVariable("idDeleteFood") boolean idDeleteFood,
-                                                                    @PathVariable("idDeleteFoodCategory") boolean idDeleteFoodCategory) {
-        List<Food> foodList = foodService.findByIsDeleted(idDeleteFood, idDeleteFoodCategory);
+    @GetMapping("/allFood/{idFoodCategory}")
+    public ResponseEntity<List<Food>> finAllIsDeleteandFoodCategory(@PathVariable("idFoodCategory") Integer idFoodCategory) {
+        List<Food> foodList = foodService.findByIsDeletedAndFoodCategory_Id(false, false, idFoodCategory);
         return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
     }
 

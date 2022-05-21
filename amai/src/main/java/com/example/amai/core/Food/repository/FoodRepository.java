@@ -17,6 +17,15 @@ public interface FoodRepository extends JpaRepository<Food, Integer> {
     List<Food> findByIsDeletedAndFoodCategory_IsDeleted(boolean idDeleteFood, boolean idDeleteFoodCategory);
 
     /**
+     * List danh sách món có cùng danh  mục
+     * @param idDeleteFood
+     * @param idDeleteFoodCategory
+     * @param idFoodCategory
+     * @return
+     */
+    List<Food> findByIsDeletedAndFoodCategory_IsDeletedAndFoodCategory_Id(boolean idDeleteFood, boolean idDeleteFoodCategory, int idFoodCategory);
+
+    /**
      *
      * @param idDelete
      * @return
