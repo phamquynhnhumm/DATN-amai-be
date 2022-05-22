@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin
-@RequestMapping("api/user")
+@RequestMapping("api/admin/user")
 public class UserController {
     @Autowired
     private UserService userService;
