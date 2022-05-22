@@ -145,19 +145,17 @@ public class foodUserController {
      * Tìm kiếm danh mục theo tên và trạng thái xóa
      *
      * @param isDelete trạng thái xóa hoặc ko xoad ( 1 đã xóa ; 0 tồn tại)
-     * @param name     Tên danh mục
+     * @param name  Tên danh mục
      * @return Danh mục món tìm kiếm thấy
      */
     @GetMapping("/search")
     public ResponseEntity<List<Food>> searcFood(@RequestParam("isDelete") boolean isDelete,
                                                 @RequestParam("name") String name,
-                                                @RequestParam("unit") String unit,
                                                 @RequestParam("foodCategoryName") String foodCategoryName
     ) {
-        List<Food> foodList = foodService.findAllByFoodIsDeletedAndName(isDelete, name, unit, foodCategoryName);
+        List<Food> foodList = foodService.findAllByFoodUserIsDeletedAndName(isDelete, false, name, foodCategoryName);
         return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(foodList, HttpStatus.OK);
     }
-
 
     /**
      * Danh sách món cú cùng một nguyên liệu

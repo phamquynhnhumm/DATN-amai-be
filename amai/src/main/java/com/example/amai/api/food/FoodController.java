@@ -155,7 +155,7 @@ public class FoodController {
                                                 @RequestParam("unit") String unit,
                                                 @RequestParam("foodCategoryName") String foodCategoryName
     ) {
-        List<Food> foodList = foodService.findAllByFoodIsDeletedAndName(isDelete, name, unit, foodCategoryName);
+        List<Food> foodList = foodService.findAllByFoodIsDeletedAndName(isDelete,false, name, unit, foodCategoryName);
         return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(foodList, HttpStatus.OK);
     }
 

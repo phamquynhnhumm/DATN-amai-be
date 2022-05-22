@@ -43,14 +43,27 @@ public interface FoodRepository extends JpaRepository<Food, Integer> {
     /**
      * Tìm kiếm theo tên danh mục và trạng thái isdelete
      */
-    @Query(value = "select * from food as f inner join food_category as fc on f.food_category_id = fc.id  where f.is_deleted = :isDelete and f.name like %:name% and f.unit like %:unit%  and fc.name like %:foodCategoryName%", nativeQuery = true)
-    List<Food> findAllByFoodIsDeletedAndName(@Param("isDelete") boolean isDelete, @Param("name") String name, @Param("unit") String unit, @Param("foodCategoryName") String foodCategoryName);
+    @Query(value = "select * from food as f inner join food_category as fc on f.food_category_id = fc.id  where f.is_deleted = :isDelete and  fc.is_deleted = :isDeleteFoodCategory and f.name like %:name% and f.unit like %:unit%  and fc.name like %:foodCategoryName%", nativeQuery = true)
+    List<Food> findAllByFoodIsDeletedAndName(@Param("isDelete") boolean isDelete, @Param("isDeleteFoodCategory") boolean isDeleteFoodCategory, @Param("name") String name, @Param("unit") String unit, @Param("foodCategoryName") String foodCategoryName);
+
+    /**
+     * Tìm kiếm food trên  trang user
+     *
+     * @param isDelete
+     * @param isDeleteFoodCategory
+     * @param name
+     * @param price
+     * @param foodCategoryName
+     * @return
+     */
+    @Query(value = "select * from food as f inner join food_category as fc on f.food_category_id = fc.id  where f.is_deleted = :isDelete and  fc.is_deleted = :isDeleteFoodCategory and f.name like %:name% and fc.name like %:foodCategoryName%", nativeQuery = true)
+    List<Food> findAllByFoodUserIsDeletedAndName(@Param("isDelete") boolean isDelete, @Param("isDeleteFoodCategory") boolean isDeleteFoodCategory, @Param("name") String name, @Param("foodCategoryName") String foodCategoryName);
 
     /**
      * Danh sách món có cùng sử dùng một nguyên liệu
      *
      * @param isDelete trạng thái tồnn tại của món
-     * @param id Id của nguyên liệu
+     * @param id       Id của nguyên liệu
      * @return
      */
 
