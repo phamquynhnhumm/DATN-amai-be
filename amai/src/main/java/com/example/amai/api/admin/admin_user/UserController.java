@@ -1,6 +1,9 @@
 package com.example.amai.api.admin.admin_user;
 
+import com.example.amai.core.admin_user.entity.Account;
 import com.example.amai.core.admin_user.entity.Users;
+import com.example.amai.core.admin_user.entity.dao.ForgotPassword;
+import com.example.amai.core.admin_user.service.AccountService;
 import com.example.amai.core.admin_user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +19,9 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AccountService accountService;
 
     /**
      * Danh sách người dùng
@@ -85,6 +91,17 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(userService.save(users), HttpStatus.OK);
+    }
+
+    @PostMapping("forgotpassword")
+    public ResponseEntity<Users> forgotPassword(@RequestBody ForgotPassword forgotPassword) {
+        Optional<Account> accountOptional = this.accountService.findById(forgotPassword.getAccount().getUserName());
+        if (forgotPassword.getNewPassword().equals(forgotPassword.getAccount().getPassword())) {
+            Account account = new Account();
+
+            return null;
+        }
+        return null;
     }
 }
 
