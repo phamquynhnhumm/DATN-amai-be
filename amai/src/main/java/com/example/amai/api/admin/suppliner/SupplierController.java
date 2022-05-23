@@ -1,4 +1,4 @@
-package com.example.amai.api.suppliner;
+package com.example.amai.api.admin.suppliner;
 
 import com.example.amai.core.suppliner.entity.Supplier;
 import com.example.amai.core.suppliner.service.SupplierService;

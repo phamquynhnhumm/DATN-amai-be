@@ -1,4 +1,4 @@
-package com.example.amai.api.admin_user;
+package com.example.amai.api.admin.admin_user;
 
 import com.example.amai.core.admin_user.entity.Account;
 import com.example.amai.core.admin_user.entity.Users;
