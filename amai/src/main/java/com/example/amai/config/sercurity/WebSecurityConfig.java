@@ -75,8 +75,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/admin/supplier/**").hasAnyRole("MANAGEMENT","ADMIN")
 //              Phân quyền phía user
                 .antMatchers("/api/food/**").permitAll()
-                .antMatchers("/api/oder").hasRole("CUSTOMER")
-                .antMatchers("/api/cart").hasRole("CUSTOMER")
+                .antMatchers("/api/order/**").hasRole("CUSTOMER")
+                .antMatchers("/api/cart/**").hasRole("CUSTOMER")
                 .antMatchers("/api/address").hasRole("CUSTOMER")
                 .antMatchers("/api/pay").hasRole("CUSTOMER")
                 .antMatchers("/api/account").hasRole("CUSTOMER")
