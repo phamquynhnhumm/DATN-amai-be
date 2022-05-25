@@ -33,4 +33,9 @@ public class CartServiceImpl implements CartService {
     public List<Cart> findByIsDeletedAndCreatedBy_UserName(boolean idDeleteOder,  boolean isDeleteAccount, String userName) {
         return cartRepository.findByIsDeletedAndCreatedBy_IsDeletedAndCreatedBy_UserName(idDeleteOder, isDeleteAccount, userName);
     }
+
+    @Override
+    public Integer totalMoney(String userName, String status) {
+        return cartRepository.totalMoney(userName, status);
+    }
 }

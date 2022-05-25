@@ -1,6 +1,5 @@
 package com.example.amai.api.user;
 
-import com.example.amai.core.Food.entity.Food;
 import com.example.amai.core.order.entity.Cart;
 import com.example.amai.core.order.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +37,6 @@ public class cartController {
      */
     @PostMapping
     public ResponseEntity<Cart> createOrder(@RequestBody Cart cart) {
-        System.out.println(cart);
         if (cart.equals(null)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -89,4 +87,5 @@ public class cartController {
         Cart cart = cartService.getById(id).orElse(null);
         return cart.equals(null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(cart, HttpStatus.OK);
     }
+
 }
