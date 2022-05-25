@@ -88,19 +88,7 @@ public class OrderController {
         Oder oder = orderService.getById(id).orElse(null);
         return oder.equals(null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(oder, HttpStatus.OK);
     }
-//
-//    /**
-//     * Tìm kiếm nguyên liệu theo nhà cung cấp
-//     *
-//     * @param idSupplier Id nhà cung cấp
-//     * @return trả về thông tin món nếu tìm kiếm thấy Ngược lại trả về NOT
-//     */
-//    @GetMapping("/findBySupplierId/{idSupplier}")
-//    public ResponseEntity<List<Material>> findAllBySupplier_Id(@PathVariable("idSupplier") Integer idSupplier) {
-//        List<Material> materialList = materialService.findAllBySupplierList_Id(idSupplier);
-//        return materialList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(materialList, HttpStatus.OK);
-//    }
-//
+
     /**
      * Thêm mới đơn hàng
      *

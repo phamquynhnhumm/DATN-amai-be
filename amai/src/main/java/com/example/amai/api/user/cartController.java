@@ -1,5 +1,6 @@
 package com.example.amai.api.user;
 
+import com.example.amai.core.Food.entity.Food;
 import com.example.amai.core.order.entity.Cart;
 import com.example.amai.core.order.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,36 @@ public class cartController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(cartService.save(cart), HttpStatus.OK);
+    }
+
+
+    /**
+     * Xóa giỏ hàng (cập nhật cơ xóa isDelete = true
+     *
+     * @param id ID món
+     * @return Món đã được cập nhật cờ xóa
+     */
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Cart> deleteFood(@PathVariable("id") Integer id) {
+        Cart cart = cartService.getById(id).orElse(null);
+        if (cart.equals(null)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            cart.setIsDeleted(true);
+            cartService.save(cart);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
+    /**
+     * Chi tiết 1 giỏ hàng
+     *
+     * @return trả về thông tin món nếu tìm kiếm thấy Ngược lại trả về NOT
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Cart> findById(@PathVariable("id") Integer id) {
+        Cart cart = cartService.getById(id).orElse(null);
+        return cart.equals(null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(cart, HttpStatus.OK);
     }
 }
 
