@@ -28,4 +28,9 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     public OrderDetail save(OrderDetail entity) {
         return orderDetailRepository.save(entity);
     }
+
+    @Override
+    public List<OrderDetail> findAllByOrders_IdAndIsDeletedIsFalse(boolean idorderdetail,Integer idOders) {
+        return orderDetailRepository.findByIsDeletedAndOrders_Id(idorderdetail,idOders);
+    }
 }

@@ -1,6 +1,8 @@
 package com.example.amai.api.user;
 
 import com.example.amai.core.order.entity.Oder;
+import com.example.amai.core.order.entity.OrderDetail;
+import com.example.amai.core.order.service.OrderDetailService;
 import com.example.amai.core.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,9 @@ import java.util.Optional;
 public class oderUserController {
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private OrderDetailService orderDetailService;
 
 
     /**
@@ -39,6 +44,17 @@ public class oderUserController {
     public ResponseEntity<Oder> findById(@PathVariable("id") Integer id) {
         Oder oder = orderService.getById(id).orElse(null);
         return oder.equals(null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(oder, HttpStatus.OK);
+    }
+
+    /**
+     * Danh sách chi tiết đơn hàng theo id Order
+     *
+     * @return trả về thông tin nguyên liệu nếu tìm kiếm thấy Ngược lại trả về NOT
+     */
+    @GetMapping("/detail/{idOders}")
+    public ResponseEntity<List<OrderDetail>> findByIdOder(@PathVariable("idOders") Integer idOders) {
+        List<OrderDetail> orderDetailList = orderDetailService.findAllByOrders_IdAndIsDeletedIsFalse(false,idOders);
+        return orderDetailList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(orderDetailList, HttpStatus.OK);
     }
 
     /**
