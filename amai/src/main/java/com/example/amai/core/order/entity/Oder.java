@@ -61,14 +61,6 @@ public class Oder {
     @Column(name = "is_deleted")
     private Boolean isDeleted;
 
-//    /**
-//     * Tài khoản đặt món {{@link Account}}
-//     */
-//    @ManyToOne
-//    @JoinColumn(name = "account")
-//    private Account account;
-
-
     /**
      * Địa chỉ đặt món
      */

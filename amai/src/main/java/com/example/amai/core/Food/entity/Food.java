@@ -90,7 +90,7 @@ public class Food {
 
     @OneToMany(mappedBy = "food")
     @JsonIgnore
-    List<Cart> cartList;
+   private List<Cart> cartList;
 
     /**
      * Danh sách chi tiết nguyên liệu {@link FoodDetail}
