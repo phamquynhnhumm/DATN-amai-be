@@ -35,7 +35,7 @@ public class cartController {
      * @param cart
      * @return
      */
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<Cart> createOrder(@RequestBody Cart cart) {
         System.out.println(cart);
         if (cart.equals(null)) {

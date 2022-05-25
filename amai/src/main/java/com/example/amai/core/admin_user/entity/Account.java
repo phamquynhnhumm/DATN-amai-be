@@ -3,6 +3,7 @@ package com.example.amai.core.admin_user.entity;
 import com.example.amai.core.admin_user.entity.contans.ERole;
 import com.example.amai.core.Food.entity.listener.FoodCategoryListener;
 import com.example.amai.core.admin_user.entity.listener.AccountListener;
+import com.example.amai.core.order.entity.Cart;
 import com.example.amai.core.order.entity.Oder;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -70,6 +71,13 @@ public class Account {
     @OneToMany(mappedBy = "account")
     @JsonIgnore
     List<Oder> ordersList;
+
+    /**
+     * Danh sách order {{@link Oder}}
+     */
+    @OneToMany(mappedBy = "createdBy")
+    @JsonIgnore
+    List<Cart> carts;
 
     @OneToOne(mappedBy = "account")
     @JsonIgnore

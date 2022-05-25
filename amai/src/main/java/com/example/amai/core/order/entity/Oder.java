@@ -36,8 +36,8 @@ public class Oder {
      * Người tạo
      */
     @ManyToOne
-    @JoinColumn(name = "created_by_user_name")
-    private Account createdBy;
+    @JoinColumn(name = "account")
+    private Account account;
 
     /**
      * Thời gian tạo
@@ -61,12 +61,12 @@ public class Oder {
     @Column(name = "is_deleted")
     private Boolean isDeleted;
 
-    /**
-     * Tài khoản đặt món {{@link Account}}
-     */
-    @ManyToOne
-    @JoinColumn(name = "account")
-    private Account account;
+//    /**
+//     * Tài khoản đặt món {{@link Account}}
+//     */
+//    @ManyToOne
+//    @JoinColumn(name = "account")
+//    private Account account;
 
 
     /**

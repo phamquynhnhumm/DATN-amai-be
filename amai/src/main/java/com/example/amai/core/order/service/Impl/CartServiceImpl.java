@@ -1,7 +1,6 @@
 package com.example.amai.core.order.service.Impl;
 
 import com.example.amai.core.order.entity.Cart;
-import com.example.amai.core.order.entity.contans.EStatusCart;
 import com.example.amai.core.order.repository.CartRepository;
 import com.example.amai.core.order.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;

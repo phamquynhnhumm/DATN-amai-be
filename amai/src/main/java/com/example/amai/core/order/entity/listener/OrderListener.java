@@ -43,7 +43,7 @@ public class OrderListener implements EntityListeners {
         oder.setCreateAt(LocalDateTime.now().format(formatter));
         oder.setUpdateAt(LocalDateTime.now().format(formatter));
         MyUserDetails userRequest = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        oder.setCreatedBy(userRequest.getAccount());
+        oder.setAccount(userRequest.getAccount());
         oder.setUpdatedBy(userRequest.getAccount());
         oder.setIsDeleted(false);
     }
