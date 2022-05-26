@@ -28,7 +28,10 @@ public class FoodDetailServiceImpl implements FoodDetailService {
     public FoodDetail save(FoodDetail entity) {
         return foodDetailRepository.save(entity);
     }
-
+    @Override
+    public void deleteById(Integer id) {
+        foodDetailRepository.deleteById(id);
+    }
 
     @Override
     public List<FoodDetail> findByIsDeleted(boolean idDelete) {

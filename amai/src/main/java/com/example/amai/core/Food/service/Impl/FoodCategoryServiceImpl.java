@@ -31,6 +31,11 @@ public class FoodCategoryServiceImpl implements FoodCategoryService {
     }
 
     @Override
+    public void deleteById(Integer id) {
+        foodCategoryRepository.deleteById(id);
+    }
+
+    @Override
     public List<FoodCategory> findByIsDeleted(boolean idDelete) {
         return foodCategoryRepository.findByIsDeleted(idDelete);
     }

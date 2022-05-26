@@ -49,4 +49,9 @@ public class UserServiceImpl implements UserService {
     public Users save(Users user) {
         return userReponsitory.save(user);
     }
+
+    @Override
+    public void deleteById(Integer id) {
+        this.userReponsitory.deleteById(id);
+    }
 }

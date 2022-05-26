@@ -30,6 +30,11 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
+    public void deleteById(Integer id) {
+        foodRepository.deleteById(id);
+    }
+
+    @Override
     public List<Food> findByIsDeleted(boolean idDeleteFood, boolean idDeleteFoodCategory) {
         return foodRepository.findByIsDeletedAndFoodCategory_IsDeleted(idDeleteFood, idDeleteFoodCategory);
     }

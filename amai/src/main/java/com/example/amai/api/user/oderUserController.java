@@ -63,7 +63,7 @@ public class oderUserController {
      * @param oder
      * @return
      */
-    @PostMapping
+    @PostMapping("createOder")
     public ResponseEntity<Oder> createOrder(@RequestBody Oder oder) {
         if (oder.equals(null)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -86,5 +86,17 @@ public class oderUserController {
         return new ResponseEntity<>(orderService.save(oder), HttpStatus.OK);
     }
 
+    /**
+     * Thêm mới orderDetail
+     *
+     * @param orderDetails truyền vào danh sách chi tiết đơn hàng cùng một lúc
+     * @return
+     */
+    @PostMapping("createDetailOder")
+    public ResponseEntity<OrderDetail> createOrderDetail(@RequestBody List<OrderDetail> orderDetails) {
+        for (OrderDetail orderDetail : orderDetails) {
+            this.orderDetailService.save(orderDetail);
+        }
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 }
-

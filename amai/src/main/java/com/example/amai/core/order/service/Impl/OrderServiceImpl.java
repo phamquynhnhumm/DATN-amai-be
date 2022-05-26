@@ -25,6 +25,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public void deleteById(Integer id) {
+        orderRepository.deleteById(id);
+    }
+
+    @Override
     public Oder save(Oder entity) {
         return orderRepository.save(entity);
     }

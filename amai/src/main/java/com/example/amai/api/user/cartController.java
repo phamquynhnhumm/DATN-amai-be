@@ -23,7 +23,7 @@ public class cartController {
      * @return
      */
     @GetMapping("")
-    public ResponseEntity<List<Cart>> findByIsDeletedAndAccount_IsDeletedAndAccount_UserName(
+    public ResponseEntity<List<Cart>> findByIsDeletedAndCreatedBy_UserName(
             @RequestParam("userName") String userName
     ) {
         List<Cart> cartList = cartService.findByIsDeletedAndCreatedBy_UserName(false, false, userName);
@@ -37,7 +37,7 @@ public class cartController {
      * @return
      */
     @PostMapping
-    public ResponseEntity<Cart> createOrder(@RequestBody Cart cart) {
+    public ResponseEntity<Cart> createCart(@RequestBody Cart cart) {
         if (cart.equals(null)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -67,13 +67,30 @@ public class cartController {
      * @return Món đã được cập nhật cờ xóa
      */
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<Cart> deleteFood(@PathVariable("id") Integer id) {
+    public ResponseEntity<Cart> deleteCart(@PathVariable("id") Integer id) {
         Cart cart = cartService.getById(id).orElse(null);
         if (cart.equals(null)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
             cart.setIsDeleted(true);
             cartService.save(cart);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
+    /**
+     * Hủy cart khỏi giỏ hàng khi đã thanh toán xong
+     *
+     * @param id
+     * @return
+     */
+    @DeleteMapping("cancel/{id}")
+    public ResponseEntity<Cart> deleteCartShopping(@PathVariable("id") Integer id) {
+        Cart cart = cartService.getById(id).orElse(null);
+        if (cart.equals(null)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            cartService.deleteById(id);
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }

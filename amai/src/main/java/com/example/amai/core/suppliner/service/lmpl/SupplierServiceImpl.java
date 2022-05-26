@@ -26,6 +26,11 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
+    public void deleteById(Integer id) {
+        supplierRepository.deleteById(id);
+    }
+
+    @Override
     public Supplier save(Supplier entity) {
         return supplierRepository.save(entity);
     }

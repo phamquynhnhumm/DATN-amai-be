@@ -28,7 +28,10 @@ public class CartServiceImpl implements CartService {
     public Cart save(Cart entity) {
         return cartRepository.save(entity);
     }
-
+    @Override
+    public void deleteById(Integer id) {
+        cartRepository.deleteById(id);
+    }
     @Override
     public List<Cart> findByIsDeletedAndCreatedBy_UserName(boolean idDeleteOder,  boolean isDeleteAccount, String userName) {
         return cartRepository.findByIsDeletedAndCreatedBy_IsDeletedAndCreatedBy_UserName(idDeleteOder, isDeleteAccount, userName);
