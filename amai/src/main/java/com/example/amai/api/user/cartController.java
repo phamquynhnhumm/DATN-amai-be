@@ -51,7 +51,7 @@ public class cartController {
      * @return
      */
     @PutMapping("")
-    public ResponseEntity<Cart> updteOrder(@RequestBody Cart cart) {
+    public ResponseEntity<Cart> updteCart(@RequestBody Cart cart) {
         Optional<Cart> cartOptional = cartService.getById(cart.getId());
         if (!cartOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
