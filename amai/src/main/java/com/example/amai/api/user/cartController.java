@@ -106,7 +106,7 @@ public class cartController {
         return cart.equals(null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(cart, HttpStatus.OK);
     }
 
-    @GetMapping("totalMoney")s-===
+    @GetMapping("totalMoney")
     public ResponseEntity<Integer> totalMoney(
             @RequestParam("userName") String userName) {
         Integer cart = cartService.totalMoney(userName);

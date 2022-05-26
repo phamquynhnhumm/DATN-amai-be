@@ -35,6 +35,7 @@ public interface FoodService extends IService<Food, Integer> {
      * @return
      */
     List<Food> findAllByFoodIsDeletedAndName(boolean isDelete, boolean isDeleteFoodCategory, String name, String unit, String foodCategoryName);
+
     List<Food> findAllByFoodUserIsDeletedAndName(boolean isDelete, boolean isDeleteFoodCategory, String name, String foodCategoryName);
 
     /**

@@ -157,6 +157,20 @@ public class foodUserController {
         return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(foodList, HttpStatus.OK);
     }
 
+
+
+    /**
+     * Danh sách món   (1 true : Đã xóa , 0 false: Tồn tại )
+     *
+     * @return
+     */
+    @GetMapping("/allFood/{idDeleteFood}/{idDeleteFoodCategory}")
+    public ResponseEntity<List<Food>> finAllIsDeleteandFoodCategory(@PathVariable("idDeleteFood") boolean idDeleteFood,
+                                                                    @PathVariable("idDeleteFoodCategory") boolean idDeleteFoodCategory) {
+        List<Food> foodList = foodService.findByIsDeleted(idDeleteFood, idDeleteFoodCategory);
+        return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
+    }
+
     /**
      * Danh sách món cú cùng một nguyên liệu
      *
