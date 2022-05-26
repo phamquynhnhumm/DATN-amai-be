@@ -106,17 +106,16 @@ public class cartController {
         return cart.equals(null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(cart, HttpStatus.OK);
     }
 
-    @GetMapping("totalMoney")
+    @GetMapping("totalMoney")s-===
     public ResponseEntity<Integer> totalMoney(
-            @RequestParam("userName") String userName,
-            @RequestParam("status") String status) {
-        Integer cart = cartService.totalMoney(userName, status);
+            @RequestParam("userName") String userName) {
+        Integer cart = cartService.totalMoney(userName);
         return cart.equals(null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(cart, HttpStatus.OK);
     }
 
     @GetMapping("totalQuantity")
-    public ResponseEntity<Integer> totalQuantity(@RequestParam("userName") String userName, @RequestParam("status") String status) {
-        Integer cart = cartService.totalQuantity(userName, status);
+    public ResponseEntity<Integer> totalQuantity(@RequestParam("userName") String userName) {
+        Integer cart = cartService.totalQuantity(userName);
         return cart.equals(null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(cart, HttpStatus.OK);
     }
 }

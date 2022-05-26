@@ -39,12 +39,12 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Integer totalMoney(String userName, String status) {
-        return cartRepository.totalMoney(userName, status);
+    public Integer totalMoney(String userName) {
+        return cartRepository.totalMoney(userName);
     }
 
     @Override
-    public Integer totalQuantity(String userName, String status) {
-        return cartRepository.totalQuantity(userName, status);
+    public Integer totalQuantity(String userName) {
+        return cartRepository.totalQuantity(userName);
     }
 }

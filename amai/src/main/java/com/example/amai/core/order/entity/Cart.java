@@ -2,7 +2,6 @@ package com.example.amai.core.order.entity;
 
 import com.example.amai.core.Food.entity.Food;
 import com.example.amai.core.admin_user.entity.Account;
-import com.example.amai.core.order.entity.contans.EStatusCart;
 import com.example.amai.core.order.entity.listener.CartListener;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -55,12 +54,6 @@ public class Cart {
      */
     @Column(name = "is_deleted")
     private Boolean isDeleted;
-
-    /**
-     * Trạng thái đặt món {@link EStatusCart}
-     */
-    @Enumerated(EnumType.STRING)
-    private EStatusCart status;
 
     /**
      * Danh sách chi tiết đặt món{@link OrderDetail}
