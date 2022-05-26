@@ -2,9 +2,11 @@ package com.example.amai.core.order.entity;
 
 import com.example.amai.core.admin_user.entity.Account;
 import com.example.amai.core.Food.entity.listener.FoodCategoryListener;
+import com.example.amai.core.order.entity.contans.EPayments;
 import com.example.amai.core.order.entity.contans.EStatusOrder;
 import com.example.amai.core.order.entity.listener.OrderListener;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.org.apache.xpath.internal.objects.XString;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -103,4 +105,10 @@ public class Oder {
      * Số lượng
      */
     private int quantity;
+
+    /**
+     * Hình thức thanh toán ( bằng thẻ hoặc thanh toán khi nhận hàng)
+     */
+    @Enumerated(EnumType.STRING)
+    private EPayments payments;
 }
