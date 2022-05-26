@@ -23,7 +23,8 @@ public class cartController {
      * @return
      */
     @GetMapping("")
-    public ResponseEntity<List<Cart>> findByIsDeletedAndAccount_IsDeletedAndAccount_UserName(@RequestParam("userName") String userName
+    public ResponseEntity<List<Cart>> findByIsDeletedAndAccount_IsDeletedAndAccount_UserName(
+            @RequestParam("userName") String userName
     ) {
         List<Cart> cartList = cartService.findByIsDeletedAndCreatedBy_UserName(false, false, userName);
         return cartList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(cartList, HttpStatus.OK);
@@ -85,6 +86,16 @@ public class cartController {
     @GetMapping("/{id}")
     public ResponseEntity<Cart> findById(@PathVariable("id") Integer id) {
         Cart cart = cartService.getById(id).orElse(null);
+        return cart.equals(null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(cart, HttpStatus.OK);
+    }
+
+    @GetMapping("totalMoney")
+    public ResponseEntity<Integer> findById(
+            @RequestParam("userName") String userName,
+            @RequestParam("status") String status
+
+    ) {
+        Integer cart = cartService.totalMoney(userName, status);
         return cart.equals(null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(cart, HttpStatus.OK);
     }
 
