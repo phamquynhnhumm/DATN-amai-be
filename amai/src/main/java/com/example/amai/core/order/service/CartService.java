@@ -11,4 +11,6 @@ public interface CartService extends IService<Cart, Integer> {
     List<Cart> findByIsDeletedAndCreatedBy_UserName(boolean idDeleteOder, boolean isDeleteAccount, String userName);
 
     Integer totalMoney(String userName, String status);
+
+    Integer totalQuantity(String userName, String status);
 }

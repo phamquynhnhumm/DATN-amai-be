@@ -107,13 +107,16 @@ public class cartController {
     }
 
     @GetMapping("totalMoney")
-    public ResponseEntity<Integer> findById(
+    public ResponseEntity<Integer> totalMoney(
             @RequestParam("userName") String userName,
-            @RequestParam("status") String status
-
-    ) {
+            @RequestParam("status") String status) {
         Integer cart = cartService.totalMoney(userName, status);
         return cart.equals(null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(cart, HttpStatus.OK);
     }
 
+    @GetMapping("totalQuantity")
+    public ResponseEntity<Integer> totalQuantity(@RequestParam("userName") String userName, @RequestParam("status") String status) {
+        Integer cart = cartService.totalQuantity(userName, status);
+        return cart.equals(null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(cart, HttpStatus.OK);
+    }
 }

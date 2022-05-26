@@ -2,12 +2,12 @@ package com.example.amai.core.order.entity.contans;
 
 public enum EPayments {
     /**
-     * giỏ hàng
+     * bằng thẻ
      */
     PAYPAL,
     /**
-     * Thanh toán
+     * khi nhận hàng
      */
-    Cash
+    CASH
 }
 
