@@ -17,6 +17,5 @@ public interface FoodCategoryService extends IService<FoodCategory, Integer> {
 
     List<FoodCategory> findAllByIsDeletedAndName(boolean isDelete, String name);
 
-
-
+    List<FoodCategory> findAllByFoodCategory_IsDeletedFalse();
 }

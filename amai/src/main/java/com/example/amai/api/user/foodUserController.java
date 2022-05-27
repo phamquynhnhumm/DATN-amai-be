@@ -1,6 +1,8 @@
 package com.example.amai.api.user;
 
 import com.example.amai.core.Food.entity.Food;
+import com.example.amai.core.Food.entity.FoodCategory;
+import com.example.amai.core.Food.service.FoodCategoryService;
 import com.example.amai.core.Food.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,9 @@ import java.util.Optional;
 public class foodUserController {
     @Autowired
     private FoodService foodService;
+
+    @Autowired
+    private FoodCategoryService foodCategoryService;
 
     /**
      * Danh sách món
@@ -212,6 +217,32 @@ public class foodUserController {
     public ResponseEntity<List<Food>> OrderByPriceACS() {
         List<Food> foodList = foodService.findByOrderByPriceAsc();
         return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
+    }
+
+    /**
+     * All danh mục dùng pphía user
+     */
+    /**
+     * Danh sách món  (1 true : Đã xóa , 0 false: Tồn tại )
+     *
+     * @return
+     */
+    @GetMapping("/foodcategoryall")
+    public ResponseEntity<List<FoodCategory>> finAlFoodCategory() {
+        List<FoodCategory> foodList = foodCategoryService.findAllByFoodCategory_IsDeletedFalse();
+        return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
+    }
+
+    /**
+     * Chi tiết 1 danh mục
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("foodcategory/{id}")
+    public ResponseEntity<FoodCategory> findByIdFoodCategory(@PathVariable("id") Integer id) {
+        FoodCategory foodCategory = foodCategoryService.getById(id).orElse(null);
+        return foodCategory.equals(null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodCategory, HttpStatus.OK);
     }
 }
 

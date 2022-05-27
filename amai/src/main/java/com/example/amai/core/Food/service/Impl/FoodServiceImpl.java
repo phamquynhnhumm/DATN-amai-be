@@ -1,6 +1,7 @@
 package com.example.amai.core.Food.service.Impl;
 
 import com.example.amai.core.Food.entity.Food;
+import com.example.amai.core.Food.entity.FoodCategory;
 import com.example.amai.core.Food.repository.FoodRepository;
 import com.example.amai.core.Food.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,4 +84,5 @@ public class FoodServiceImpl implements FoodService {
     public List<Food> findByOrderByFoodCategory_NameAsc() {
         return foodRepository.findByOrderByFoodCategory_NameAsc();
     }
+
 }

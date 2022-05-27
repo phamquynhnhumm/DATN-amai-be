@@ -1,6 +1,7 @@
 package com.example.amai.core.Food.service;
 
 import com.example.amai.core.Food.entity.Food;
+import com.example.amai.core.Food.entity.FoodCategory;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
@@ -50,5 +51,4 @@ public interface FoodService extends IService<Food, Integer> {
     List<Food> findByOrderByNameAsc();
     List<Food> findByOrderByPriceAsc();
     List<Food> findByOrderByFoodCategory_NameAsc();
-
 }
