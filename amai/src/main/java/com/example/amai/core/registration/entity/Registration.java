@@ -51,6 +51,7 @@ public class Registration {
     /**
      * Trạng thái xử lý
      */
+    @Enumerated(EnumType.STRING)
     private EStatuasHandle handle;
 
     /**

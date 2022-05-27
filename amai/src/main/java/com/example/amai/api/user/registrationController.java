@@ -15,7 +15,7 @@ public class registrationController {
     @Autowired
     private RegistrationService registrationService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Registration> createRegistration(@RequestBody Registration registration) {
         if (registration.equals(null)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

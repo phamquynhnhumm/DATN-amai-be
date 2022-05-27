@@ -43,7 +43,6 @@ public class RegistrationListener implements EntityListeners {
         MyUserDetails userRequest = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         registration.setUpdatedBy(null);
         registration.setIsDeleted(false);
-        registration.setHandle(EStatuasHandle.NOTCONTACTED);
     }
 
     /**
