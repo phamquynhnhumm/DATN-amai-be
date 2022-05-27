@@ -51,7 +51,7 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     public List<Food> findAllByFoodCategory_Id(Integer idFoodCategory) {
-        return foodRepository.findAllByFoodCategory_Id(idFoodCategory);
+        return foodRepository.findAllByIsDeletedFalseAndFoodCategory_Id(idFoodCategory);
     }
 
     @Override
@@ -61,11 +61,26 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     public List<Food> findAllByFoodUserIsDeletedAndName(boolean isDelete, boolean isDeleteFoodCategory, String name, String foodCategoryName) {
-        return foodRepository.findAllByFoodUserIsDeletedAndName(isDelete,isDeleteFoodCategory,name,foodCategoryName);
+        return foodRepository.findAllByFoodUserIsDeletedAndName(isDelete, isDeleteFoodCategory, name, foodCategoryName);
     }
 
     @Override
     public List<Food> findAllByFoodByIsdeleteAndMaterial(boolean isDelete, Integer id) {
         return foodRepository.findAllByFoodByIsdeleteAndMaterial(isDelete, id);
+    }
+
+    @Override
+    public List<Food> findByOrderByNameAsc() {
+        return foodRepository.findByOrderByNameAsc();
+    }
+
+    @Override
+    public List<Food> findByOrderByPriceAsc() {
+        return foodRepository.findByOrderByPriceAsc();
+    }
+
+    @Override
+    public List<Food> findByOrderByFoodCategory_NameAsc() {
+        return foodRepository.findByOrderByFoodCategory_NameAsc();
     }
 }

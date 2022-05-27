@@ -38,7 +38,7 @@ public interface FoodRepository extends JpaRepository<Food, Integer> {
      * @param idFoodCategory id danh mục món
      * @return list món có cùng id danh mục
      */
-    List<Food> findAllByFoodCategory_Id(Integer idFoodCategory);
+    List<Food> findAllByIsDeletedFalseAndFoodCategory_Id(Integer idFoodCategory);
 
     /**
      * Tìm kiếm theo tên danh mục và trạng thái isdelete
@@ -48,6 +48,7 @@ public interface FoodRepository extends JpaRepository<Food, Integer> {
 
     /**
      * Tìm kiếm food trên  trang user
+     * Native SQL
      *
      * @param isDelete
      * @param isDeleteFoodCategory
@@ -69,5 +70,9 @@ public interface FoodRepository extends JpaRepository<Food, Integer> {
     @Query(value = "select * from food_detail as fd inner join food as f on fd.food_id = f.id inner join material as m on fd.material_id = m.id where f.is_deleted =:isDelete and m.id =:id", nativeQuery = true)
     List<Food> findAllByFoodByIsdeleteAndMaterial(@Param("isDelete") boolean isDelete, @Param("id") Integer id);
 
-//    List<Food> findAllByIsDeletedAndPriceOrderBy(boolean isDelete);
+
+    List<Food> findByOrderByNameAsc();
+    List<Food> findByOrderByPriceAsc();
+    List<Food> findByOrderByFoodCategory_NameAsc();
+
 }

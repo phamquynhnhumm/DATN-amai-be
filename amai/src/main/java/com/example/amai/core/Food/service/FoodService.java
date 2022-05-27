@@ -46,4 +46,9 @@ public interface FoodService extends IService<Food, Integer> {
      * @return
      */
     List<Food> findAllByFoodByIsdeleteAndMaterial(boolean isDelete, Integer id);
+
+    List<Food> findByOrderByNameAsc();
+    List<Food> findByOrderByPriceAsc();
+    List<Food> findByOrderByFoodCategory_NameAsc();
+
 }

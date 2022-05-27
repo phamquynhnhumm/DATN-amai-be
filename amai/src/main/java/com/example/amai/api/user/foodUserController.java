@@ -185,5 +185,33 @@ public class foodUserController {
         List<Food> foodList = foodService.findAllByFoodByIsdeleteAndMaterial(isDelete, id);
         return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(foodList, HttpStatus.OK);
     }
+
+    /**
+     * /**
+     * Xắp xếp Food theo name
+     */
+    @GetMapping("oderByName")
+    public ResponseEntity<List<Food>> OrderByNameACS() {
+        List<Food> foodList = foodService.findByOrderByNameAsc();
+        return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
+    }
+
+    /**
+     * Xắp xếp Food theo tên danh mục món
+     */
+    @GetMapping("oderByFoodCategory")
+    public ResponseEntity<List<Food>> OrderByFoodCategoryACS() {
+        List<Food> foodList = foodService.findByOrderByFoodCategory_NameAsc();
+        return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
+    }
+
+    /**
+     * Xắp xếp Food theo giá
+     */
+    @GetMapping("oderByPrice")
+    public ResponseEntity<List<Food>> OrderByPriceACS() {
+        List<Food> foodList = foodService.findByOrderByPriceAsc();
+        return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
+    }
 }
 
