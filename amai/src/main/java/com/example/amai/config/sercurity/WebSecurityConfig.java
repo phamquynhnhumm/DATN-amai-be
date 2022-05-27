@@ -65,7 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                Phân quyền phía admin
                 .antMatchers("/api/home").permitAll()
 //                .antMatchers("/api/user/**").permitAll()
-                .antMatchers("/api/admin/food/**").hasAnyRole("MANAGEMENT","ADMIN")
+              .antMatchers("/api/admin/food/**").hasAnyRole("MANAGEMENT", "ADMIN")
               .antMatchers("/api/admin/user/**").hasAnyRole("MANAGEMENT", "ADMIN", "CUSTOMER")
               .antMatchers("/api/admin/foodcategory/**").hasAnyRole("MANAGEMENT", "ADMIN")
               .antMatchers("/api/admin/fooddetail/**").hasAnyRole("MANAGEMENT", "ADMIN")
@@ -75,6 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
               .antMatchers("/api/admin/supplier/**").hasAnyRole("MANAGEMENT", "ADMIN")
 //              Phân quyền phía user
               .antMatchers("/api/food/**").permitAll()
+              .antMatchers("/api/class/**").permitAll()
               .antMatchers("/api/order/**").hasRole("CUSTOMER")
               .antMatchers("/api/address/**").hasRole("CUSTOMER")
               .antMatchers("/api/pay").hasRole("CUSTOMER")
