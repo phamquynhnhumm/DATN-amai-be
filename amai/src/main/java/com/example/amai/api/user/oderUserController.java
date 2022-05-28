@@ -99,4 +99,20 @@ public class oderUserController {
         }
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+    /**
+     * Chuyển chuỗi Json order thành mã OR
+     *
+     * @param oder
+     * @return
+     */
+    @PostMapping("generateQRCode")
+    public ResponseEntity<String> generateQRCode(@RequestBody Oder oder
+    ) {
+        Optional<Oder> oderOptional = orderService.getById(oder.getId());
+        if (!oderOptional.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(orderService.generateQrCode(oder), HttpStatus.OK);
+    }
 }

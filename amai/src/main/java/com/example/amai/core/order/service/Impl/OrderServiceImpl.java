@@ -4,6 +4,8 @@ import com.example.amai.core.order.entity.Oder;
 import com.example.amai.core.order.entity.contans.EStatusOrder;
 import com.example.amai.core.order.repository.OrderRepository;
 import com.example.amai.core.order.service.OrderService;
+import com.example.amai.core.security.jwt.QRUtils;
+import com.sun.deploy.association.utility.AppUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,9 @@ import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
+    private static final int ORDER_QR_CODE_SIZE_WIDTH = 300;
+    private static final int ORDER_QR_CODE_SIZE_HEIGHT = 300;
+
     @Autowired
     private OrderRepository orderRepository;
 
@@ -48,6 +53,13 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Oder> findAllByIsDeletedFalseAndStatus(EStatusOrder status) {
         return orderRepository.findAllByIsDeletedFalseAndStatus(status);
+    }
+
+    @Override
+    public String generateQrCode(Oder sdi) {
+        String prettyData = QRUtils.prettyObject(sdi);
+        String qrCode = QRUtils.generateQrCode(prettyData, ORDER_QR_CODE_SIZE_WIDTH, ORDER_QR_CODE_SIZE_HEIGHT);
+        return qrCode;
     }
 
     @Override
