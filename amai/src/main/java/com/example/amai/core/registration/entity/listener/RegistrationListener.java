@@ -1,6 +1,5 @@
 package com.example.amai.core.registration.entity.listener;
 
-import com.example.amai.core.Food.entity.FoodDetail;
 import com.example.amai.core.registration.entity.Registration;
 import com.example.amai.core.registration.entity.contans.EStatuasHandle;
 import com.example.amai.core.security.service.MyUserDetails;
@@ -40,8 +39,8 @@ public class RegistrationListener implements EntityListeners {
     public void preInser(Registration registration) {
         registration.setCreateAt(LocalDateTime.now().format(formatter));
         registration.setUpdateAt(LocalDateTime.now().format(formatter));
-        MyUserDetails userRequest = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         registration.setUpdatedBy(null);
+        registration.setHandle(EStatuasHandle.NOTCONTACTED);
         registration.setIsDeleted(false);
     }
 
