@@ -1,6 +1,7 @@
 package com.example.amai.core.order.service.Impl;
 
 import com.example.amai.core.order.entity.Oder;
+import com.example.amai.core.order.entity.contans.EStatusOrder;
 import com.example.amai.core.order.repository.OrderRepository;
 import com.example.amai.core.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Oder> findByIsDeletedAndAccount_IsDeletedAndAccount_UserName(boolean idDeleteOder, boolean issDeleteAccount, String userName) {
         return orderRepository.findByIsDeletedAndAccount_IsDeletedAndAccount_UserName(idDeleteOder, issDeleteAccount, userName);
+    }
+
+    @Override
+    public List<Oder> findAllByIsDeletedFalseAndStatus(EStatusOrder status) {
+        return orderRepository.findAllByIsDeletedFalseAndStatus(status);
     }
 
     @Override

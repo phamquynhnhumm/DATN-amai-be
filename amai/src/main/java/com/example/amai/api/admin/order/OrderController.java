@@ -1,6 +1,7 @@
 package com.example.amai.api.admin.order;
 
 import com.example.amai.core.order.entity.Oder;
+import com.example.amai.core.order.entity.contans.EStatusOrder;
 import com.example.amai.core.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,12 @@ public class OrderController {
     @GetMapping("/all/{isdelete}")
     public ResponseEntity<List<Oder>> finAllIsDelete(@PathVariable("isdelete") boolean isdelete) {
         List<Oder> oderList = orderService.findByIsDeleted(isdelete, false);
+        return oderList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(oderList, HttpStatus.OK);
+    }
+
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<Oder>> finAllStatus(@PathVariable("status") EStatusOrder status) {
+        List<Oder> oderList = orderService.findAllByIsDeletedFalseAndStatus(status);
         return oderList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(oderList, HttpStatus.OK);
     }
 
@@ -118,6 +125,16 @@ public class OrderController {
         return new ResponseEntity<>(orderService.save(oder), HttpStatus.OK);
     }
 
+    @PutMapping("confirm")
+    public ResponseEntity<Oder> confirmOder(@RequestBody Oder oder) {
+        Optional<Oder> oderOptional = orderService.getById(oder.getId());
+        oder.setStatus(EStatusOrder.CONFIRMED);
+        if (!oderOptional.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(orderService.save(oder), HttpStatus.OK);
+    }
+
     /**
      * Tìm kiếm theo nguyên liệu theo tên , trạng thái isdelete, đơn vị tính, nhà cung cấp
      *
@@ -125,7 +142,7 @@ public class OrderController {
      */
     @GetMapping("/search")
     public ResponseEntity<List<Oder>> searchOder(@RequestParam("isDeleteOder") boolean isDeleteOder,
-                                                    @RequestParam("isDeleteAccount") boolean isDeleteAccount,
+                                                 @RequestParam("isDeleteAccount") boolean isDeleteAccount,
                                                     @RequestParam("fullName") String fullName,
                                                     @RequestParam("userName") String userName,
                                                     @RequestParam("address") String address,
