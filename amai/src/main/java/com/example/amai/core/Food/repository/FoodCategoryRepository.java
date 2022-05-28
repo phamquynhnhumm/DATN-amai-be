@@ -21,4 +21,7 @@ public interface FoodCategoryRepository extends JpaRepository<FoodCategory, Inte
      */
     @Query(value = "select * from food_category as fc where fc.is_deleted = :isDelete and fc.name like %:name% ", nativeQuery = true)
     List<FoodCategory> findAllByIsDeletedAndName(@Param("isDelete") boolean isDelete, @Param("name") String name);
+
+    List<FoodCategory> findByIsDeletedFalse();
+
 }

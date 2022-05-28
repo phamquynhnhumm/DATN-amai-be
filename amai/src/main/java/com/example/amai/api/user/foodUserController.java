@@ -1,6 +1,8 @@
-package com.example.amai.api.food;
+package com.example.amai.api.user;
 
 import com.example.amai.core.Food.entity.Food;
+import com.example.amai.core.Food.entity.FoodCategory;
+import com.example.amai.core.Food.service.FoodCategoryService;
 import com.example.amai.core.Food.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,12 +13,14 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/admin/food")
+@RequestMapping("api/food")
 @CrossOrigin
-public class FoodController {
-
+public class foodUserController {
     @Autowired
     private FoodService foodService;
+
+    @Autowired
+    private FoodCategoryService foodCategoryService;
 
     /**
      * Danh sách món
@@ -35,10 +39,9 @@ public class FoodController {
      *
      * @return
      */
-    @GetMapping("/allFood/{idDeleteFood}/{idDeleteFoodCategory}")
-    public ResponseEntity<List<Food>> finAllIsDeleteandFoodCategory(@PathVariable("idDeleteFood") boolean idDeleteFood,
-                                                     @PathVariable("idDeleteFoodCategory") boolean idDeleteFoodCategory) {
-        List<Food> foodList = foodService.findByIsDeleted(idDeleteFood, idDeleteFoodCategory);
+    @GetMapping("/allFood/{idFoodCategory}")
+    public ResponseEntity<List<Food>> finAllIsDeleteandFoodCategory(@PathVariable("idFoodCategory") Integer idFoodCategory) {
+        List<Food> foodList = foodService.findByIsDeletedAndFoodCategory_Id(false,false,idFoodCategory);
         return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
     }
 
@@ -130,6 +133,7 @@ public class FoodController {
 
     /**
      * Cập nhật món
+     *
      * @param food
      * @return
      */
@@ -146,25 +150,37 @@ public class FoodController {
      * Tìm kiếm danh mục theo tên và trạng thái xóa
      *
      * @param isDelete trạng thái xóa hoặc ko xoad ( 1 đã xóa ; 0 tồn tại)
-     * @param name Tên danh mục
+     * @param name  Tên danh mục
      * @return Danh mục món tìm kiếm thấy
      */
     @GetMapping("/search")
     public ResponseEntity<List<Food>> searcFood(@RequestParam("isDelete") boolean isDelete,
                                                 @RequestParam("name") String name,
-                                                @RequestParam("unit") String unit,
                                                 @RequestParam("foodCategoryName") String foodCategoryName
     ) {
-        List<Food> foodList = foodService.findAllByFoodIsDeletedAndName(isDelete, name, unit, foodCategoryName);
+        List<Food> foodList = foodService.findAllByFoodUserIsDeletedAndName(isDelete, false, name, foodCategoryName);
         return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(foodList, HttpStatus.OK);
     }
 
+
+
+    /**
+     * Danh sách món   (1 true : Đã xóa , 0 false: Tồn tại )
+     *
+     * @return
+     */
+    @GetMapping("/allFood/{idDeleteFood}/{idDeleteFoodCategory}")
+    public ResponseEntity<List<Food>> finAllIsDeleteandFoodCategory(@PathVariable("idDeleteFood") boolean idDeleteFood,
+                                                                    @PathVariable("idDeleteFoodCategory") boolean idDeleteFoodCategory) {
+        List<Food> foodList = foodService.findByIsDeleted(idDeleteFood, idDeleteFoodCategory);
+        return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
+    }
 
     /**
      * Danh sách món cú cùng một nguyên liệu
      *
      * @param isDelete trạng thái xóa của món
-     * @param id Id nguyên liệu
+     * @param id       Id nguyên liệu
      * @return
      */
     @GetMapping("/searchfindBymaterial")
@@ -174,4 +190,59 @@ public class FoodController {
         List<Food> foodList = foodService.findAllByFoodByIsdeleteAndMaterial(isDelete, id);
         return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(foodList, HttpStatus.OK);
     }
+
+    /**
+     * /**
+     * Xắp xếp Food theo name
+     */
+    @GetMapping("oderByName")
+    public ResponseEntity<List<Food>> OrderByNameACS() {
+        List<Food> foodList = foodService.findByOrderByNameAsc();
+        return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
+    }
+
+    /**
+     * Xắp xếp Food theo tên danh mục món
+     */
+    @GetMapping("oderByFoodCategory")
+    public ResponseEntity<List<Food>> OrderByFoodCategoryACS() {
+        List<Food> foodList = foodService.findByOrderByFoodCategory_NameAsc();
+        return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
+    }
+
+    /**
+     * Xắp xếp Food theo giá
+     */
+    @GetMapping("oderByPrice")
+    public ResponseEntity<List<Food>> OrderByPriceACS() {
+        List<Food> foodList = foodService.findByOrderByPriceAsc();
+        return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
+    }
+
+    /**
+     * All danh mục dùng pphía user
+     */
+    /**
+     * Danh sách món  (1 true : Đã xóa , 0 false: Tồn tại )
+     *
+     * @return
+     */
+    @GetMapping("/foodcategoryall")
+    public ResponseEntity<List<FoodCategory>> finAlFoodCategory() {
+        List<FoodCategory> foodList = foodCategoryService.findAllByFoodCategory_IsDeletedFalse();
+        return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
+    }
+
+    /**
+     * Chi tiết 1 danh mục
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("foodcategory/{id}")
+    public ResponseEntity<FoodCategory> findByIdFoodCategory(@PathVariable("id") Integer id) {
+        FoodCategory foodCategory = foodCategoryService.getById(id).orElse(null);
+        return foodCategory.equals(null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodCategory, HttpStatus.OK);
+    }
 }
+

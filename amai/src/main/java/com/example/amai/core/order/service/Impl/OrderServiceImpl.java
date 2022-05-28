@@ -25,6 +25,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public void deleteById(Integer id) {
+        orderRepository.deleteById(id);
+    }
+
+    @Override
     public Oder save(Oder entity) {
         return orderRepository.save(entity);
     }
@@ -32,6 +37,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Oder> findByIsDeleted(boolean idDeleteOder, boolean issDeleteAccount) {
         return orderRepository.findByIsDeletedAndAccount_IsDeleted(idDeleteOder, issDeleteAccount);
+    }
+
+    @Override
+    public List<Oder> findByIsDeletedAndAccount_IsDeletedAndAccount_UserName(boolean idDeleteOder, boolean issDeleteAccount, String userName) {
+        return orderRepository.findByIsDeletedAndAccount_IsDeletedAndAccount_UserName(idDeleteOder, issDeleteAccount, userName);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.example.amai.core.order.entity.listener;
 
-import com.example.amai.core.order.entity.Oder;
+import com.example.amai.core.order.entity.Cart;
 import com.example.amai.core.security.service.MyUserDetails;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -13,11 +13,8 @@ import java.lang.annotation.Annotation;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Lớp thực hiện trước khi trương tác với table đặt món
- */
 @Service
-public class OrderListener implements EntityListeners {
+public class CartListener implements EntityListeners {
     @Override
     public Class[] value() {
         return new Class[0];
@@ -34,30 +31,30 @@ public class OrderListener implements EntityListeners {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy");
 
     /**
-     * Thực hiện trước khi thêm mới đặt món
+     * Thực hiện trước khi thêm mới chi tiết đặt món
      *
-     * @param oder Thông tin đưa vào câu truy vấn
+     * @param cart Thông tin đưa vào câu truy vấn
      */
     @PrePersist
-    public void preInser(Oder oder) {
-        oder.setCreateAt(LocalDateTime.now().format(formatter));
-        oder.setUpdateAt(LocalDateTime.now().format(formatter));
+    public void preInser(Cart cart) {
+        cart.setCreateAt(LocalDateTime.now().format(formatter));
+        cart.setUpdateAt(LocalDateTime.now().format(formatter));
         MyUserDetails userRequest = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        oder.setAccount(userRequest.getAccount());
-        oder.setUpdatedBy(userRequest.getAccount());
-        oder.setIsDeleted(false);
+        cart.setCreatedBy(userRequest.getAccount());
+        cart.setUpdatedBy(userRequest.getAccount());
+        cart.setIsDeleted(false);
     }
 
     /**
-     * Thực hiện trước khi cập nhật lại đặt món
+     * Thực hiện trước khi cập nhật lại chi tiết đặt món
      *
-     * @param oder Thông tin đưa vào câu truy vấn
+     * @param cart Thông tin đưa vào câu truy vấn
      */
     @PreRemove
     @PreUpdate
-    public void preUpdate(Oder oder) {
-        oder.setUpdateAt(LocalDateTime.now().format(formatter));
+    public void preUpdate(Cart cart) {
+        cart.setUpdateAt(LocalDateTime.now().format(formatter));
         MyUserDetails userRequest = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        oder.setUpdatedBy(userRequest.getAccount());
+        cart.setUpdatedBy(userRequest.getAccount());
     }
 }

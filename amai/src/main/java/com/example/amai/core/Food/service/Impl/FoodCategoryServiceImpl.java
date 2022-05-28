@@ -31,12 +31,22 @@ public class FoodCategoryServiceImpl implements FoodCategoryService {
     }
 
     @Override
+    public void deleteById(Integer id) {
+        foodCategoryRepository.deleteById(id);
+    }
+
+    @Override
     public List<FoodCategory> findByIsDeleted(boolean idDelete) {
         return foodCategoryRepository.findByIsDeleted(idDelete);
     }
 
     @Override
     public List<FoodCategory> findAllByIsDeletedAndName(boolean isDelete, String name) {
-        return foodCategoryRepository.findAllByIsDeletedAndName(isDelete,name);
+        return foodCategoryRepository.findAllByIsDeletedAndName(isDelete, name);
+    }
+
+    @Override
+    public List<FoodCategory> findAllByFoodCategory_IsDeletedFalse() {
+        return foodCategoryRepository.findByIsDeletedFalse();
     }
 }

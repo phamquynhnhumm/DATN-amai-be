@@ -1,4 +1,4 @@
-package com.example.amai.api.admin_user;
+package com.example.amai.api.admin.admin_user;
 
 import com.example.amai.core.admin_user.entity.Users;
 import com.example.amai.core.admin_user.service.UserService;
@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin
-@RequestMapping("api/user")
+@RequestMapping("api/admin/user")
 public class UserController {
     @Autowired
     private UserService userService;

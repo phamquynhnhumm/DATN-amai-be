@@ -37,4 +37,9 @@ public class AccountServiceImpl implements AccountService {
     public Account save(Account account) {
         return accountReponsitory.save(account);
     }
+
+    @Override
+    public void deleteById(String id) {
+        accountReponsitory.deleteById(id);
+    }
 }

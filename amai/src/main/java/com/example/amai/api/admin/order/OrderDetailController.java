@@ -1,4 +1,4 @@
-package com.example.amai.api.order;
+package com.example.amai.api.admin.order;
 
 import com.example.amai.core.order.entity.OrderDetail;
 import com.example.amai.core.order.service.OrderDetailService;

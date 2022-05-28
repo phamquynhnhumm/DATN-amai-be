@@ -1,4 +1,4 @@
-package com.example.amai.api.food;
+package com.example.amai.api.admin.food;
 
 import com.example.amai.core.Food.entity.FoodDetail;
 import com.example.amai.core.Food.service.FoodDetailService;

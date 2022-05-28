@@ -9,6 +9,7 @@ import java.util.List;
 @Service
 public interface OrderService extends IService<Oder, Integer> {
     List<Oder> findByIsDeleted(boolean idDeleteOder, boolean issDeleteAccount);
+    List<Oder> findByIsDeletedAndAccount_IsDeletedAndAccount_UserName(boolean idDeleteOder, boolean issDeleteAccount, String userName);
 
     List<Oder> findAllSerachOder(boolean isDeleteOder, boolean isDeleteAccount, String fullName, String userName, String address, String phone);
 }

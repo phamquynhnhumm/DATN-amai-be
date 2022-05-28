@@ -3,6 +3,7 @@ package com.example.amai.core.Food.entity;
 import com.example.amai.core.Food.entity.contans.EStatusFood;
 import com.example.amai.core.Food.entity.listener.FoodListener;
 import com.example.amai.core.admin_user.entity.Account;
+import com.example.amai.core.order.entity.Cart;
 import com.example.amai.core.order.entity.OrderDetail;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -74,12 +75,6 @@ public class Food {
      */
     private Float price;
 
-
-    /**
-     * Số lượng
-     */
-    private int quanity;
-
     /**
      * Trạng thái món {@link EStatusFood}
      */
@@ -92,6 +87,10 @@ public class Food {
     @OneToMany(mappedBy = "food")
     @JsonIgnore
     private List<OrderDetail> orderDetailList;
+
+    @OneToMany(mappedBy = "food")
+    @JsonIgnore
+   private List<Cart> cartList;
 
     /**
      * Danh sách chi tiết nguyên liệu {@link FoodDetail}
@@ -111,4 +110,9 @@ public class Food {
      * Ảnh món
      */
     private String image;
+
+    /**
+     * Nội dung món
+     */
+    private String content;
 }

@@ -26,6 +26,11 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
+    public void deleteById(Integer id) {
+        materialRepository.deleteById(id);
+    }
+
+    @Override
     public Material save(Material entity) {
         return materialRepository.save(entity);
     }
