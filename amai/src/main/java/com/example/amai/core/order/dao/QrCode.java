@@ -2,7 +2,6 @@ package com.example.amai.core.order.dao;
 
 import com.example.amai.core.admin_user.entity.Account;
 
-import javax.persistence.*;
 import java.util.List;
 
 public class QrCode {
