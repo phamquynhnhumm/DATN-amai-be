@@ -114,7 +114,6 @@ public class oderUserController {
         if (oderOptional == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'
         int targetStringLength = 10;
