@@ -7,8 +7,12 @@ import com.example.amai.core.order.service.OrderService;
 import com.example.amai.core.security.jwt.QRUtils;
 import com.sun.deploy.association.utility.AppUtility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +23,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private JavaMailSender javaMailSender;
 
     @Override
     public List<Oder> getAll() {
@@ -56,9 +62,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public String generateQrCode(Oder sdi,String imagePath) {
+    public String generateQrCode(Oder sdi, String imagePath) {
         String prettyData = QRUtils.prettyObject(sdi);
-        String qrCode = QRUtils.generateQrCode(prettyData, ORDER_QR_CODE_SIZE_WIDTH, ORDER_QR_CODE_SIZE_HEIGHT,imagePath);
+        String qrCode = QRUtils.generateQrCode(prettyData, ORDER_QR_CODE_SIZE_WIDTH, ORDER_QR_CODE_SIZE_HEIGHT, imagePath);
         return qrCode;
     }
 
@@ -66,4 +72,54 @@ public class OrderServiceImpl implements OrderService {
     public List<Oder> findAllSerachOder(boolean isDeleteOder, boolean isDeleteAccount, String fullName, String userName, String address, String phone) {
         return orderRepository.findAllSerachOder(isDeleteOder, isDeleteAccount, fullName, userName, address, phone);
     }
+
+    @Override
+    public Boolean senOrderEmail(Oder oder) {
+        try {
+//            MailMessage Là một interface đại diện cho một tin nhắn (message) đơn giản. Nó bao gồm các thông tin cơ bản của một email như người gửi, người nhận, tiêu đề (subject) và nội tin nhắn.
+//            MimeMessage Đây là một lớp thực hiện interface MailMessage, được sử dụng để tạo ra một tin nhắn hỗ trợ MIME.
+
+            MimeMessage message = this.javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message);
+            helper.setTo(oder.getAccount().getUser().getEmail());
+            helper.setSubject("Thông tin tài Đơn hàng");
+            helper.setText("<h3>Xin chào quý khách !</h3>" +
+                    "<p>Tên người nhận " + oder.getFullName() + "</span></p>" +
+                    "<p>Địa chỉ " + oder.getAddress() + "</span></p>" +
+                    "<p>Hình thức thanh toán " + oder.getPayments() + "</span></p>" +
+                    "<p>Số điện thoại " + oder.getPhone() + "</span></p>" +
+                    "<p>Link dan den trang chu: <a style='color: red; text-decoration: underline' href='http://localhost:4200'>bam vao day</a></p>", true
+            );
+            this.javaMailSender.send(message);
+            return true;
+        } catch (MessagingException e) {
+            return false;
+        }
+    }
+
+//    @Override
+//    public Boolean senOrderEmail(Oder oder) {
+//        try {
+//            MimeMessage message = this.javaMailSender.createMimeMessage();
+//            MimeMessageHelper helper = new MimeMessageHelper(message);
+//            helper.setTo("nhuptq2809@gmail.com");
+//            System.out.println(oder.getAccount().getUser().getEmail());
+//            helper.setSubject("Thông tin đơn hàng");
+//            helper.setText("<h3>Xin chào !</h3>" +
+//                    "<p>vui long khong chia se ma nay cho bat ky ai." +
+////                    " <img src=\"https://bootdey.com/img/Content/avatar/avatar6.png\">" +
+////                    " <img src=\"" + oder.getQrcode() + "\">" +
+//                    "<p>: Tên người nhận:" + oder.getFullName() + "</p>" +
+//                    "<p>: Địa chỉ:" + oder.getAddress() + "</p>" +
+//                    "<p>: Số điện thoại:" + oder.getPhone() + "</p>" +
+//                    "<p>: Hình thưc thanh toán:" + oder.getPayments() + "</p>" +
+//                    "<p>Link dan den trang chu: <a style='color: red; text-decoration: underline' href='http://localhost:4200'>bam vao day</a></p>", true
+//            );
+//            this.javaMailSender.send(message);
+//            System.out.println("Gửi email đơn hàng thành công");
+//            return true;
+//        } catch (MessagingException e) {
+//            return false;
+//        }
+//    }
 }

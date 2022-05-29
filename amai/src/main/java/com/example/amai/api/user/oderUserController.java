@@ -126,6 +126,15 @@ public class oderUserController {
         String imagePath = "E:/DATN/Code/DATN-amai-fe/amaife/src/assets/image/" + generatedString + ".png";
         orderService.generateQrCode(oder, imagePath);
         oder.setQrcode(generatedString + ".png");
+        System.out.println(oder.getAccount().getUser().getEmail());
         return ResponseEntity.ok(orderService.save(oder));
+
+//        System.out.println(oder.getAccount().getUser().getEmail());
+//        boolean isSendOtp = this.orderService.senOrderEmail(oder);
+//        if (isSendOtp) {
+//            return ResponseEntity.ok(orderService.save(oder));
+//        } else {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
     }
 }

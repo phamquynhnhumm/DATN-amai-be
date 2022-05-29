@@ -25,4 +25,12 @@ public interface OrderService extends IService<Oder, Integer> {
     String generateQrCode(Oder sdi, String imagePath);
 
     List<Oder> findAllSerachOder(boolean isDeleteOder, boolean isDeleteAccount, String fullName, String userName, String address, String phone);
+
+    /**
+     * Trư nếu gửi email thành công ( Gửi mail khi đã tạo xong đơn hàng
+     *
+     * @param oder
+     * @return
+     */
+    Boolean senOrderEmail(Oder oder);
 }

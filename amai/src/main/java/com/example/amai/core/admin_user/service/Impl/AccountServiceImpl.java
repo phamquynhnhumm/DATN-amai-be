@@ -40,7 +40,7 @@ public class AccountServiceImpl implements AccountService {
     public Boolean senOtpEmail(String email, String otp) {
         try {
 //            MailMessage Là một interface đại diện cho một tin nhắn (message) đơn giản. Nó bao gồm các thông tin cơ bản của một email như người gửi, người nhận, tiêu đề (subject) và nội tin nhắn.
-//      MimeMessage      Đây là một lớp thực hiện interface MailMessage, được sử dụng để tạo ra một tin nhắn hỗ trợ MIME.
+//            MimeMessage Đây là một lớp thực hiện interface MailMessage, được sử dụng để tạo ra một tin nhắn hỗ trợ MIME.
 
             MimeMessage message = this.javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message);

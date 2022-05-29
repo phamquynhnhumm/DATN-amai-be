@@ -87,7 +87,6 @@ public class Account {
     List<Registration> registrations;
 
     @OneToOne(mappedBy = "account")
-    @JsonIgnore
     private Users user;
 
     public boolean getEnable() {

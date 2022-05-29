@@ -6,6 +6,7 @@ package com.example.amai.core.admin_user.entity;
 import com.example.amai.core.admin_user.entity.contans.EGender;
 import com.example.amai.core.admin_user.entity.contans.Provider;
 import com.example.amai.core.admin_user.entity.listener.UserListener;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -97,5 +98,6 @@ public class Users {
      * account là username (tên tài khoản) {{@link Account}}
      */
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
     private Account account;
 }
