@@ -8,5 +8,6 @@ import java.util.List;
 
 @Service
 public interface OrderDetailService extends IService<OrderDetail, Integer> {
-    List<OrderDetail> findAllByOrders_IdAndIsDeletedIsFalse(boolean idorderdetail, Integer idOders);
+
+    List<OrderDetail> findByIsDeletedAndOrders_Id(boolean idorderdetail, Integer idOders);
 }

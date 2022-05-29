@@ -2,6 +2,7 @@ package com.example.amai.api.user;
 
 import com.example.amai.core.order.entity.Oder;
 import com.example.amai.core.order.entity.OrderDetail;
+import com.example.amai.core.order.entity.contans.EStatusOrder;
 import com.example.amai.core.order.service.OrderDetailService;
 import com.example.amai.core.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public class oderUserController {
      */
     @GetMapping("/detail/{idOders}")
     public ResponseEntity<List<OrderDetail>> findByIdOder(@PathVariable("idOders") Integer idOders) {
-        List<OrderDetail> orderDetailList = orderDetailService.findAllByOrders_IdAndIsDeletedIsFalse(false,idOders);
+        List<OrderDetail> orderDetailList = orderDetailService.findByIsDeletedAndOrders_Id(false, idOders);
         return orderDetailList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(orderDetailList, HttpStatus.OK);
     }
 

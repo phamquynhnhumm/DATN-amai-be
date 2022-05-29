@@ -14,6 +14,15 @@ public interface OrderService extends IService<Oder, Integer> {
     List<Oder> findByIsDeletedAndAccount_IsDeletedAndAccount_UserName(boolean idDeleteOder, boolean issDeleteAccount, String userName);
 
     List<Oder> findAllByIsDeletedFalseAndStatus(EStatusOrder status);
-    String generateQrCode(Oder sdi,String imagePath);
+
+    /**
+     * Tạo mã QR chuyển QR thành hình ảnh
+     *
+     * @param sdi
+     * @param imagePath
+     * @return
+     */
+    String generateQrCode(Oder sdi, String imagePath);
+
     List<Oder> findAllSerachOder(boolean isDeleteOder, boolean isDeleteAccount, String fullName, String userName, String address, String phone);
 }
