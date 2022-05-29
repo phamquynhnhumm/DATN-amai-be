@@ -106,17 +106,6 @@ public class oderUserController {
      * @param oder
      * @return
      */
-//    @PostMapping("generateQRCode")
-//    public ResponseEntity<String> generateQRCode(@RequestBody Oder oder
-//    ) {
-//        Optional<Oder> oderOptional = orderService.getById(oder.getId());
-//        if (!oderOptional.isPresent()) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//        orderService.generateQrCode(oder);
-//        System.out.println(orderService.generateQrCode(oder));
-//        return new ResponseEntity<>(orderService.generateQrCode(oder), HttpStatus.OK);
-//    }
     @PostMapping("generateQRCode")
     public ResponseEntity<Oder> generateQRCodeOder(@RequestBody Oder oder
     ) {
