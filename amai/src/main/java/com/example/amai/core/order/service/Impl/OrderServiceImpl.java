@@ -56,9 +56,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public String generateQrCode(Oder sdi) {
+    public String generateQrCode(Oder sdi,String imagePath) {
         String prettyData = QRUtils.prettyObject(sdi);
-        String qrCode = QRUtils.generateQrCode(prettyData, ORDER_QR_CODE_SIZE_WIDTH, ORDER_QR_CODE_SIZE_HEIGHT);
+        String qrCode = QRUtils.generateQrCode(prettyData, ORDER_QR_CODE_SIZE_WIDTH, ORDER_QR_CODE_SIZE_HEIGHT,imagePath);
         return qrCode;
     }
 

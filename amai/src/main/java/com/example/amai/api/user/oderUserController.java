@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @RestController
 @CrossOrigin
@@ -113,7 +114,18 @@ public class oderUserController {
         if (oderOptional == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        oder.setQrcode(orderService.generateQrCode(oder));
+
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+        String generatedString = random.ints(leftLimit, rightLimit + 1)
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+        String imagePath = "E:/DATN/Code/DATN-amai-fe/amaife/src/assets/image/" + generatedString + ".png";
+        orderService.generateQrCode(oder, imagePath);
+        oder.setQrcode(generatedString + ".png");
         return ResponseEntity.ok(orderService.save(oder));
     }
 }

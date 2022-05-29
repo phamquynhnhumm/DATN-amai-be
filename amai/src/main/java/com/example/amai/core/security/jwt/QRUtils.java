@@ -10,6 +10,8 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.Base64;
 
 public class QRUtils {
@@ -24,7 +26,7 @@ public class QRUtils {
         return "";
     }
 
-    public static String generateQrCode(String data, int width, int height) {
+    public static String generateQrCode(String data, int width, int height, String imagePath) {
         StringBuilder resultImage = new StringBuilder();
 
         if (!data.isEmpty()) {
@@ -40,6 +42,11 @@ public class QRUtils {
 
                 resultImage.append("data:image/png;base64,");
                 resultImage.append(new String(Base64.getEncoder().encode(os.toByteArray())));
+
+                // Write to file image
+//                String imagePath = "./src/main/resources/static/image.png";
+                Path path = FileSystems.getDefault().getPath(imagePath);
+                MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
             } catch (Exception e) {
                 e.printStackTrace();
             }
