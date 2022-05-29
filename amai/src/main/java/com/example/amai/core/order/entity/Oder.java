@@ -9,8 +9,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @Entity
@@ -79,6 +82,8 @@ public class Oder {
     /**
      * Mã QR đặt món
      */
+
+    @Column(columnDefinition = "text", length = 10485760)
     private String qrcode;
 
     /**
