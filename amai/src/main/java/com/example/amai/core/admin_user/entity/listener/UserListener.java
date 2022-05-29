@@ -43,8 +43,8 @@ public class UserListener implements EntityListeners {
         users.setCreateAt(LocalDateTime.now().format(formatter));
         users.setUpdateAt(LocalDateTime.now().format(formatter));
         MyUserDetails userRequest = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        users.setCreatedBy(userRequest.getAccount());
-        users.setUpdatedBy(userRequest.getAccount());
+        users.setCreatedBy(null);
+        users.setUpdatedBy(null);
         users.setIsDeleted(false);
     }
 

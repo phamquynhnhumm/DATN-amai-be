@@ -11,4 +11,5 @@ public interface AccountRepository extends JpaRepository<Account, String> {
     List<Account> findAccountByIsDeletedFalse();
 
     Boolean existsByUserName(String username);
+
 }

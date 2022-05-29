@@ -46,35 +46,38 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(myUserDetailService);
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 
-    @Bean
-    public ModelMapper modelMapper(){return new ModelMapper();}
+//    @Bean
+//    public ModelMapper modelMapper() {
+//        return new ModelMapper();
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 //        Chưa phân quyền
 //        http.csrf().disable();
 //        http.authorizeRequests().anyRequest().permitAll();
-      http.csrf().disable()
+        http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/login").permitAll()
 //                Phân quyền phía admin
                 .antMatchers("/api/home").permitAll()
 //                .antMatchers("/api/user/**").permitAll()
-              .antMatchers("/api/admin/food/**").hasAnyRole("MANAGEMENT", "ADMIN")
-              .antMatchers("/api/admin/user/**").hasAnyRole("MANAGEMENT", "ADMIN", "CUSTOMER")
-              .antMatchers("/api/admin/foodcategory/**").hasAnyRole("MANAGEMENT", "ADMIN")
-              .antMatchers("/api/admin/fooddetail/**").hasAnyRole("MANAGEMENT", "ADMIN")
-              .antMatchers("/api/admin/material/**").hasAnyRole("MANAGEMENT", "ADMIN")
-              .antMatchers("/api/admin/order/**").hasAnyRole("MANAGEMENT", "ADMIN")
-              .antMatchers("/api/admin/orderdetail/**").hasAnyRole("MANAGEMENT", "ADMIN")
-              .antMatchers("/api/admin/supplier/**").hasAnyRole("MANAGEMENT", "ADMIN")
+                .antMatchers("/api/admin/food/**").hasAnyRole("MANAGEMENT", "ADMIN")
+                .antMatchers("/api/admin/user/**").hasAnyRole("MANAGEMENT", "ADMIN", "CUSTOMER")
+                .antMatchers("/api/admin/foodcategory/**").hasAnyRole("MANAGEMENT", "ADMIN")
+                .antMatchers("/api/admin/fooddetail/**").hasAnyRole("MANAGEMENT", "ADMIN")
+                .antMatchers("/api/admin/material/**").hasAnyRole("MANAGEMENT", "ADMIN")
+                .antMatchers("/api/admin/order/**").hasAnyRole("MANAGEMENT", "ADMIN")
+                .antMatchers("/api/admin/orderdetail/**").hasAnyRole("MANAGEMENT", "ADMIN")
+                .antMatchers("/api/admin/supplier/**").hasAnyRole("MANAGEMENT", "ADMIN")
 //              Phân quyền phía user
-              .antMatchers("/api/food/**").permitAll()
+                .antMatchers("/api/food/**").permitAll()
+                .antMatchers("/api/users/**").hasRole("CUSTOMER")
               .antMatchers("/api/class/**").permitAll()
               .antMatchers("/api/order/**").hasRole("CUSTOMER")
               .antMatchers("/api/address/**").hasRole("CUSTOMER")

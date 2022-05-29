@@ -1,6 +1,7 @@
 package com.example.amai.api.admin.admin_user;
 
 import com.example.amai.core.admin_user.entity.Users;
+import com.example.amai.core.admin_user.entity.contans.ERole;
 import com.example.amai.core.admin_user.service.AccountService;
 import com.example.amai.core.admin_user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +94,16 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(userService.save(users), HttpStatus.OK);
+    }
+
+    @PostMapping("/register")
+    public Users sinup(@RequestBody Users users) {
+        users.getAccount().setPassword(passwordEncoder.encode(users.getAccount().getPassword()));
+        users.getAccount().setEnable(true);
+        users.getAccount().setRole(ERole.ROLE_CUSTOMER);
+        System.out.println(users.getAccount().getPassword());
+//        return userService.save(users);
+        return null;
     }
 }
 
