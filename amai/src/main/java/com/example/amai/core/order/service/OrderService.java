@@ -32,5 +32,5 @@ public interface OrderService extends IService<Oder, Integer> {
      * @param oder
      * @return
      */
-    Boolean senOrderEmail(Oder oder);
+    Boolean senOrderEmail(Oder oder,String email);
 }

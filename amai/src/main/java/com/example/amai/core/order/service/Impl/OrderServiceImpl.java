@@ -74,20 +74,21 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Boolean senOrderEmail(Oder oder) {
+    public Boolean senOrderEmail(Oder oder, String email) {
         try {
 //            MailMessage Là một interface đại diện cho một tin nhắn (message) đơn giản. Nó bao gồm các thông tin cơ bản của một email như người gửi, người nhận, tiêu đề (subject) và nội tin nhắn.
 //            MimeMessage Đây là một lớp thực hiện interface MailMessage, được sử dụng để tạo ra một tin nhắn hỗ trợ MIME.
 
             MimeMessage message = this.javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message);
-            helper.setTo(oder.getAccount().getUser().getEmail());
-            helper.setSubject("Thông tin tài Đơn hàng");
-            helper.setText("<h3>Xin chào quý khách !</h3>" +
-                    "<p>Tên người nhận " + oder.getFullName() + "</span></p>" +
-                    "<p>Địa chỉ " + oder.getAddress() + "</span></p>" +
-                    "<p>Hình thức thanh toán " + oder.getPayments() + "</span></p>" +
-                    "<p>Số điện thoại " + oder.getPhone() + "</span></p>" +
+            helper.setTo(email);
+            helper.setSubject("Thong Tin Don Hang");
+            helper.setText("<h3>Xin chao quy khach !</h3>" +
+                    "<p>Ten xac nhan" + oder.getFullName() + "</span></p>" +
+                    "<p>Dia chi " + oder.getAddress() + "</span></p>" +
+                    "<p>Hinh thuc thanh toan " + oder.getPayments() + "</span></p>" +
+                    "<p>So dien thoai" + oder.getPhone() + "</span></p>" +
+                    "<p>Ma OR: <img src=\"https://bootdey.com/img/Content/avatar/avatar6.png\">" + oder.getPhone() + "</span></p>" +
                     "<p>Link dan den trang chu: <a style='color: red; text-decoration: underline' href='http://localhost:4200'>bam vao day</a></p>", true
             );
             this.javaMailSender.send(message);

@@ -98,6 +98,5 @@ public class Users {
      * account là username (tên tài khoản) {{@link Account}}
      */
     @OneToOne(cascade = CascadeType.ALL)
-    @JsonIgnore
     private Account account;
 }

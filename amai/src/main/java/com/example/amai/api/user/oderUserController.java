@@ -1,5 +1,6 @@
 package com.example.amai.api.user;
 
+import com.example.amai.core.admin_user.service.UserService;
 import com.example.amai.core.order.entity.Oder;
 import com.example.amai.core.order.entity.OrderDetail;
 import com.example.amai.core.order.entity.contans.EStatusOrder;
@@ -24,6 +25,8 @@ public class oderUserController {
     @Autowired
     private OrderDetailService orderDetailService;
 
+    @Autowired
+    private UserService userService;
 
     /**
      * Danh sách đơn hàng theo tài khoản (1 true : Đã xóa , 0 false: Tồn tại )
@@ -126,15 +129,12 @@ public class oderUserController {
         String imagePath = "E:/DATN/Code/DATN-amai-fe/amaife/src/assets/image/" + generatedString + ".png";
         orderService.generateQrCode(oder, imagePath);
         oder.setQrcode(generatedString + ".png");
-        System.out.println(oder.getAccount().getUser().getEmail());
-        return ResponseEntity.ok(orderService.save(oder));
-
-//        System.out.println(oder.getAccount().getUser().getEmail());
-//        boolean isSendOtp = this.orderService.senOrderEmail(oder);
-//        if (isSendOtp) {
-//            return ResponseEntity.ok(orderService.save(oder));
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
+        String email = userService.findAllByEmail(oder.getAccount().getUserName());
+        boolean isSendOtp = this.orderService.senOrderEmail(oder, email);
+        if (isSendOtp) {
+            return ResponseEntity.ok(orderService.save(oder));
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

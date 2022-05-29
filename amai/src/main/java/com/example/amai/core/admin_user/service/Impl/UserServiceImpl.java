@@ -29,6 +29,11 @@ public class UserServiceImpl implements UserService {
         return userReponsitory.existsByPhone(phone);
     }
 
+    @Override
+    public String findAllByEmail(String userName) {
+        return userReponsitory.findAllByEmail(userName);
+    }
+
 
     @Override
     public Optional<Users> findByEmail(String email) {
