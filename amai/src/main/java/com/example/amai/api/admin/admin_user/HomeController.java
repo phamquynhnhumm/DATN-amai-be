@@ -73,11 +73,6 @@ public class HomeController {
         return ResponseEntity.ok(new LoginResponse(jwt, userRequest, status));
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<?> saveUser(@RequestBody Account user) throws Exception {
-        return ResponseEntity.ok(accountService.save(user));
-    }
-
     @PostMapping("/logout")
     private ResponseEntity<?> logout() {
         return null;

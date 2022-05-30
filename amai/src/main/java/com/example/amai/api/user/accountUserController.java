@@ -1,15 +1,11 @@
 package com.example.amai.api.user;
 
 import com.example.amai.core.admin_user.entity.Account;
-import com.example.amai.core.admin_user.entity.Users;
-import com.example.amai.core.admin_user.entity.contans.ERole;
 import com.example.amai.core.admin_user.service.AccountService;
 import com.example.amai.core.admin_user.service.UserService;
 import com.example.amai.core.security.dto.user.ForgotPassword;
 import com.example.amai.core.security.service.OtpService;
-import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.Repository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,14 +28,6 @@ public class accountUserController {
 
     @Autowired
     private OtpService otpService;
-
-    @PostMapping("register")
-    public Users register(@RequestBody Users user) {
-        user.getAccount().setPassword(passwordEncoder.encode(user.getAccount().getPassword()));
-        user.getAccount().setEnable(true);
-        user.getAccount().setRole(ERole.ROLE_CUSTOMER);
-        return userService.save(user);
-    }
 
     @PostMapping("account/forgot-password")
     public ResponseEntity<Boolean> forgotPassword(@RequestBody ForgotPassword forgotPassword) {

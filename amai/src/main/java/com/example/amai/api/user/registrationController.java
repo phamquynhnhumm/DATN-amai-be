@@ -1,5 +1,9 @@
 package com.example.amai.api.user;
 
+import com.example.amai.core.admin_user.dao.AccountSinup;
+import com.example.amai.core.admin_user.entity.Account;
+import com.example.amai.core.admin_user.entity.Users;
+import com.example.amai.core.admin_user.entity.contans.ERole;
 import com.example.amai.core.admin_user.service.AccountService;
 import com.example.amai.core.admin_user.service.UserService;
 import com.example.amai.core.registration.entity.Registration;
@@ -42,14 +46,29 @@ public class registrationController {
 
     @GetMapping("account/otpsotpsinup/{email}")
     public ResponseEntity<Boolean> generateOtpSinup(@PathVariable("email") String email) {
-        System.out.println(email);
-
-        String otp = RandomStringUtils.randomAlphabetic(6);
+        String otp = this.otpService.generateOTP(email);
         System.out.println(otp);
         boolean isSenMail = this.accountService.senOtpEmailSinup(email, otp);
         if (isSenMail) {
             return new ResponseEntity<>(true, HttpStatus.OK);// Send mail success
         }
         return new ResponseEntity<>(true, HttpStatus.BAD_REQUEST);  // Account locked
+    }
+
+    @PostMapping("account/register")
+    public ResponseEntity<Account> CreateaccountSinup(@RequestBody AccountSinup accountSinup) {
+        Account account = new Account();
+        System.out.println(accountSinup.getUserName() + accountSinup.getPassword());
+        String otpServer = this.otpService.getOtp(accountSinup.getEmail());
+        System.out.println(otpServer);
+        if (accountSinup.getOtp().equals(otpServer)) {
+            account.setPassword(this.passwordEncoder.encode(accountSinup.getPassword()));
+            account.setUserName(accountSinup.getUserName());
+            this.otpService.clearOTP(accountSinup.getUserName());
+            System.out.println(accountSinup.getUserName() + accountSinup.getPassword());
+            return ResponseEntity.ok(accountService.save(account));
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }
