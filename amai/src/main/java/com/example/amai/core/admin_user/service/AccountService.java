@@ -12,4 +12,5 @@ public interface AccountService extends IService<Account, String> {
     Boolean isUsernameExists(String username);
     Optional<Account> findById(String username);
     Boolean senOtpEmail(String email, String otp);
+    Boolean senOtpEmailSinup(String email, String otp);
 }

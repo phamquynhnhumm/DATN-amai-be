@@ -7,7 +7,9 @@ import com.example.amai.core.admin_user.service.AccountService;
 import com.example.amai.core.admin_user.service.UserService;
 import com.example.amai.core.security.dto.user.ForgotPassword;
 import com.example.amai.core.security.service.OtpService;
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.Repository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -59,7 +61,6 @@ public class accountUserController {
     public ResponseEntity<Boolean> generateOtp(@PathVariable("userName") String userName) {
 
         Optional<Account> accountOptional = this.accountService.getById(userName);
-
         return accountOptional.map(account -> {
             if (account.getEnable()) {
                 String otp = this.otpService.generateOTP(userName);
