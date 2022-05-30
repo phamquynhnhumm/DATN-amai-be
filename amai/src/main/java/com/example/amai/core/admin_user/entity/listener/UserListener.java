@@ -1,6 +1,8 @@
 package com.example.amai.core.admin_user.entity.listener;
 
 import com.example.amai.core.admin_user.entity.Users;
+import com.example.amai.core.admin_user.entity.contans.EGender;
+import com.example.amai.core.admin_user.entity.contans.Provider;
 import com.example.amai.core.security.service.MyUserDetails;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -42,8 +44,12 @@ public class UserListener implements EntityListeners {
     public void preInser(Users users) {
         users.setCreateAt(LocalDateTime.now().format(formatter));
         users.setUpdateAt(LocalDateTime.now().format(formatter));
-        MyUserDetails userRequest = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         users.setCreatedBy(null);
+        users.setBirthday(null);
+        users.setAddress(null);
+        users.setImage(null);
+        users.setGender(EGender.FEMALE);
+        users.setProvider(Provider.LOCAL);
         users.setUpdatedBy(null);
         users.setIsDeleted(false);
     }

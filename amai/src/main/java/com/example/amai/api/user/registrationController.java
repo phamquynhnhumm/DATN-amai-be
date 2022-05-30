@@ -55,20 +55,36 @@ public class registrationController {
         return new ResponseEntity<>(true, HttpStatus.BAD_REQUEST);  // Account locked
     }
 
+    /**
+     * @param accountSinup
+     * @return Thông tin account
+     */
     @PostMapping("account/register")
     public ResponseEntity<Account> CreateaccountSinup(@RequestBody AccountSinup accountSinup) {
         Account account = new Account();
         System.out.println(accountSinup.getUserName() + accountSinup.getPassword());
         String otpServer = this.otpService.getOtp(accountSinup.getEmail());
-        System.out.println(otpServer);
         if (accountSinup.getOtp().equals(otpServer)) {
             account.setPassword(this.passwordEncoder.encode(accountSinup.getPassword()));
             account.setUserName(accountSinup.getUserName());
             this.otpService.clearOTP(accountSinup.getUserName());
             System.out.println(accountSinup.getUserName() + accountSinup.getPassword());
-            return ResponseEntity.ok(accountService.save(account));
+            return ResponseEntity.ok(account);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+    /**
+     * @param users
+     * @return thêm tài khoản mới và thông tin tài khoản mới.vì QH 1-1 nên thêm User sẽ thêm đồng bộ Account
+     */
+    @PostMapping("user/create")
+    public ResponseEntity<Users> createUser(@RequestBody Users users) {
+        if (users.equals(null)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok(userService.save(users));
+    }
+
 }
