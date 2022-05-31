@@ -1,6 +1,7 @@
 package com.example.amai.core.admin_user.service.Impl;
 
 import com.example.amai.core.admin_user.entity.Users;
+import com.example.amai.core.admin_user.entity.contans.ERole;
 import com.example.amai.core.admin_user.repository.UserRepository;
 import com.example.amai.core.admin_user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<Users> findByEmail(String email) {
         return userReponsitory.findByEmail(email);
+    }
+
+    @Override
+    public List<Users> findAllByAccount_Role(ERole role) {
+        return userReponsitory.findAllByAccount_Role(role);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.amai.core.admin_user.repository;
 
 import com.example.amai.core.admin_user.entity.Users;
+import com.example.amai.core.admin_user.entity.contans.ERole;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,4 +24,6 @@ public interface UserRepository extends JpaRepository<Users, Integer> {
     Users findByAccount_UserName(String username);
 
     List<Users> findUserByIsDeletedFalse();
+
+    List<Users> findAllByAccount_Role(ERole role);
 }

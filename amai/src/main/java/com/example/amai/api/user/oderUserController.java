@@ -126,7 +126,8 @@ public class oderUserController {
                 .limit(targetStringLength)
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                 .toString();
-        String imagePath = "E:/DATN/Code/DATN-amai-fe/amaife/src/assets/image/" + generatedString + ".png";
+//        String imagePath = "C:/Users/ASUS/Pictures/qrcode" + generatedString + ".png";
+        String imagePath = "C:/Users/ASUS/Pictures/qrcode/anh1.png";
         orderService.generateQrCode(oder, imagePath);
         oder.setQrcode(generatedString + ".png");
         String email = userService.findAllByEmail(oder.getAccount().getUserName());
