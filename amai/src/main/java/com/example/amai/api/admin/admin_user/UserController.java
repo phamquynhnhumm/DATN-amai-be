@@ -56,6 +56,7 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
             users.setIsDeleted(true);
+            users.getAccount().setIsDeleted(true);
             userService.save(users);
             return new ResponseEntity<>(HttpStatus.OK);
         }
