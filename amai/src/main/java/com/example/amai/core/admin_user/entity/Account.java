@@ -74,7 +74,7 @@ public class Account {
     List<Oder> ordersList;
 
     /**
-     * Danh sách order {{@link Oder}}
+     * Danh sách gior hangf {{@link Oder}}
      */
     @OneToMany(mappedBy = "createdBy")
     @JsonIgnore

@@ -58,15 +58,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        Chưa phân quyền
-//        http.csrf().disable();
-//        http.authorizeRequests().anyRequest().permitAll();
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/login").permitAll()
 //                Phân quyền phía admin
                 .antMatchers("/api/home").permitAll()
-//                .antMatchers("/api/user/**").permitAll()
                 .antMatchers("/api/admin/food/**").hasAnyRole("MANAGEMENT", "ADMIN")
                 .antMatchers("/api/admin/user/**").hasAnyRole("MANAGEMENT", "ADMIN", "CUSTOMER")
                 .antMatchers("/api/admin/foodcategory/**").hasAnyRole("MANAGEMENT", "ADMIN")
@@ -79,12 +75,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/food/**").permitAll()
                 .antMatchers("/api/users/**").hasRole("CUSTOMER")
                 .antMatchers("/api/sinup/**").permitAll()
-              .antMatchers("/api/order/**").hasRole("CUSTOMER")
-              .antMatchers("/api/address/**").hasRole("CUSTOMER")
-              .antMatchers("/api/pay").hasRole("CUSTOMER")
-              .antMatchers("/api/account").hasRole("CUSTOMER")
-              .antMatchers("/api/cart/**").hasRole("CUSTOMER")
-//                Phân quyền phía admin
+                .antMatchers("/api/order/**").hasRole("CUSTOMER")
+                .antMatchers("/api/address/**").hasRole("CUSTOMER")
+                .antMatchers("/api/pay").hasRole("CUSTOMER")
+                .antMatchers("/api/account").hasRole("CUSTOMER")
+                .antMatchers("/api/cart/**").hasRole("CUSTOMER")
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()

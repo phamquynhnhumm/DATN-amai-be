@@ -26,13 +26,13 @@ public interface OrderRepository extends JpaRepository<Oder, Integer> {
      */
     List<Oder> findByIsDeletedAndAccount_IsDeletedAndAccount_UserName(boolean idDeleteOder, boolean issDeleteAccount, String userName);
 
-    @Query(value = "select * from oder as od" +
-            "inner join account as ac on ac.user_name = od.account" +
+    @Query(value = "select * from oder as od " +
+            "inner join account as ac on ac.user_name = od.account " +
             "where od.is_deleted = :isDeleteOder " +
             "and od.is_deleted = :isDeleteAccount " +
             "and od.full_name like %:fullName% " +
             "and ac.user_name  like  %:userName% " +
-            "and  od.address  like  %:address%" +
+            "and  od.address  like  %:address% " +
             "and od.phone  like  %:phone%", nativeQuery = true)
     List<Oder> findAllSerachOder(@Param("isDeleteOder") boolean isDeleteOder,
                                  @Param("isDeleteAccount") boolean isDeleteAccount,

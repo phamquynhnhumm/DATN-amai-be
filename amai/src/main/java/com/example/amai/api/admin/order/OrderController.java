@@ -151,7 +151,10 @@ public class OrderController {
                                                     @RequestParam("address") String address,
                                                     @RequestParam("phone") String phone) {
         System.out.println(isDeleteAccount + address + fullName);
-        List<Oder> oderList = orderService.findAllSerachOder(isDeleteOder,isDeleteAccount,fullName,userName,address,phone);
+        List<Oder> oderList = orderService.findAllSerachOder(isDeleteOder, isDeleteAccount, fullName, userName, address, phone);
+        if (oderList != null) {
+            System.out.println("Có timg hay nha");
+        }
         return oderList.isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(oderList, HttpStatus.OK);
     }
 }
