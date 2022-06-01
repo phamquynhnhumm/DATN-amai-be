@@ -28,4 +28,7 @@ public interface FoodDetailService extends IService<FoodDetail, Integer> {
      * @return
      */
     List<FoodDetail> findAllByFoodDetaillFoodNameAndMaterialNam(boolean isDeleteFoodDetail, boolean isDeleteFood, boolean isDeleteMaterial, String nameFood, String nameMaterial);
+
+    List<FoodDetail> findAllByIsDeletedFalseAndFood_Id(Integer idFood);
+
 }

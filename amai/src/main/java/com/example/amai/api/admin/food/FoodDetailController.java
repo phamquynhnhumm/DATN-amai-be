@@ -1,6 +1,7 @@
 package com.example.amai.api.admin.food;
 
 import com.example.amai.core.Food.entity.FoodDetail;
+import com.example.amai.core.Food.entity.Material;
 import com.example.amai.core.Food.service.FoodDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -135,5 +136,17 @@ public class FoodDetailController {
                                                           @RequestParam("nameMaterial") String nameMaterial) {
         List<FoodDetail> foodDetailList = foodDetailService.findAllByFoodDetaillFoodNameAndMaterialNam(isDeleteFoodDetail,isDeleteFood,isDeleteMaterial,nameFood,nameMaterial);
         return foodDetailList.isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(foodDetailList, HttpStatus.OK);
+    }
+
+    /**
+     * List các nguyên liệu làm một món
+     *
+     * @param idFood
+     * @return
+     */
+    @GetMapping("/findByIdFood/{idFood}")
+    public ResponseEntity<List<FoodDetail>> findAllByFoodDetailList_Food_Id(@PathVariable("idFood") Integer idFood) {
+        List<FoodDetail> foodDetailList = foodDetailService.findAllByIsDeletedFalseAndFood_Id(idFood);
+        return foodDetailList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodDetailList, HttpStatus.OK);
     }
 }

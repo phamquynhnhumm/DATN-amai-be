@@ -47,4 +47,9 @@ public class FoodDetailServiceImpl implements FoodDetailService {
     public List<FoodDetail> findAllByFoodDetaillFoodNameAndMaterialNam(boolean isDeleteFoodDetail, boolean isDeleteFood, boolean isDeleteMaterial, String nameFood, String nameMaterial) {
         return foodDetailRepository.findAllByFoodDetaillFoodNameAndMaterialNam(isDeleteFoodDetail, isDeleteFood, isDeleteMaterial, nameFood, nameMaterial);
     }
+
+    @Override
+    public List<FoodDetail> findAllByIsDeletedFalseAndFood_Id(Integer idFood) {
+        return foodDetailRepository.findAllByIsDeletedFalseAndFood_Id(idFood);
+    }
 }

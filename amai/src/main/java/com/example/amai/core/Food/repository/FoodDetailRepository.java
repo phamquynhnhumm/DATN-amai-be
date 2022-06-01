@@ -35,4 +35,6 @@ public interface FoodDetailRepository extends JpaRepository<FoodDetail, Integer>
                                                                 @Param("isDeleteMaterial") boolean isDeleteMaterial,
                                                                 @Param("nameFood") String nameFood,
                                                                 @Param("nameMaterial") String nameMaterial);
+
+    List<FoodDetail> findAllByIsDeletedFalseAndFood_Id(Integer idFood);
 }
