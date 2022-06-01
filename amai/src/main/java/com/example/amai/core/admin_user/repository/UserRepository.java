@@ -25,7 +25,7 @@ public interface UserRepository extends JpaRepository<Users, Integer> {
 
     List<Users> findUserByIsDeletedFalse();
 
-    List<Users> findAllByAccount_Role(ERole role);
+    List<Users> findByAccount_RoleAndIsDeleted(ERole role, boolean isDeleted);
 
     @Query(value = "select  * from users as us inner join account as ac on ac.user_name = us.account_user_name " +
             "where ac.role = 'ROLE_CUSTOMER' and us.is_deleted ='false' and ac.is_deleted = 'false' " +

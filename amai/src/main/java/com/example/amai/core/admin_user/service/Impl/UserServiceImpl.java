@@ -42,8 +42,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Users> findAllByAccount_Role(ERole role) {
-        return userReponsitory.findAllByAccount_Role(role);
+    public List<Users> findAllByAccount_Role( ERole role,boolean isDeleted) {
+        return userReponsitory.findByAccount_RoleAndIsDeleted(role,isDeleted);
     }
 
     @Override

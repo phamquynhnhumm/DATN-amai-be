@@ -12,13 +12,16 @@ import java.util.Optional;
 @Service
 public interface UserService extends IService<Users, Integer> {
     Boolean isEmailExists(String email);
+
     Users getByUserName(String username);
 
     Boolean isPhoneExists(String phone);
+
     String findAllByEmail(String userName);
 
     Optional<Users> findByEmail(String email);
-    List<Users> findAllByAccount_Role(ERole role);
+
+    List<Users> findAllByAccount_Role(ERole role, boolean isDelete);
 
     List<Users> search(String fullName, String userName, String phone, String email, String address);
 }
