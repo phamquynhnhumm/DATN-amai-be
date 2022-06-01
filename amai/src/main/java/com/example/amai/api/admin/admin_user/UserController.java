@@ -124,5 +124,17 @@ public class UserController {
                 : new ResponseEntity<>(usersList, HttpStatus.OK);
 
     }
+
+    @PutMapping("undelete/{id}")
+    public ResponseEntity<Users> undeleteCustomer(@PathVariable("id") Integer id) {
+        Users users = userService.getById(id).orElse(null);
+        if (users.equals(null)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            users.setIsDeleted(false);
+            userService.save(users);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
 }
 
