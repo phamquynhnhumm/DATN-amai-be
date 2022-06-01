@@ -1,9 +1,12 @@
 package com.example.amai.api.admin.admin_user;
 
+import com.example.amai.core.admin_user.dao.AccountSinup;
+import com.example.amai.core.admin_user.entity.Account;
 import com.example.amai.core.admin_user.entity.Users;
 import com.example.amai.core.admin_user.entity.contans.ERole;
 import com.example.amai.core.admin_user.service.AccountService;
 import com.example.amai.core.admin_user.service.UserService;
+import com.example.amai.core.security.service.OtpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +28,9 @@ public class UserController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private OtpService otpService;
 
     /**
      * Danh sách người dùng
@@ -136,5 +142,38 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
+
+
+    @GetMapping("account/otpsotpsinup/{email}")
+    public ResponseEntity<Boolean> generateOtpSinup(@PathVariable("email") String email) {
+        String otp = this.otpService.generateOTP(email);
+        System.out.println(otp);
+        boolean isSenMail = this.accountService.senOtpEmailSinup(email, otp);
+        if (isSenMail) {
+            return new ResponseEntity<>(true, HttpStatus.OK);// Send mail success
+        }
+        return new ResponseEntity<>(true, HttpStatus.BAD_REQUEST);  // Account locked
+    }
+
+    /**
+     * @param accountSinup
+     * @return Thông tin account
+     */
+    @PostMapping("account/register")
+    public ResponseEntity<Account> CreateaccountSinup(@RequestBody AccountSinup accountSinup) {
+        Account account = new Account();
+        System.out.println(accountSinup.getUserName() + accountSinup.getPassword());
+        String otpServer = this.otpService.getOtp(accountSinup.getEmail());
+        if (accountSinup.getOtp().equals(otpServer)) {
+            account.setPassword(this.passwordEncoder.encode(accountSinup.getPassword()));
+            account.setUserName(accountSinup.getUserName());
+            this.otpService.clearOTP(accountSinup.getUserName());
+            System.out.println(accountSinup.getUserName() + accountSinup.getPassword());
+            return ResponseEntity.ok(account);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }
 
