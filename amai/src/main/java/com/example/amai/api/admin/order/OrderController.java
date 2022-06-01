@@ -1,6 +1,7 @@
 package com.example.amai.api.admin.order;
 
 import com.example.amai.core.order.entity.Oder;
+import com.example.amai.core.order.entity.OrderDetail;
 import com.example.amai.core.order.entity.contans.EStatusOrder;
 import com.example.amai.core.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,6 +96,8 @@ public class OrderController {
         Oder oder = orderService.getById(id).orElse(null);
         return oder.equals(null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(oder, HttpStatus.OK);
     }
+
+
 
     /**
      * Thêm mới đơn hàng

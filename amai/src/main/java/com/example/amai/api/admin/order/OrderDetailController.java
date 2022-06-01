@@ -86,4 +86,15 @@ public class OrderDetailController {
         }
         return new ResponseEntity<>(orderDetailService.save(orderDetail), HttpStatus.OK);
     }
+
+    /**
+     * Danh sach chi tiét đơn hàng trong đơn hàng 
+     * @param idOders
+     * @return
+     */
+    @GetMapping("/detail/{idOders}")
+    public ResponseEntity<List<OrderDetail>> findByIdOder(@PathVariable("idOders") Integer idOders) {
+        List<OrderDetail> orderDetailList = orderDetailService.findByIsDeletedAndOrders_Id(false, idOders);
+        return orderDetailList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(orderDetailList, HttpStatus.OK);
+    }
 }
