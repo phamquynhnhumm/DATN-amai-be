@@ -111,5 +111,17 @@ public class UserController {
 //        return userService.save(users);
         return null;
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Users>> searchOder(@RequestParam("fullName") String fullName,
+                                                  @RequestParam("userName") String userName,
+                                                  @RequestParam("phone") String phone,
+                                                  @RequestParam("email") String email,
+                                                  @RequestParam("address") String address) {
+        List<Users> usersList = userService.search(fullName, userName, phone, email, address);
+        return usersList.isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST)
+                : new ResponseEntity<>(usersList, HttpStatus.OK);
+
+    }
 }
 

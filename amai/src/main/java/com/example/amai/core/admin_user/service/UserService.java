@@ -20,5 +20,6 @@ public interface UserService extends IService<Users, Integer> {
     Optional<Users> findByEmail(String email);
     List<Users> findAllByAccount_Role(ERole role);
 
+    List<Users> search(String fullName, String userName, String phone, String email, String address);
 }
 

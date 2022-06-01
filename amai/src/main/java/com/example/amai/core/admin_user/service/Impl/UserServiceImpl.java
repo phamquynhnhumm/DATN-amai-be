@@ -47,6 +47,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<Users> search(String fullName, String userName, String phone, String email, String address) {
+        return userReponsitory.search(fullName, userName, phone, email, address);
+    }
+
+    @Override
     public List<Users> getAll() {
         return userReponsitory.findUserByIsDeletedFalse();
     }
