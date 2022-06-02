@@ -1,13 +1,11 @@
 package com.example.amai.core.shop.entity;
 
 import com.example.amai.core.admin_user.entity.Account;
-import com.example.amai.core.registration.entity.contans.EStatuasHandle;
 import com.example.amai.core.shop.entity.listener.ShopListener;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
 
 import javax.persistence.*;
 
@@ -42,6 +40,7 @@ public class Shop {
      * Địa chỉ cửa hàng
      */
     private String address;
+    private String nameShop;
 
     /**
      * Số điên thoại cửa hàng
@@ -51,6 +50,8 @@ public class Shop {
      * Khẩu hiệu của cửa hàng
      */
     private String slogen;
+    private String logo;
+    private String email;
 
     /**
      * Tên tài khoản
@@ -63,5 +64,13 @@ public class Shop {
     /**
      * Tên ngân hàng chi nhánh
      */
+
     private String bankName;
+    /**
+     * Đoạn Giới thiệu ngắn
+     */
+    private String content;
+    private String facebook;
+    private String youtube;
+    private String instagram;
 }

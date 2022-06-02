@@ -1,6 +1,5 @@
 package com.example.amai.api.admin.shop;
 
-import com.example.amai.core.order.entity.Oder;
 import com.example.amai.core.shop.entity.Shop;
 import com.example.amai.core.shop.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin
-@RequestMapping("api/shop")
+@RequestMapping("api/admin/shop")
 public class ShopController {
 
     @Autowired

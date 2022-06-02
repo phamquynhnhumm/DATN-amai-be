@@ -1,7 +1,7 @@
 package com.example.amai.core.shop.service.Impl;
 
 import com.example.amai.core.shop.entity.Shop;
-import com.example.amai.core.shop.repository.ShopRepository;
+import com.example.amai.core.shop.repository.ShopRepositorys;
 import com.example.amai.core.shop.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,9 +11,10 @@ import java.util.Optional;
 
 @Service
 public class ShopRepositoryImpl implements ShopService {
-    @Autowired
-    private ShopRepository shopRepository;
 
+    @Autowired
+    private ShopRepositorys shopRepository;
+    
     @Override
     public List<Shop> getAll() {
         return shopRepository.findAll();
