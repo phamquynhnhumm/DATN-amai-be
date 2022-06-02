@@ -116,7 +116,6 @@ public class UserController {
         users.getAccount().setEnable(true);
         users.getAccount().setRole(ERole.ROLE_CUSTOMER);
         System.out.println(users.getAccount().getPassword());
-//        return userService.save(users);
         return null;
     }
 
@@ -179,4 +178,3 @@ public class UserController {
         }).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST)); // Username not exists
     }
 }
-
