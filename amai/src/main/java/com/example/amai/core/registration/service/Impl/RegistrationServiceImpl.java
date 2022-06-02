@@ -1,7 +1,7 @@
 package com.example.amai.core.registration.service.Impl;
 
-import com.example.amai.core.Food.entity.Food;
 import com.example.amai.core.registration.entity.Registration;
+import com.example.amai.core.registration.entity.contans.EStatuasHandle;
 import com.example.amai.core.registration.repository.RegistrationRepository;
 import com.example.amai.core.registration.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +33,20 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Override
     public void deleteById(Integer id) {
         registrationRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Registration> findAllByIsDeletedFalseAndHandle(EStatuasHandle handle) {
+        return registrationRepository.findAllByIsDeletedFalseAndHandle(handle);
+    }
+
+    @Override
+    public List<Registration> findAllByIsDeleted(boolean idDelete) {
+        return registrationRepository.findAllByIsDeleted(idDelete);
+    }
+
+    @Override
+    public List<Registration> findSearch(boolean isDelete, String name, String phone) {
+        return registrationRepository.findSearch(isDelete, name, phone);
     }
 }

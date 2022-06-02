@@ -3,7 +3,6 @@ package com.example.amai.api.user;
 import com.example.amai.core.admin_user.service.UserService;
 import com.example.amai.core.order.entity.Oder;
 import com.example.amai.core.order.entity.OrderDetail;
-import com.example.amai.core.order.entity.contans.EStatusOrder;
 import com.example.amai.core.order.service.OrderDetailService;
 import com.example.amai.core.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;

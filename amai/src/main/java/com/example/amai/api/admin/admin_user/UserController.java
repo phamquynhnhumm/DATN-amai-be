@@ -1,11 +1,11 @@
 package com.example.amai.api.admin.admin_user;
 
-import com.example.amai.core.admin_user.dao.AccountSinup;
 import com.example.amai.core.admin_user.entity.Account;
 import com.example.amai.core.admin_user.entity.Users;
 import com.example.amai.core.admin_user.entity.contans.ERole;
 import com.example.amai.core.admin_user.service.AccountService;
 import com.example.amai.core.admin_user.service.UserService;
+import com.example.amai.core.security.dto.user.ForgotPassword;
 import com.example.amai.core.security.service.OtpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -144,37 +144,39 @@ public class UserController {
         }
     }
 
-
-    @GetMapping("account/otpsotpsinup/{email}")
-    public ResponseEntity<Boolean> generateOtpSinup(@PathVariable("email") String email) {
-        String otp = this.otpService.generateOTP(email);
-        System.out.println(otp);
-        boolean isSenMail = this.accountService.senOtpEmailSinup(email, otp);
-        if (isSenMail) {
-            return new ResponseEntity<>(true, HttpStatus.OK);// Send mail success
-        }
-        return new ResponseEntity<>(true, HttpStatus.BAD_REQUEST);  // Account locked
+    @PostMapping("account/forgot-password")
+    public ResponseEntity<Boolean> forgotPassword(@RequestBody ForgotPassword forgotPassword) {
+        Optional<Account> accountOptional = this.accountService.getById(forgotPassword.getUserName());
+        return accountOptional.map(account -> {
+            String otpServer = this.otpService.getOtp(forgotPassword.getUserName());
+            if (forgotPassword.getOtp().equals(otpServer)) {
+                account.setPassword(this.passwordEncoder.encode(forgotPassword.getNewPassword()));
+                this.accountService.save(account);
+                this.otpService.clearOTP(forgotPassword.getUserName());
+                return new ResponseEntity<>(true, HttpStatus.OK); // Success
+            } else {
+                return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST); // OTP fail
+            }
+        }).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST)); // username not exists
     }
 
-    /**
-     * @param accountSinup
-     * @return Thông tin account
-     */
-    @PostMapping("account/register")
-    public ResponseEntity<Account> CreateaccountSinup(@RequestBody AccountSinup accountSinup) {
-        Account account = new Account();
-        System.out.println(accountSinup.getUserName() + accountSinup.getPassword());
-        String otpServer = this.otpService.getOtp(accountSinup.getEmail());
-        if (accountSinup.getOtp().equals(otpServer)) {
-            account.setPassword(this.passwordEncoder.encode(accountSinup.getPassword()));
-            account.setUserName(accountSinup.getUserName());
-            this.otpService.clearOTP(accountSinup.getUserName());
-            System.out.println(accountSinup.getUserName() + accountSinup.getPassword());
-            return ResponseEntity.ok(account);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-    }
+    @GetMapping("account/generate/{userName}")
+    public ResponseEntity<Boolean> generateOtp(@PathVariable("userName") String userName) {
 
+        Optional<Account> accountOptional = this.accountService.getById(userName);
+        return accountOptional.map(account -> {
+            if (account.getEnable()) {
+                String otp = this.otpService.generateOTP(userName);
+                boolean isSendOtp = this.accountService.senOtpEmail(account.getUser().getEmail(), otp);
+                if (isSendOtp) {
+                    return new ResponseEntity<>(true, HttpStatus.OK);// Send mail success
+                } else {
+                    return new ResponseEntity<>(false, HttpStatus.OK);  // Send mail fail
+                }
+            } else {
+                return new ResponseEntity<>(true, HttpStatus.BAD_REQUEST);  // Account locked
+            }
+        }).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST)); // Username not exists
+    }
 }
 

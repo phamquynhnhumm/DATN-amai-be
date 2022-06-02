@@ -1,6 +1,5 @@
 package com.example.amai.core.registration.entity;
 
-import com.example.amai.core.Food.entity.listener.FoodDetailListener;
 import com.example.amai.core.admin_user.entity.Account;
 import com.example.amai.core.registration.entity.contans.EStatuasHandle;
 import com.example.amai.core.registration.entity.listener.RegistrationListener;
