@@ -40,12 +40,17 @@ public class Shop {
      * Địa chỉ cửa hàng
      */
     private String address;
+
+    /**
+     * Tên cửa hàng
+     */
     private String nameShop;
 
     /**
      * Số điên thoại cửa hàng
      */
     private String phone;
+
     /**
      * Khẩu hiệu của cửa hàng
      */
@@ -57,14 +62,15 @@ public class Shop {
      * Tên tài khoản
      */
     private String nameTransfer;
+
     /**
      * Số tài khoản
      */
     private Integer number;
+
     /**
      * Tên ngân hàng chi nhánh
      */
-
     private String bankName;
     /**
      * Đoạn Giới thiệu ngắn
