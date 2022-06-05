@@ -30,16 +30,6 @@ public class Account {
     private String userName;
 
     /**
-     * Người tạo
-     */
-    @Column(name = "created_by")
-    private String createdBy;
-
-    /**
-     * Thời gian tạo
-     */
-    private String createAt;
-    /**
      * Người cập nhật
      */
     @Column(name = "updated_by")

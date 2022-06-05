@@ -23,7 +23,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 /**
- * Đặt món
+ * Đơn hàng
  */
 public class Oder {
 

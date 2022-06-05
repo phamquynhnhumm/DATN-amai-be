@@ -41,9 +41,7 @@ public class AccountListener  implements EntityListeners {
      */
     @PrePersist
     public void preInser(Account account) {
-        account.setCreateAt(LocalDateTime.now().format(formatter));
         account.setUpdateAt(LocalDateTime.now().format(formatter));
-        account.setCreatedBy(null);
         account.setUpdatedBy(null);
         account.setEnable(true);
         account.setRole(ERole.ROLE_CUSTOMER);
