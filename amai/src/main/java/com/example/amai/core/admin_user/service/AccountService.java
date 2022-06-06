@@ -13,4 +13,6 @@ public interface AccountService extends IService<Account, String> {
     Optional<Account> findById(String username);
     Boolean senOtpEmail(String email, String otp);
     Boolean senOtpEmailSinup(String email, String otp);
+    Account findByUser_Email(String email);
+    Boolean senOtpEmailNewPassword(String emailnew, String otp);
 }

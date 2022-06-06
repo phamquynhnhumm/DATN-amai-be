@@ -77,6 +77,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/food/**").permitAll()
                 .antMatchers("/api/users/**").hasRole("CUSTOMER")
                 .antMatchers("/api/sinup/**").permitAll()
+                .antMatchers("/api/forgot/**").permitAll()
                 .antMatchers("/api/order/**").hasRole("CUSTOMER")
                 .antMatchers("/api/address/**").hasRole("CUSTOMER")
                 .antMatchers("/api/pay").hasRole("CUSTOMER")

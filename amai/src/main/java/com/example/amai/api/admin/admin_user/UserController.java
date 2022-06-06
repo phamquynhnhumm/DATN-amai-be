@@ -6,6 +6,7 @@ import com.example.amai.core.admin_user.entity.contans.ERole;
 import com.example.amai.core.admin_user.service.AccountService;
 import com.example.amai.core.admin_user.service.UserService;
 import com.example.amai.core.security.dto.user.ForgotPassword;
+import com.example.amai.core.security.dto.user.NewPassword;
 import com.example.amai.core.security.service.OtpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -115,7 +116,6 @@ public class UserController {
         users.getAccount().setPassword(passwordEncoder.encode(users.getAccount().getPassword()));
         users.getAccount().setEnable(true);
         users.getAccount().setRole(ERole.ROLE_CUSTOMER);
-        System.out.println(users.getAccount().getPassword());
         return null;
     }
 
@@ -158,6 +158,7 @@ public class UserController {
             }
         }).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST)); // username not exists
     }
+
 
     @GetMapping("account/generate/{userName}")
     public ResponseEntity<Boolean> generateOtp(@PathVariable("userName") String userName) {

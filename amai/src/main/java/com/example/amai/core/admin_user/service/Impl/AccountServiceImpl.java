@@ -78,6 +78,30 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Account findByUser_Email(String email) {
+        return accountReponsitory.findByUser_Email(email);
+    }
+
+    @Override
+    public Boolean senOtpEmailNewPassword(String emailnew, String otp) {
+        try {
+            MimeMessage message = this.javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message);
+            helper.setTo(emailnew);
+            helper.setSubject("MÃ OTP- TẠO MỚI MẬT KHẨU");
+            helper.setText("<h3>Xin chào !</h3>" +
+                    "<p>vui long khong chia se ma nay cho bat ky ai." +
+                    "<p>Ma OTP cua ban la: <span style='color: blue; font-size: x-large'>" + otp + "</span></p>" +
+                    "<p>Link dan den trang chu: <a style='color: red; text-decoration: underline' href='http://localhost:4200'>bam vao day</a></p>", true
+            );
+            this.javaMailSender.send(message);
+            return true;
+        } catch (MessagingException e) {
+            return false;
+        }
+    }
+
+    @Override
     public List<Account> getAll() {
         return accountReponsitory.findAccountByIsDeletedFalse();
     }

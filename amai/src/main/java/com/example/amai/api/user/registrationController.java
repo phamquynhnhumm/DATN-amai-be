@@ -8,6 +8,7 @@ import com.example.amai.core.admin_user.service.AccountService;
 import com.example.amai.core.admin_user.service.UserService;
 import com.example.amai.core.registration.entity.Registration;
 import com.example.amai.core.registration.service.RegistrationService;
+import com.example.amai.core.security.dto.user.NewPassword;
 import com.example.amai.core.security.service.OtpService;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/sinup")
@@ -47,7 +50,6 @@ public class registrationController {
     @GetMapping("account/otpsotpsinup/{email}")
     public ResponseEntity<Boolean> generateOtpSinup(@PathVariable("email") String email) {
         String otp = this.otpService.generateOTP(email);
-        System.out.println(otp);
         boolean isSenMail = this.accountService.senOtpEmailSinup(email, otp);
         if (isSenMail) {
             return new ResponseEntity<>(true, HttpStatus.OK);// Send mail success
@@ -62,13 +64,11 @@ public class registrationController {
     @PostMapping("account/register")
     public ResponseEntity<Account> CreateaccountSinup(@RequestBody AccountSinup accountSinup) {
         Account account = new Account();
-        System.out.println(accountSinup.getUserName() + accountSinup.getPassword());
         String otpServer = this.otpService.getOtp(accountSinup.getEmail());
         if (accountSinup.getOtp().equals(otpServer)) {
             account.setPassword(this.passwordEncoder.encode(accountSinup.getPassword()));
             account.setUserName(accountSinup.getUserName());
             this.otpService.clearOTP(accountSinup.getUserName());
-            System.out.println(accountSinup.getUserName() + accountSinup.getPassword());
             return ResponseEntity.ok(account);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
