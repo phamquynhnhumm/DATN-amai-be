@@ -43,8 +43,6 @@ public class QRUtils {
                 resultImage.append("data:image/png;base64,");
                 resultImage.append(new String(Base64.getEncoder().encode(os.toByteArray())));
 
-                // Write to file image
-//                String imagePath = "./src/main/resources/static/image.png";
                 Path path = FileSystems.getDefault().getPath(imagePath);
                 MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
             } catch (Exception e) {

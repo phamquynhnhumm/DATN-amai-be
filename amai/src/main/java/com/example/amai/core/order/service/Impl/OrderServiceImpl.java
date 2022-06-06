@@ -76,20 +76,18 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Boolean senOrderEmail(Oder oder, String email) {
         try {
-//            MailMessage Là một interface đại diện cho một tin nhắn (message) đơn giản. Nó bao gồm các thông tin cơ bản của một email như người gửi, người nhận, tiêu đề (subject) và nội tin nhắn.
-//            MimeMessage Đây là một lớp thực hiện interface MailMessage, được sử dụng để tạo ra một tin nhắn hỗ trợ MIME.
-
             MimeMessage message = this.javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message);
             helper.setTo(email);
             helper.setSubject("Thong Tin Don Hang");
             helper.setText("<h3>Xin chao quy khach !</h3>" +
-                    "<p>Ten xac nhan" + oder.getFullName() + "</span></p>" +
-                    "<p>Dia chi " + oder.getAddress() + "</span></p>" +
-                    "<p>Hinh thuc thanh toan " + oder.getPayments() + "</span></p>" +
-                    "<p>So dien thoai" + oder.getPhone() + "</span></p>" +
-                    "<p>Ma OR: <img src=\"https://bootdey.com/img/Content/avatar/avatar6.png\">" + oder.getPhone() + "</span></p>" +
-                    "<p>Link dan den trang chu: <a style='color: red; text-decoration: underline' href='http://localhost:4200'>bam vao day</a></p>", true
+                    "<p>Ten xac nhan :" + oder.getFullName() + "</p>" +
+                    "<p>Dia chi : " + oder.getAddress() + "</span></p>" +
+                    "<p>So dien thoai :" + oder.getPhone() + "</p>" +
+                    "<p>Ma OR:" +
+                    " <img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsAQAAAABRBrPYAAABHElEQVR42u3aQRKDIAxAUVz1GB5Vj+oRunQFlSSgtla7KDDtfBZMsc9VhgQyuvDJuDsYDAaDwX6Kzc5GvyzGfu7CaA86WD2mKxM6bf+AVWJjDIzF6SYvxNjBmrC8hDVks6UrWBOWEleuIef5DVaA5SKey8d5rYcVYOtIYbs498IKsCVYwxRLt9RvSVw63WBVmdNH+svrfhmOEhesFAvegiVVexIWpx5WkellYmulfMgSVotJsNYDrb7gj7cMrBh7KuI+xQlWke0OtGGS3bLeuGGVWL7cxTitwZretV5hZVhqN0m6cjYdVRlYeSYieOs5OdfBGrC4st1y1aGFfZ9tmn4SorRbYPXYvumnEfOviQtWkvE5BAwGg8H+hj0AQzlerr0vqS0AAAAASUVORK5CYII=\" alt='mã qrr'></p>" +
+                    " <p> Mã QR Thông tin đơn hàng <a  style='color: red; text-decoration: underline' href='" + oder.getQrcode()+ "'>bam vao day </a></p>" +
+                    " <p>Link dan den trang chu: <a style='color: red; text-decoration: underline' href='http://localhost:4200'>bam vao day</a></p>", true
             );
             this.javaMailSender.send(message);
             return true;
@@ -97,30 +95,4 @@ public class OrderServiceImpl implements OrderService {
             return false;
         }
     }
-
-//    @Override
-//    public Boolean senOrderEmail(Oder oder) {
-//        try {
-//            MimeMessage message = this.javaMailSender.createMimeMessage();
-//            MimeMessageHelper helper = new MimeMessageHelper(message);
-//            helper.setTo("nhuptq2809@gmail.com");
-//            System.out.println(oder.getAccount().getUser().getEmail());
-//            helper.setSubject("Thông tin đơn hàng");
-//            helper.setText("<h3>Xin chào !</h3>" +
-//                    "<p>vui long khong chia se ma nay cho bat ky ai." +
-////                    " <img src=\"https://bootdey.com/img/Content/avatar/avatar6.png\">" +
-////                    " <img src=\"" + oder.getQrcode() + "\">" +
-//                    "<p>: Tên người nhận:" + oder.getFullName() + "</p>" +
-//                    "<p>: Địa chỉ:" + oder.getAddress() + "</p>" +
-//                    "<p>: Số điện thoại:" + oder.getPhone() + "</p>" +
-//                    "<p>: Hình thưc thanh toán:" + oder.getPayments() + "</p>" +
-//                    "<p>Link dan den trang chu: <a style='color: red; text-decoration: underline' href='http://localhost:4200'>bam vao day</a></p>", true
-//            );
-//            this.javaMailSender.send(message);
-//            System.out.println("Gửi email đơn hàng thành công");
-//            return true;
-//        } catch (MessagingException e) {
-//            return false;
-//        }
-//    }
 }

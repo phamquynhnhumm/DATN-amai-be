@@ -34,13 +34,7 @@ public class HomeController {
     private UserService userService;
 
     @Autowired
-    private AccountService accountService;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
     private ModelMapper modelMapper;
-
 
     @PostMapping("/login")
     private ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {

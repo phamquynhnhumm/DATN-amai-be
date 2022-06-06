@@ -2,8 +2,6 @@ package com.example.amai.api.user;
 
 import com.example.amai.core.admin_user.entity.Account;
 import com.example.amai.core.admin_user.service.AccountService;
-import com.example.amai.core.admin_user.service.UserService;
-import com.example.amai.core.registration.service.RegistrationService;
 import com.example.amai.core.security.dto.user.NewPassword;
 import com.example.amai.core.security.service.OtpService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +23,11 @@ public class forgotPassword {
     @Autowired
     private OtpService otpService;
 
-    @GetMapping("account/otpsotnewpassword/{emailnew}")
-    public ResponseEntity<Boolean> senOtpEmailNewPassword(@PathVariable("emailnew") String emailnew) {
-        String otp = this.otpService.generateOTP(emailnew);
+    @GetMapping("account/otpsotnewpassword/{email}")
+    public ResponseEntity<Boolean> senOtpEmailNewPassword(@PathVariable("email") String email) {
+        String otp = this.otpService.generateOTP(email);
         System.out.println(otp);
-        boolean isSenMail = this.accountService.senOtpEmailNewPassword(emailnew, otp);
+        boolean isSenMail = this.accountService.senOtpEmailNewPassword(email, otp);
         if (isSenMail) {
             return new ResponseEntity<>(true, HttpStatus.OK);// Send mail success
         }
@@ -38,8 +36,10 @@ public class forgotPassword {
 
     @PostMapping("account/newpassword")
     public ResponseEntity<Boolean> newPassword(@RequestBody NewPassword newPassword) {
-        Account account = this.accountService.findByUser_Email(newPassword.getEmailnew());
-        String otpServer = this.otpService.getOtp(newPassword.getEmailnew());
+        Account account = this.accountService.findByUser_Email(newPassword.getEmail());
+        String otpServer = this.otpService.getOtp(newPassword.getEmail());
+        System.out.println(otpServer);
+        System.out.println(newPassword.getOtp());
         if (newPassword.getOtp().equals(otpServer)) {
             account.setPassword(this.passwordEncoder.encode(newPassword.getNewPassword()));
             this.accountService.save(account);

@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -125,10 +126,9 @@ public class oderUserController {
                 .limit(targetStringLength)
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                 .toString();
-//        String imagePath = "C:/Users/ASUS/Pictures/qrcode" + generatedString + ".png";
-        String imagePath = "C:/Users/ASUS/Pictures/qrcode/anh1.png";
+        String imagePath = "E:/DATN/Code/DATN-amai-fe/amaife/src/assets/image/" + generatedString + ".png";
         orderService.generateQrCode(oder, imagePath);
-        oder.setQrcode(generatedString + ".png");
+        oder.setQrcode(orderService.generateQrCode(oder, imagePath));
         String email = userService.findAllByEmail(oder.getAccount().getUserName());
         boolean isSendOtp = this.orderService.senOrderEmail(oder, email);
         if (isSendOtp) {
