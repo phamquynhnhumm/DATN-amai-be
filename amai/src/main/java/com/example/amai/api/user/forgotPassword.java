@@ -26,7 +26,6 @@ public class forgotPassword {
     @GetMapping("account/otpsotnewpassword/{email}")
     public ResponseEntity<Boolean> senOtpEmailNewPassword(@PathVariable("email") String email) {
         String otp = this.otpService.generateOTP(email);
-        System.out.println(otp);
         boolean isSenMail = this.accountService.senOtpEmailNewPassword(email, otp);
         if (isSenMail) {
             return new ResponseEntity<>(true, HttpStatus.OK);// Send mail success
@@ -38,9 +37,7 @@ public class forgotPassword {
     public ResponseEntity<Boolean> newPassword(@RequestBody NewPassword newPassword) {
         Account account = this.accountService.findByUser_Email(newPassword.getEmail());
         String otpServer = this.otpService.getOtp(newPassword.getEmail());
-        System.out.println(otpServer);
-        System.out.println(newPassword.getOtp());
-        if (newPassword.getOtp().equals("KdCUGH")) {
+        if (newPassword.getOtp().equals(otpServer)) {
             account.setPassword(this.passwordEncoder.encode(newPassword.getNewPassword()));
             account.setUpdatedBy(String.valueOf(account));
             this.accountService.save(account);

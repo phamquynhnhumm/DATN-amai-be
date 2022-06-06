@@ -40,7 +40,5 @@ public interface OrderRepository extends JpaRepository<Oder, Integer> {
                                  @Param("userName") String userName,
                                  @Param("address") String address,
                                  @Param("phone") String phone);
-
     List<Oder> findAllByIsDeletedFalseAndStatus(EStatusOrder status);
 }
-
