@@ -1,5 +1,6 @@
 package com.example.amai.api.admin.shop;
 
+import com.example.amai.core.order.entity.Oder;
 import com.example.amai.core.shop.entity.Shop;
 import com.example.amai.core.shop.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,11 @@ public class ShopController {
     public ResponseEntity<List<Shop>> finAll() {
         List<Shop> shops = shopService.getAll();
         return shops.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(shops, HttpStatus.OK);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Shop> findById(@PathVariable("id") Integer id) {
+        Shop shop = shopService.getById(id).orElse(null);
+        return shop.equals(null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(shop, HttpStatus.OK);
     }
 
     /**
