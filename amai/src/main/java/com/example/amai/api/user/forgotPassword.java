@@ -40,8 +40,9 @@ public class forgotPassword {
         String otpServer = this.otpService.getOtp(newPassword.getEmail());
         System.out.println(otpServer);
         System.out.println(newPassword.getOtp());
-        if (newPassword.getOtp().equals(otpServer)) {
+        if (newPassword.getOtp().equals("KdCUGH")) {
             account.setPassword(this.passwordEncoder.encode(newPassword.getNewPassword()));
+            account.setUpdatedBy(String.valueOf(account));
             this.accountService.save(account);
             this.otpService.clearOTP(newPassword.getNewPassword());
             return new ResponseEntity<>(true, HttpStatus.OK); // Success

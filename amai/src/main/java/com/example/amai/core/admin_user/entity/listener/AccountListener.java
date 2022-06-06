@@ -57,7 +57,11 @@ public class AccountListener  implements EntityListeners {
     @PreUpdate
     public void preUpdate(Account account) {
         account.setUpdateAt(LocalDateTime.now().format(formatter));
-        MyUserDetails userRequest = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        account.setUpdatedBy(userRequest.getAccount().getUserName());
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() == "anonymousUser") {
+            account.setUpdatedBy(null);
+        } else {
+            MyUserDetails userRequest = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            account.setUpdatedBy(userRequest.getAccount().getUserName());
+        }
     }
 }
