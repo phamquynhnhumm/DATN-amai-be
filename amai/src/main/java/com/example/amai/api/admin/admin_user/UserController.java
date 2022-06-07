@@ -177,4 +177,17 @@ public class UserController {
             }
         }).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST)); // Username not exists
     }
+
+
+    /**
+     * Hiển thị tất cả người dùng không có email là email được truyền vào
+     *
+     * @param email
+     * @return Nhằm mục đích khi update user sẽ loại bỏ các trường hợp email đã có trong data và trường hoipwj người dùng nhập emal hiện tại của tài khoản vẫn chấp nhận
+     */
+    @GetMapping("findallnotemail/{email}")
+    public ResponseEntity<List<Users>> findUserByNotAccount_Email(@PathVariable("email") String email) {
+        List<Users> usersList = userService.findUserByNotAccount_Email(email);
+        return usersList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(usersList, HttpStatus.OK);
+    }
 }
