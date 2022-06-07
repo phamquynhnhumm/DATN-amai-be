@@ -44,7 +44,6 @@ public class AccountListener  implements EntityListeners {
         account.setUpdateAt(LocalDateTime.now().format(formatter));
         account.setUpdatedBy(null);
         account.setEnable(true);
-        account.setRole(ERole.ROLE_CUSTOMER);
         account.setIsDeleted(false);
     }
 

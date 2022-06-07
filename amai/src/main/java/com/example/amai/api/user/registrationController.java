@@ -8,9 +8,7 @@ import com.example.amai.core.admin_user.service.AccountService;
 import com.example.amai.core.admin_user.service.UserService;
 import com.example.amai.core.registration.entity.Registration;
 import com.example.amai.core.registration.service.RegistrationService;
-import com.example.amai.core.security.dto.user.NewPassword;
 import com.example.amai.core.security.service.OtpService;
-import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -82,6 +80,7 @@ public class registrationController {
      */
     @PostMapping("user/create")
     public ResponseEntity<Users> createUser(@RequestBody Users users) {
+        users.getAccount().setRole(ERole.ROLE_CUSTOMER);
         if (users.equals(null)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

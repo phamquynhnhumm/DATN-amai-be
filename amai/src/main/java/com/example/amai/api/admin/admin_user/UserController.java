@@ -1,5 +1,6 @@
 package com.example.amai.api.admin.admin_user;
 
+import com.example.amai.core.admin_user.dao.AccountSinup;
 import com.example.amai.core.admin_user.entity.Account;
 import com.example.amai.core.admin_user.entity.Users;
 import com.example.amai.core.admin_user.entity.contans.ERole;
@@ -188,6 +189,56 @@ public class UserController {
     @GetMapping("findallnotemail/{email}")
     public ResponseEntity<List<Users>> findUserByNotAccount_Email(@PathVariable("email") String email) {
         List<Users> usersList = userService.findUserByNotAccount_Email(email);
+        return usersList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(usersList, HttpStatus.OK);
+    }
+
+    @GetMapping("account/otpsotpsinup/{email}")
+    public ResponseEntity<Boolean> generateOtpSinup(@PathVariable("email") String email) {
+        String otp = this.otpService.generateOTP(email);
+        boolean isSenMail = this.accountService.senOtpEmailSinup(email, otp);
+        if (isSenMail) {
+            return new ResponseEntity<>(true, HttpStatus.OK);// Send mail success
+        }
+        return new ResponseEntity<>(true, HttpStatus.BAD_REQUEST);  // Account locked
+    }
+
+    /**
+     * @param accountSinup
+     * @return Thông tin account
+     */
+    @PostMapping("account/register")
+    public ResponseEntity<Account> CreateaccountSinup(@RequestBody AccountSinup accountSinup) {
+        Account account = new Account();
+        String otpServer = this.otpService.getOtp(accountSinup.getEmail());
+        if (accountSinup.getOtp().equals(otpServer)) {
+            account.setPassword(this.passwordEncoder.encode(accountSinup.getPassword()));
+            account.setUserName(accountSinup.getUserName());
+            this.otpService.clearOTP(accountSinup.getUserName());
+            return ResponseEntity.ok(account);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /**
+     * @param users
+     * @return thêm tài khoản mới và thông tin tài khoản mới.vì QH 1-1 nên thêm User sẽ thêm đồng bộ Account
+     */
+    @PostMapping("user/create")
+    public ResponseEntity<Users> createUserAdmin(@RequestBody Users users) {
+        users.getAccount().setRole(ERole.ROLE_MANAGEMENT);
+        if (users.equals(null)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok(userService.save(users));
+    }
+
+    /**
+     * Hiển thị tất cả các tài khoản user nhằm check email trùng v
+     */
+    @GetMapping("userlist")
+    public ResponseEntity<List<Users>> finAllUser() {
+        List<Users> usersList = userService.getAll();
         return usersList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(usersList, HttpStatus.OK);
     }
 }
