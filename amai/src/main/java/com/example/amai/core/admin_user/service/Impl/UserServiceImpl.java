@@ -42,13 +42,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Users> findAllByAccount_Role( ERole role,boolean isDeleted) {
-        return userReponsitory.findByAccount_RoleAndIsDeleted(role,isDeleted);
+    public List<Users> findAllByAccount_Role(ERole role, boolean isDeleted) {
+        return userReponsitory.findByAccount_RoleAndIsDeleted(role, isDeleted);
     }
 
     @Override
     public List<Users> search(String fullName, String userName, String phone, String email, String address) {
         return userReponsitory.search(fullName, userName, phone, email, address);
+    }
+
+    @Override
+    public List<Users> findUserByNotAccount_Email(String email) {
+        return userReponsitory.findUserByNotAccount_Email(email);
     }
 
     @Override

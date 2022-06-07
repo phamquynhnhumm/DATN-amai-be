@@ -25,6 +25,9 @@ public interface UserRepository extends JpaRepository<Users, Integer> {
 
     List<Users> findUserByIsDeletedFalse();
 
+    @Query(value = "select * from users where email != :email", nativeQuery = true)
+    List<Users> findUserByNotAccount_Email(@Param("email") String email);
+
     List<Users> findByAccount_RoleAndIsDeleted(ERole role, boolean isDeleted);
 
     @Query(value = "select  * from users as us inner join account as ac on ac.user_name = us.account_user_name " +

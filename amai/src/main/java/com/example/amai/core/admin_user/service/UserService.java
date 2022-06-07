@@ -24,5 +24,8 @@ public interface UserService extends IService<Users, Integer> {
     List<Users> findAllByAccount_Role(ERole role, boolean isDelete);
 
     List<Users> search(String fullName, String userName, String phone, String email, String address);
+
+    List<Users> findUserByNotAccount_Email(String email);
+
 }
 
