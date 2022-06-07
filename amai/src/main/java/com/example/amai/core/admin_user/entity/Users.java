@@ -4,9 +4,7 @@
 package com.example.amai.core.admin_user.entity;
 
 import com.example.amai.core.admin_user.entity.contans.EGender;
-import com.example.amai.core.admin_user.entity.contans.Provider;
 import com.example.amai.core.admin_user.entity.listener.UserListener;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -86,12 +84,6 @@ public class Users {
      * Ảnh người dùng
      */
     private String image;
-
-    /**
-     * Xác nhận loại tài khoản gg, facebook hay tài khoản đăng nhập
-     */
-    @Enumerated(EnumType.STRING)
-    private Provider provider;
 
     /**
      * Tên tài khoản

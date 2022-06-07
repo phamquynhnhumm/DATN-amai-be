@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -85,6 +86,14 @@ public class registrationController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return ResponseEntity.ok(userService.save(users));
+    }
+    /**
+     * Hiển thị tất cả các tài khoản user nhằm check email trùng và tên tài khoản trùng
+     */
+    @GetMapping("userlist")
+    public ResponseEntity<List<Users>> finAllUser() {
+        List<Users> usersList = userService.getAll();
+        return usersList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(usersList, HttpStatus.OK);
     }
 
 }
