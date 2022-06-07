@@ -87,13 +87,13 @@ public class registrationController {
         }
         return ResponseEntity.ok(userService.save(users));
     }
+
     /**
-     * Hiển thị tất cả các tài khoản user nhằm check email trùng và tên tài khoản trùng
+     * Hiển thị tất cả các tài khoản user nhằm check email trùng v
      */
     @GetMapping("userlist")
     public ResponseEntity<List<Users>> finAllUser() {
         List<Users> usersList = userService.getAll();
         return usersList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(usersList, HttpStatus.OK);
     }
-
 }
