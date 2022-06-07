@@ -77,5 +77,4 @@ public class accountUserController {
         List<Users> usersList = userService.findUserByNotAccount_Email(email);
         return usersList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(usersList, HttpStatus.OK);
     }
-
 }
