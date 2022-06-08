@@ -38,4 +38,9 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     public List<OrderDetail> findByIsDeletedAndOrders_Id(boolean idorderdetail, Integer idOders) {
         return orderDetailRepository.findByIsDeletedAndOrders_Id(idorderdetail, idOders);
     }
+
+    @Override
+    public List<OrderDetail> findAllByOrders_Id(Integer idOser) {
+        return orderDetailRepository.findAllByOrders_Id(idOser);
+    }
 }

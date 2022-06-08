@@ -1,6 +1,7 @@
 package com.example.amai.core.order.service;
 
 import com.example.amai.core.Food.service.IService;
+import com.example.amai.core.order.dao.QrCode;
 import com.example.amai.core.order.entity.Oder;
 import com.example.amai.core.order.entity.contans.EStatusOrder;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,8 @@ public interface OrderService extends IService<Oder, Integer> {
      * @return
      */
     String generateQrCode(Oder sdi, String imagePath);
+
+    String generateQrCodeOr(Integer id, String imagePath);
 
     List<Oder> findAllSerachOder(boolean isDeleteOder, boolean isDeleteAccount, String fullName, String userName, String address, String phone);
 

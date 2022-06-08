@@ -5,10 +5,7 @@ import com.example.amai.core.order.entity.contans.EPayments;
 import com.example.amai.core.order.entity.contans.EStatusOrder;
 import com.example.amai.core.order.entity.listener.OrderListener;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -22,6 +19,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 /**
  * Đơn hàng
  */

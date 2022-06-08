@@ -1,6 +1,7 @@
 package com.example.amai.core.order.repository;
 
 import com.example.amai.core.order.entity.Oder;
+import com.example.amai.core.order.entity.OrderDetail;
 import com.example.amai.core.order.entity.contans.EStatusOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -40,5 +41,7 @@ public interface OrderRepository extends JpaRepository<Oder, Integer> {
                                  @Param("userName") String userName,
                                  @Param("address") String address,
                                  @Param("phone") String phone);
+
     List<Oder> findAllByIsDeletedFalseAndStatus(EStatusOrder status);
+
 }

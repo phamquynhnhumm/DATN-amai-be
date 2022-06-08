@@ -1,5 +1,6 @@
 package com.example.amai.api.user;
 
+import com.example.amai.core.Food.service.FoodService;
 import com.example.amai.core.admin_user.service.UserService;
 import com.example.amai.core.order.entity.Oder;
 import com.example.amai.core.order.entity.OrderDetail;
@@ -10,11 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 @RestController
 @CrossOrigin
@@ -22,6 +19,9 @@ import java.util.Random;
 public class oderUserController {
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private FoodService foodService;
 
     @Autowired
     private OrderDetailService orderDetailService;
@@ -120,8 +120,7 @@ public class oderUserController {
      * @return
      */
     @PostMapping("generateQRCode")
-    public ResponseEntity<Oder> generateQRCodeOder(@RequestBody Oder oder
-    ) {
+    public ResponseEntity<Oder> generateQRCodeOder(@RequestBody Oder oder) {
         Optional<Oder> oderOptional = orderService.getById(oder.getId());
         if (oderOptional == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -135,14 +134,8 @@ public class oderUserController {
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                 .toString();
         String imagePath = "E:/DATN/Code/DATN-amai-fe/amaife/src/assets/image/" + generatedString + ".png";
-        orderService.generateQrCode(oder, imagePath);
-        oder.setQrcode(orderService.generateQrCode(oder, imagePath));
-//        String email = userService.findAllByEmail(oder.getAccount().getUserName());
-//        boolean isSendOtp = this.orderService.senOrderEmail(oder, email);
-//        if (isSendOtp) {
+        orderService.generateQrCodeOr(oder.getId(), imagePath);
+        oder.setQrcode(orderService.generateQrCodeOr(oder.getId(), imagePath));
         return ResponseEntity.ok(orderService.save(oder));
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
     }
 }

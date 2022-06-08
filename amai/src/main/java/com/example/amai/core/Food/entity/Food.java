@@ -6,13 +6,11 @@ import com.example.amai.core.admin_user.entity.Account;
 import com.example.amai.core.order.entity.Cart;
 import com.example.amai.core.order.entity.OrderDetail;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @EntityListeners(FoodListener.class)
@@ -20,6 +18,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 /**
  * Món
  */

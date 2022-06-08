@@ -1,5 +1,6 @@
 package com.example.amai.core.order.service.Impl;
 
+import com.example.amai.core.order.dao.QrCode;
 import com.example.amai.core.order.entity.Oder;
 import com.example.amai.core.order.entity.contans.EStatusOrder;
 import com.example.amai.core.order.repository.OrderRepository;
@@ -69,6 +70,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public String generateQrCodeOr(Integer id, String imagePath) {
+        String prettyData = QRUtils.prettyObject(id);
+        String qrCode = QRUtils.generateQrCode(prettyData, ORDER_QR_CODE_SIZE_WIDTH, ORDER_QR_CODE_SIZE_HEIGHT, imagePath);
+        return qrCode;
+    }
+
+    @Override
     public List<Oder> findAllSerachOder(boolean isDeleteOder, boolean isDeleteAccount, String fullName, String userName, String address, String phone) {
         return orderRepository.findAllSerachOder(isDeleteOder, isDeleteAccount, fullName, userName, address, phone);
     }
@@ -85,9 +93,7 @@ public class OrderServiceImpl implements OrderService {
                     "<p>Dia chi : " + oder.getAddress() + "</span></p>" +
                     "<p>So dien thoai :" + oder.getPhone() + "</p>" +
                     "<p>Ma OR:" +
-                    "<a download=\"image.png\" href=\""+oder.getQrcode() +"\">ma QR code code</a>" +
                     " <img src=\"" + oder.getQrcode() + "\" alt='mã qrr'></p>" +
-                    " <p> Mã QR Thông tin đơn hàng <a  style='color: red; text-decoration: underline' href='" + oder.getQrcode()+ "'>bam vao day </a></p>" +
                     " <p>Link dan den trang chu: <a style='color: red; text-decoration: underline' href='http://localhost:4200'>bam vao day</a></p>", true
             );
             this.javaMailSender.send(message);

@@ -3,10 +3,7 @@ package com.example.amai.core.order.entity;
 import com.example.amai.core.Food.entity.Food;
 import com.example.amai.core.admin_user.entity.Account;
 import com.example.amai.core.order.entity.listener.OrderDetailListener;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -16,6 +13,8 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@With
 /**
  * Chi tiết đặt món
  */
