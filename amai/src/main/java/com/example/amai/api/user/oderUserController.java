@@ -86,10 +86,17 @@ public class oderUserController {
     @PutMapping("")
     public ResponseEntity<Oder> updteOrder(@RequestBody Oder oder) {
         Optional<Oder> oderOptional = orderService.getById(oder.getId());
-        if (!oderOptional.isPresent()) {
+        if (oderOptional == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(orderService.save(oder), HttpStatus.OK);
+        oder.setQrcode(oder.getQrcode());
+        String email = userService.findAllByEmail(oder.getAccount().getUserName());
+        boolean isSendOtp = this.orderService.senOrderEmail(oder, email);
+        if (isSendOtp) {
+            return ResponseEntity.ok(orderService.save(oder));
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     /**
@@ -130,12 +137,12 @@ public class oderUserController {
         String imagePath = "E:/DATN/Code/DATN-amai-fe/amaife/src/assets/image/" + generatedString + ".png";
         orderService.generateQrCode(oder, imagePath);
         oder.setQrcode(orderService.generateQrCode(oder, imagePath));
-        String email = userService.findAllByEmail(oder.getAccount().getUserName());
-        boolean isSendOtp = this.orderService.senOrderEmail(oder, email);
-        if (isSendOtp) {
-            return ResponseEntity.ok(orderService.save(oder));
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+//        String email = userService.findAllByEmail(oder.getAccount().getUserName());
+//        boolean isSendOtp = this.orderService.senOrderEmail(oder, email);
+//        if (isSendOtp) {
+        return ResponseEntity.ok(orderService.save(oder));
+//        } else {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
     }
 }
