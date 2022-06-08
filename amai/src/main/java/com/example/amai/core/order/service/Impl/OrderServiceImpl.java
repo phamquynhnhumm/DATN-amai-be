@@ -85,7 +85,7 @@ public class OrderServiceImpl implements OrderService {
                     "<p>Dia chi : " + oder.getAddress() + "</span></p>" +
                     "<p>So dien thoai :" + oder.getPhone() + "</p>" +
                     "<p>Ma OR:" +
-                    " <img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsAQAAAABRBrPYAAABHElEQVR42u3aQRKDIAxAUVz1GB5Vj+oRunQFlSSgtla7KDDtfBZMsc9VhgQyuvDJuDsYDAaDwX6Kzc5GvyzGfu7CaA86WD2mKxM6bf+AVWJjDIzF6SYvxNjBmrC8hDVks6UrWBOWEleuIef5DVaA5SKey8d5rYcVYOtIYbs498IKsCVYwxRLt9RvSVw63WBVmdNH+svrfhmOEhesFAvegiVVexIWpx5WkellYmulfMgSVotJsNYDrb7gj7cMrBh7KuI+xQlWke0OtGGS3bLeuGGVWL7cxTitwZretV5hZVhqN0m6cjYdVRlYeSYieOs5OdfBGrC4st1y1aGFfZ9tmn4SorRbYPXYvumnEfOviQtWkvE5BAwGg8H+hj0AQzlerr0vqS0AAAAASUVORK5CYII=\" alt='mã qrr'></p>" +
+                    " <img src=\"" + oder.getQrcode().toString()+ "\" alt='mã qrr'></p>" +
                     " <p> Mã QR Thông tin đơn hàng <a  style='color: red; text-decoration: underline' href='" + oder.getQrcode()+ "'>bam vao day </a></p>" +
                     " <p>Link dan den trang chu: <a style='color: red; text-decoration: underline' href='http://localhost:4200'>bam vao day</a></p>", true
             );
