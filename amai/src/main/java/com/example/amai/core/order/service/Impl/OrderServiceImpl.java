@@ -85,6 +85,7 @@ public class OrderServiceImpl implements OrderService {
                     "<p>Dia chi : " + oder.getAddress() + "</span></p>" +
                     "<p>So dien thoai :" + oder.getPhone() + "</p>" +
                     "<p>Ma OR:" +
+                    "<a download=\"image.png\" href=\""+oder.getQrcode() +"\">ma QR code code</a>" +
                     " <img src=\"" + oder.getQrcode().toString()+ "\" alt='mã qrr'></p>" +
                     " <p> Mã QR Thông tin đơn hàng <a  style='color: red; text-decoration: underline' href='" + oder.getQrcode()+ "'>bam vao day </a></p>" +
                     " <p>Link dan den trang chu: <a style='color: red; text-decoration: underline' href='http://localhost:4200'>bam vao day</a></p>", true
