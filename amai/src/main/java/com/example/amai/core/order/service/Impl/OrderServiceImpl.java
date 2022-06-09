@@ -1,12 +1,10 @@
 package com.example.amai.core.order.service.Impl;
 
-import com.example.amai.core.order.dao.QrCode;
 import com.example.amai.core.order.entity.Oder;
 import com.example.amai.core.order.entity.contans.EStatusOrder;
 import com.example.amai.core.order.repository.OrderRepository;
 import com.example.amai.core.order.service.OrderService;
 import com.example.amai.core.security.jwt.QRUtils;
-import com.sun.deploy.association.utility.AppUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;

@@ -12,9 +12,8 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin
-@RequestMapping("api/admin/shop")
-public class ShopController {
-
+@RequestMapping("api/shop")
+public class shopCustomerController {
     @Autowired
     private ShopService shopService;
 
@@ -23,6 +22,7 @@ public class ShopController {
         List<Shop> shops = shopService.getAll();
         return shops.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(shops, HttpStatus.OK);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<Shop> findById(@PathVariable("id") Integer id) {
         Shop shop = shopService.getById(id).orElse(null);

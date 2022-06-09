@@ -1,7 +1,6 @@
 package com.example.amai.core.order.service;
 
 import com.example.amai.core.Food.service.IService;
-import com.example.amai.core.order.dao.QrCode;
 import com.example.amai.core.order.entity.Oder;
 import com.example.amai.core.order.entity.contans.EStatusOrder;
 import org.springframework.stereotype.Service;
