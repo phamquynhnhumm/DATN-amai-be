@@ -42,9 +42,17 @@ public class AccountListener  implements EntityListeners {
     @PrePersist
     public void preInser(Account account) {
         account.setUpdateAt(LocalDateTime.now().format(formatter));
-        account.setUpdatedBy(null);
-        account.setEnable(true);
-        account.setIsDeleted(false);
+        account.setCreateAt(LocalDateTime.now().format(formatter));
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() == "anonymousUser") {
+            account.setCreatedBy(null);
+            account.setUpdatedBy(null);
+        } else {
+            MyUserDetails userRequest = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            account.setCreatedBy(userRequest.getAccount().getUserName());
+            account.setUpdatedBy(userRequest.getAccount().getUserName());
+            account.setEnable(true);
+            account.setIsDeleted(false);
+        }
     }
 
     /**

@@ -113,5 +113,6 @@ public class Food {
     /**
      * Nội dung món
      */
+    @Column(columnDefinition = "text", length = 10485760)
     private String content;
 }

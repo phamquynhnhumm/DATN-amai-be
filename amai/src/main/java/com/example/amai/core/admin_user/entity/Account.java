@@ -29,6 +29,12 @@ public class Account {
     @Id
     private String userName;
 
+    private String createdBy;
+
+    /**
+     * Thời gian tạo
+     */
+    private String createAt;
     /**
      * Người cập nhật
      */

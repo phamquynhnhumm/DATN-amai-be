@@ -41,15 +41,23 @@ public class UserListener implements EntityListeners {
      */
     @PrePersist
     public void preInser(Users users) {
-        users.setCreateAt(LocalDateTime.now().format(formatter));
         users.setUpdateAt(LocalDateTime.now().format(formatter));
-        users.setCreatedBy(null);
+        users.setCreateAt(LocalDateTime.now().format(formatter));
         users.setBirthday(null);
         users.setAddress(null);
         users.setImage(null);
         users.setGender(EGender.FEMALE);
-        users.setUpdatedBy(null);
         users.setIsDeleted(false);
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() == "anonymousUser") {
+            users.setCreatedBy(null);
+            users.setUpdatedBy(null);
+        } else {
+            MyUserDetails userRequest = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            users.setCreatedBy(userRequest.getAccount());
+            users.setUpdatedBy(userRequest.getAccount());
+            users.setIsDeleted(false);
+
+        }
     }
 
     /**
