@@ -76,7 +76,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //              Phân quyền phía user
                 .antMatchers("/api/food/**").permitAll()
                 .antMatchers("/api/users/**").hasRole("CUSTOMER")
-                .antMatchers("/api/shop/**").permitAll()
+                .antMatchers("/api/shop/**").hasRole("CUSTOMER")
+                .antMatchers("/api/chat/**").permitAll()
                 .antMatchers("/api/sinup/**").permitAll()
                 .antMatchers("/api/forgot/**").permitAll()
                 .antMatchers("/api/order/**").hasRole("CUSTOMER")
