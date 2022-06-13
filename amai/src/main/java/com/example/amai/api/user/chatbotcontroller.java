@@ -59,9 +59,9 @@ public class chatbotcontroller {
      *
      * @return
      */
-    @GetMapping("/{createAt}")
-    public ResponseEntity<List<Chat>> findByIsDeletedAndAccount_IsDeletedAndAccount_UserName(@PathVariable("createAt") String createAt) {
-        List<Chat> oderList = chatService.findByIsDeletedFalseAndCreateAt_UserName(createAt);
+    @GetMapping("/{createBy}")
+    public ResponseEntity<List<Chat>> findByIsDeletedAndAccount_IsDeletedAndAccount_UserName(@PathVariable("createBy") String createBy) {
+        List<Chat> oderList = chatService.findByIsDeletedFalseAndCreateAt_UserName(createBy);
         return oderList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(oderList, HttpStatus.OK);
     }
 }

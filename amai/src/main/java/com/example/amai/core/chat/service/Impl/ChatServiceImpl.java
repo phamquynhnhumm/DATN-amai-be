@@ -36,7 +36,7 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
-    public List<Chat> findByIsDeletedFalseAndCreateAt_UserName(String createAt) {
-        return chatRepository.findByIsDeletedFalseAndCreateAt_UserName(createAt);
+    public List<Chat> findByIsDeletedFalseAndCreateAt_UserName(String createBy) {
+        return chatRepository.findByIsDeletedFalseAndCreatedBy_UserName(createBy);
     }
 }

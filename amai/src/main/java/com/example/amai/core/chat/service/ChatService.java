@@ -8,5 +8,5 @@ import java.util.List;
 
 @Service
 public interface ChatService extends IService<Chat, Integer> {
-    List<Chat> findByIsDeletedFalseAndCreateAt_UserName(String createAt);
+    List<Chat> findByIsDeletedFalseAndCreateAt_UserName(String createBy);
 }

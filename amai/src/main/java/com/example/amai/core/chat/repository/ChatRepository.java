@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ChatRepository extends JpaRepository<Chat, Integer> {
-    List<Chat> findByIsDeletedFalseAndCreateAt_UserName(String createAt);
+    List<Chat> findByIsDeletedFalseAndCreatedBy_UserName(String createBy);
 }
