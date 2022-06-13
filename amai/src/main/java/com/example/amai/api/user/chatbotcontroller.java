@@ -17,41 +17,16 @@ import java.util.List;
 public class chatbotcontroller {
     @Autowired
     private ChatService chatService;
-//    private final String PATH_URL_AI = "http://127.0.0.1:5000";
 
-//    @GetMapping(value = "/chatbot")
-//    public String chatGui() {
-//        return "chat/chatbot";
-//    }
-
-    //    @PostMapping(value = "/send")
-//    public ResponseEntity<String> SendsAPI(@PathVariable("msg") String msg) {
-//        String uri = PATH_URL_AI + "send/" + msg;
-//        RestTemplate restTemplate = new RestTemplate();
-//        String result = restTemplate.getForObject(uri, String.class);
-//        return new ResponseEntity<String>(result, HttpStatus.OK);
-//    }
-
-    //
-//    @PostMapping(value = "/send/{msg}")
-//    public ResponseEntity<String> SendAPI(@PathVariable("msg") String msg) {
-//        String uri = PATH_URL_AI + "send/" + msg;
-//        RestTemplate restTemplate = new RestTemplate();
-//        String result = restTemplate.getForObject(uri, String.class);
-////        if (cart.equals(null)) {
-////            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-////        }
-//        System.out.println(result);
-//        return new ResponseEntity<String>(result, HttpStatus.OK);
-//    }
     private final String PATH_URL_AI = "http://localhost:5000/";
 
-    @GetMapping(value = "send")
-    public ResponseEntity<String> SendAPI(@RequestParam("msg") String msg) {
-        String uri = PATH_URL_AI + "send/" + msg;
-        RestTemplate restTemplate = new RestTemplate();
-        String result = restTemplate.getForObject(uri, String.class);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+    @GetMapping(value = "send/{msg}")
+    public ResponseEntity<String> SendAPI(@PathVariable("msg") String msg) {
+//        String uri = PATH_URL_AI + "send/" + msg;
+//        RestTemplate restTemplate = new RestTemplate();
+//        String result = restTemplate.getForObject(uri, String.class);
+        String result = "Xin chao quynh nhu";
+        return result.equals("") ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     /**
@@ -59,7 +34,7 @@ public class chatbotcontroller {
      *
      * @return
      */
-    @GetMapping("/{createBy}")
+    @GetMapping("{createBy}")
     public ResponseEntity<List<Chat>> findByIsDeletedAndAccount_IsDeletedAndAccount_UserName(@PathVariable("createBy") String createBy) {
         List<Chat> oderList = chatService.findByIsDeletedFalseAndCreateAt_UserName(createBy);
         return oderList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(oderList, HttpStatus.OK);
