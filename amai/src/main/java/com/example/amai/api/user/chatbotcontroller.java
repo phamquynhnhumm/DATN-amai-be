@@ -2,7 +2,6 @@ package com.example.amai.api.user;
 
 import com.example.amai.core.chat.entity.Chat;
 import com.example.amai.core.chat.service.ChatService;
-import com.example.amai.core.order.entity.Oder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +19,16 @@ public class chatbotcontroller {
 
     private final String PATH_URL_AI = "http://localhost:5000/";
 
-    @GetMapping(value = "send/{msg}")
-    public ResponseEntity<String> SendAPI(@PathVariable("msg") String msg) {
-//        String uri = PATH_URL_AI + "send/" + msg;
-//        RestTemplate restTemplate = new RestTemplate();
-//        String result = restTemplate.getForObject(uri, String.class);
-        String result = "Xin chao quynh nhu";
-        return result.equals("") ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(result, HttpStatus.OK);
+    @PostMapping("send")
+    public ResponseEntity<Chat> SendAPI(@RequestBody Chat chat) {
+        String uri = PATH_URL_AI + "send/" + chat.getMsg();
+        RestTemplate restTemplate = new RestTemplate();
+        String result = restTemplate.getForObject(uri, String.class);
+        chat.setMsgchatbot(result);
+        if (chat.equals(null)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok(chatService.save(chat));
     }
 
     /**

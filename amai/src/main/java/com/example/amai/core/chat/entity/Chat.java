@@ -12,7 +12,6 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class Chat {
     /**
      * ID dịch vụ
