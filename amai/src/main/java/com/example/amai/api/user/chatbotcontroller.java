@@ -1,5 +1,6 @@
 package com.example.amai.api.user;
 
+import com.example.amai.core.Food.entity.Food;
 import com.example.amai.core.chat.entity.Chat;
 import com.example.amai.core.chat.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,38 @@ public class chatbotcontroller {
     }
 
     /**
+     * Thu hồi tin nhắn
+     */
+    @DeleteMapping("cancel/{id}")
+    public ResponseEntity<Chat> deleteCartShopping(@PathVariable("id") Integer id) {
+        Chat chat = chatService.getById(id).orElse(null);
+        if (chat.equals(null)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            chatService.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
+    /**
+     * Xóa chỉ mình tôi
+     *
+     * @param id
+     * @return
+     */
+    @PutMapping("delete/{id}")
+    public ResponseEntity<Chat> undeleteFood(@PathVariable("id") Integer id) {
+        Chat chat = chatService.getById(id).orElse(null);
+        if (chat.equals(null)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            chat.setMsg("Tin nhắn đã được thu hồi");
+            chatService.save(chat);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
+    /**
      * Hiển thị tin nhắn của tài khoản đã đăng nhập (1 true : Đã xóa , 0 false: Tồn tại )
      *
      * @return
@@ -40,5 +73,11 @@ public class chatbotcontroller {
     public ResponseEntity<List<Chat>> findByIsDeletedAndAccount_IsDeletedAndAccount_UserName(@PathVariable("createBy") String createBy) {
         List<Chat> oderList = chatService.findByIsDeletedFalseAndCreateAt_UserName(createBy);
         return oderList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(oderList, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Chat> findById(@PathVariable("id") Integer id) {
+        Chat chat = chatService.getById(id).orElse(null);
+        return chat.equals(null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(chat, HttpStatus.OK);
     }
 }
