@@ -35,7 +35,7 @@ public class chatbotcontroller {
     /**
      * Thu hồi tin nhắn
      */
-    @DeleteMapping("cancel/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<Chat> deleteCartShopping(@PathVariable("id") Integer id) {
         Chat chat = chatService.getById(id).orElse(null);
         if (chat.equals(null)) {
@@ -49,12 +49,11 @@ public class chatbotcontroller {
     /**
      * Xóa chỉ mình tôi
      *
-     * @param id
      * @return
      */
-    @PutMapping("delete/{id}")
-    public ResponseEntity<Chat> undeleteFood(@PathVariable("id") Integer id) {
-        Chat chat = chatService.getById(id).orElse(null);
+    @PutMapping("cancel")
+    public ResponseEntity<Chat> undeleteFood(@RequestBody Chat chats) {
+        Chat chat = chatService.getById(chats.getId()).orElse(null);
         if (chat.equals(null)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
@@ -63,6 +62,7 @@ public class chatbotcontroller {
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
+
 
     /**
      * Hiển thị tin nhắn của tài khoản đã đăng nhập (1 true : Đã xóa , 0 false: Tồn tại )
@@ -75,7 +75,7 @@ public class chatbotcontroller {
         return oderList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(oderList, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("findbyid/{id}")
     public ResponseEntity<Chat> findById(@PathVariable("id") Integer id) {
         Chat chat = chatService.getById(id).orElse(null);
         return chat.equals(null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(chat, HttpStatus.OK);
