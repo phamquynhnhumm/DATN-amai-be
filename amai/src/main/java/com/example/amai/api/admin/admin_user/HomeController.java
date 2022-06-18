@@ -1,8 +1,6 @@
 package com.example.amai.api.admin.admin_user;
 
-import com.example.amai.core.admin_user.entity.Account;
 import com.example.amai.core.admin_user.entity.Users;
-import com.example.amai.core.admin_user.service.AccountService;
 import com.example.amai.core.admin_user.service.UserService;
 import com.example.amai.core.security.dto.user.LoginRequest;
 import com.example.amai.core.security.dto.user.LoginResponse;
@@ -15,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
@@ -60,11 +57,10 @@ public class HomeController {
             status = "Username not exists";
             httpStatus = HttpStatus.BAD_REQUEST;
         } catch (Exception exception) {
-            // Cat error xxx ->
             status = "Error server";
             httpStatus = HttpStatus.BAD_REQUEST;
         }
-        return ResponseEntity.ok(new LoginResponse(jwt, userRequest, status));
+        return new ResponseEntity<>(new LoginResponse(jwt, userRequest, status), httpStatus);
     }
 
     @PostMapping("/logout")

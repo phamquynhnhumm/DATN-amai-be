@@ -8,6 +8,7 @@ import com.example.amai.core.admin_user.entity.listener.UserListener;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -63,12 +64,14 @@ public class Users {
     /**
      * Email
      */
+    @NotNull
     private String email;
 
     /**
      * Số điện thoại
      */
     private String phone;
+
     /**
      * Địa chỉ
      */

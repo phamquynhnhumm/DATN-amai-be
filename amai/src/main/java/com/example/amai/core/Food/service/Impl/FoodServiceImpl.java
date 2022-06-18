@@ -2,6 +2,7 @@ package com.example.amai.core.Food.service.Impl;
 
 import com.example.amai.core.Food.entity.Food;
 import com.example.amai.core.Food.entity.FoodCategory;
+import com.example.amai.core.Food.entity.contans.EStatusFood;
 import com.example.amai.core.Food.repository.FoodRepository;
 import com.example.amai.core.Food.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,13 +42,18 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public List<Food> findByIsDeletedFood(boolean idDelete) {
-        return foodRepository.findByIsDeleted(idDelete);
+    public List<Food> findByIsDeleteduser(boolean idDeleteFood, boolean idDeleteFoodCategory, EStatusFood status) {
+        return foodRepository.findByIsDeletedAndFoodCategory_IsDeletedAndStatus(idDeleteFood, idDeleteFoodCategory, status);
     }
 
     @Override
-    public List<Food> findByIsDeletedAndFoodCategory_Id(boolean idDeleteFood, boolean idDeleteFoodCategory, int idFoodCategory) {
-        return foodRepository.findByIsDeletedAndFoodCategory_IsDeletedAndFoodCategory_Id(idDeleteFood,idDeleteFoodCategory,idFoodCategory);
+    public List<Food> findByIsDeletedFood(boolean idDelete, EStatusFood status) {
+        return foodRepository.findByIsDeletedAndStatus(idDelete, status);
+    }
+
+    @Override
+    public List<Food> findByIsDeletedAndFoodCategory_Id(boolean idDeleteFood, boolean idDeleteFoodCategory, int idFoodCategory, EStatusFood status) {
+        return foodRepository.findByIsDeletedAndFoodCategory_IsDeletedAndFoodCategory_IdAndStatus(idDeleteFood, idDeleteFoodCategory, idFoodCategory, status);
     }
 
     @Override
@@ -56,8 +62,8 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public List<Food> findAllByFoodIsDeletedAndName(boolean isDelete,boolean isDeleteFoodCategory, String name, String unit, String foodCategoryName) {
-        return foodRepository.findAllByFoodIsDeletedAndName(isDelete,isDeleteFoodCategory, name, unit, foodCategoryName);
+    public List<Food> findAllByFoodIsDeletedAndName(boolean isDelete, boolean isDeleteFoodCategory, String name, String unit, String foodCategoryName) {
+        return foodRepository.findAllByFoodIsDeletedAndName(isDelete, isDeleteFoodCategory, name, unit, foodCategoryName);
     }
 
     @Override

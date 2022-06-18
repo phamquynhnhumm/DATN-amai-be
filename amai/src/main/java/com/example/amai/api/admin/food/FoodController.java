@@ -1,6 +1,7 @@
 package com.example.amai.api.admin.food;
 
 import com.example.amai.core.Food.entity.Food;
+import com.example.amai.core.Food.entity.contans.EStatusFood;
 import com.example.amai.core.Food.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -49,7 +50,7 @@ public class FoodController {
      */
     @GetMapping("/all/{isdelete}")
     public ResponseEntity<List<Food>> finAllIsDelete(@PathVariable("isdelete") boolean isdelete) {
-        List<Food> foodList = foodService.findByIsDeletedFood(isdelete);
+        List<Food> foodList = foodService.findByIsDeletedFood(isdelete, EStatusFood.INSTOCK);
         return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
     }
 

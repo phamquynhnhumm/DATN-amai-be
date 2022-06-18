@@ -2,6 +2,7 @@ package com.example.amai.api.user;
 
 import com.example.amai.core.Food.entity.Food;
 import com.example.amai.core.Food.entity.FoodCategory;
+import com.example.amai.core.Food.entity.contans.EStatusFood;
 import com.example.amai.core.Food.service.FoodCategoryService;
 import com.example.amai.core.Food.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class foodUserController {
      */
     @GetMapping("/allFood/{idFoodCategory}")
     public ResponseEntity<List<Food>> finAllIsDeleteandFoodCategory(@PathVariable("idFoodCategory") Integer idFoodCategory) {
-        List<Food> foodList = foodService.findByIsDeletedAndFoodCategory_Id(false,false,idFoodCategory);
+        List<Food> foodList = foodService.findByIsDeletedAndFoodCategory_Id(false, false, idFoodCategory, EStatusFood.INSTOCK);
         return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
     }
 
@@ -52,7 +53,7 @@ public class foodUserController {
      */
     @GetMapping("/all/{isdelete}")
     public ResponseEntity<List<Food>> finAllIsDelete(@PathVariable("isdelete") boolean isdelete) {
-        List<Food> foodList = foodService.findByIsDeletedFood(isdelete);
+        List<Food> foodList = foodService.findByIsDeletedFood(isdelete, EStatusFood.INSTOCK);
         return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
     }
 
@@ -172,7 +173,7 @@ public class foodUserController {
     @GetMapping("/allFood/{idDeleteFood}/{idDeleteFoodCategory}")
     public ResponseEntity<List<Food>> finAllIsDeleteandFoodCategory(@PathVariable("idDeleteFood") boolean idDeleteFood,
                                                                     @PathVariable("idDeleteFoodCategory") boolean idDeleteFoodCategory) {
-        List<Food> foodList = foodService.findByIsDeleted(idDeleteFood, idDeleteFoodCategory);
+        List<Food> foodList = foodService.findByIsDeleteduser(idDeleteFood, idDeleteFoodCategory, EStatusFood.INSTOCK);
         return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
     }
 
