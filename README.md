@@ -1,34 +1,40 @@
-# Hệ thống quản lý quán trà sữa order QR và tích hợp Chatbox
+# java-getting-started
 
-# Người dùng vãng lai
-* Xem món
-* Tìm kiếm món
-* Đăng ký
+A barebones Java app, which can easily be deployed to Heroku.
 
-# Người dùng thành viên
-* Xem món, chi tiết món
-* Tìm kiếm món
-* Thêm sửa xóa giỏ hàng
-* Đặt món, thanh toán tiền mặt hoặc paypal
-* Xem, sửa thông tin tài khoản
-* Quên mật khẩu
-* Đăng nhập, đăng xuất
-* Chat với của hàng
-# Nhân viên
-* Đang nhập, đăng xuất
-* Thêm, sửa, xóa, tìm kiếm món
-* Thêm, sửa, xóa, tìm kiếm nhà cung cấp
-* Xác nhận, tìm kiếm, xem thông tin đơn hàng
-* Thêm, xóa, tìm kiếm thông tin khách hàng, nhà cung cấp
-* Xem, tìm kiếm thông tin nhân viên
-* Sửa thông tin cá nhân (không sửa quyền)
-* Thêm, sửa, xóa, tìm kiếm nguyên liệu
-* Thống kê đơn hàng
+This application supports the [Getting Started with Java on Heroku](https://devcenter.heroku.com/articles/getting-started-with-java) article - check it out.
 
-# Admin
-* Đang nhập, đăng xuất
-* Thêm, sửa, xóa, tìm kiếm món
-* Tìm kiếm, xem thông tin đơn hàng
-* Thêm, sửa, xóa, tìm kiếm nguyên liệu
-* Thêm, sửa quyền, xóa, tìm kiếm thông tin nhân viên
-* Thêm, xóa, tìm kiếm thông tin khách hàng
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+## Running Locally
+
+Make sure you have Java and Maven installed.  Also, install the [Heroku CLI](https://cli.heroku.com/).
+
+```sh
+$ git clone https://github.com/heroku/java-getting-started.git
+$ cd java-getting-started
+$ mvn install
+$ heroku local:start
+```
+
+Your app should now be running on [localhost:5000](http://localhost:5000/).
+
+If you're going to use a database, ensure you have a local `.env` file that reads something like this:
+
+```
+JDBC_DATABASE_URL=jdbc:postgresql://localhost:5432/java_database_name
+```
+
+## Deploying to Heroku
+
+```sh
+$ heroku create
+$ git push heroku main
+$ heroku open
+```
+
+## Documentation
+
+For more information about using Java on Heroku, see these Dev Center articles:
+
+- [Java on Heroku](https://devcenter.heroku.com/categories/java)
