@@ -9,6 +9,14 @@ public enum EPayments {
      * khi nhận hàng
      */
     CASH,
-    NO
+    /**
+     * Đến của hàng
+     */
+    NO,
+    /**
+     * chuyển khoản
+     */
+    TRANSFER
+
 }
 
