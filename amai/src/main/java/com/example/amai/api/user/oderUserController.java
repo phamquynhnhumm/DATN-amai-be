@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+
 @RestController
 @CrossOrigin
 @RequestMapping("api/order")
@@ -90,6 +91,7 @@ public class oderUserController {
         }
         oder.setQrcode(oder.getQrcode());
         String email = userService.findAllByEmail(oder.getAccount().getUserName());
+        System.out.println(email);
         boolean isSendOtp = this.orderService.senOrderEmail(oder, email);
         if (isSendOtp) {
             return ResponseEntity.ok(orderService.save(oder));
