@@ -2,6 +2,7 @@ package com.example.amai.core.Food.service;
 
 import com.example.amai.core.Food.entity.Food;
 import com.example.amai.core.Food.entity.FoodCategory;
+import com.example.amai.core.Food.entity.contans.EStatusFood;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,11 @@ public interface FoodService extends IService<Food, Integer> {
      */
     List<Food> findByIsDeleted(boolean idDeleteFood, boolean idDeleteFoodCategory);
 
-    List<Food> findByIsDeletedFood(boolean idDelete);
-    List<Food> findByIsDeletedAndFoodCategory_Id(boolean idDeleteFood, boolean idDeleteFoodCategory, int idFoodCategory);
+    List<Food> findByIsDeleteduser(boolean idDeleteFood, boolean idDeleteFoodCategory, EStatusFood status);
+
+    List<Food> findByIsDeletedFood(boolean idDelete, EStatusFood status);
+
+    List<Food> findByIsDeletedAndFoodCategory_Id(boolean idDeleteFood, boolean idDeleteFoodCategory, int idFoodCategory, EStatusFood status);
 
     /**
      * Tìm kiếm món theo danh mục món

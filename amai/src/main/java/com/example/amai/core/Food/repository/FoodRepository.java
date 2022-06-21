@@ -1,6 +1,7 @@
 package com.example.amai.core.Food.repository;
 
 import com.example.amai.core.Food.entity.Food;
+import com.example.amai.core.Food.entity.contans.EStatusFood;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,21 +17,23 @@ public interface FoodRepository extends JpaRepository<Food, Integer> {
      */
     List<Food> findByIsDeletedAndFoodCategory_IsDeleted(boolean idDeleteFood, boolean idDeleteFoodCategory);
 
+    List<Food> findByIsDeletedAndFoodCategory_IsDeletedAndStatus(boolean idDeleteFood, boolean idDeleteFoodCategory, EStatusFood status);
+
     /**
      * List danh sách món có cùng danh  mục
+     *
      * @param idDeleteFood
      * @param idDeleteFoodCategory
      * @param idFoodCategory
      * @return
      */
-    List<Food> findByIsDeletedAndFoodCategory_IsDeletedAndFoodCategory_Id(boolean idDeleteFood, boolean idDeleteFoodCategory, int idFoodCategory);
+    List<Food> findByIsDeletedAndFoodCategory_IsDeletedAndFoodCategory_IdAndStatus(boolean idDeleteFood, boolean idDeleteFoodCategory, int idFoodCategory, EStatusFood status);
 
     /**
-     *
      * @param idDelete
      * @return
      */
-    List<Food> findByIsDeleted(boolean idDelete);
+    List<Food> findByIsDeletedAndStatus(boolean idDelete, EStatusFood status);
 
     /**
      * Tìm kiếm món theo danh mục món
@@ -74,5 +77,4 @@ public interface FoodRepository extends JpaRepository<Food, Integer> {
     List<Food> findByOrderByNameAsc();
     List<Food> findByOrderByPriceAsc();
     List<Food> findByOrderByFoodCategory_NameAsc();
-
 }

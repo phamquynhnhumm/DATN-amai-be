@@ -47,7 +47,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Oder> findByIsDeleted(boolean idDeleteOder, boolean issDeleteAccount) {
-        return orderRepository.findByIsDeletedAndAccount_IsDeleted(idDeleteOder, issDeleteAccount);
+        return orderRepository.findAllByIsDeletedAndAccount_IsDeleted(idDeleteOder, issDeleteAccount);
     }
 
     @Override

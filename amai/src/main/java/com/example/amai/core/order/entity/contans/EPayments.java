@@ -9,6 +9,7 @@ public enum EPayments {
      * khi nhận hàng
      */
     CASH,
-    NO
+    NO,
+    TRANSFER
 }
 

@@ -64,7 +64,7 @@ public class HomeController {
             status = "Error server";
             httpStatus = HttpStatus.BAD_REQUEST;
         }
-        return ResponseEntity.ok(new LoginResponse(jwt, userRequest, status));
+        return new ResponseEntity<>(new LoginResponse(jwt, userRequest, status), httpStatus);
     }
 
     @PostMapping("/logout")

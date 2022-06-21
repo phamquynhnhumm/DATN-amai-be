@@ -1,7 +1,6 @@
 package com.example.amai.api.admin.order;
 
 import com.example.amai.core.order.entity.Oder;
-import com.example.amai.core.order.entity.OrderDetail;
 import com.example.amai.core.order.entity.contans.EStatusOrder;
 import com.example.amai.core.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -145,11 +144,11 @@ public class OrderController {
     @GetMapping("/search")
     public ResponseEntity<List<Oder>> searchOder(@RequestParam("isDeleteOder") boolean isDeleteOder,
                                                  @RequestParam("isDeleteAccount") boolean isDeleteAccount,
-                                                    @RequestParam("fullName") String fullName,
-                                                    @RequestParam("userName") String userName,
-                                                    @RequestParam("address") String address,
-                                                    @RequestParam("phone") String phone) {
-        List<Oder> oderList = orderService.findAllSerachOder(isDeleteOder,isDeleteAccount,fullName,userName,address,phone);
+                                                 @RequestParam("fullName") String fullName,
+                                                 @RequestParam("userName") String userName,
+                                                 @RequestParam("address") String address,
+                                                 @RequestParam("phone") String phone) {
+        List<Oder> oderList = orderService.findAllSerachOder(isDeleteOder, isDeleteAccount, fullName, userName, address, phone);
         return oderList.isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(oderList, HttpStatus.OK);
     }
 }

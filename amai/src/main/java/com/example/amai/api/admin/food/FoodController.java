@@ -1,6 +1,7 @@
 package com.example.amai.api.admin.food;
 
 import com.example.amai.core.Food.entity.Food;
+import com.example.amai.core.Food.entity.contans.EStatusFood;
 import com.example.amai.core.Food.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import java.util.Optional;
 @RequestMapping("api/admin/food")
 @CrossOrigin
 public class FoodController {
+
 
     @Autowired
     private FoodService foodService;
@@ -37,7 +39,7 @@ public class FoodController {
      */
     @GetMapping("/allFood/{idDeleteFood}/{idDeleteFoodCategory}")
     public ResponseEntity<List<Food>> finAllIsDeleteandFoodCategory(@PathVariable("idDeleteFood") boolean idDeleteFood,
-                                                     @PathVariable("idDeleteFoodCategory") boolean idDeleteFoodCategory) {
+                                                                    @PathVariable("idDeleteFoodCategory") boolean idDeleteFoodCategory) {
         List<Food> foodList = foodService.findByIsDeleted(idDeleteFood, idDeleteFoodCategory);
         return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
     }
@@ -49,7 +51,7 @@ public class FoodController {
      */
     @GetMapping("/all/{isdelete}")
     public ResponseEntity<List<Food>> finAllIsDelete(@PathVariable("isdelete") boolean isdelete) {
-        List<Food> foodList = foodService.findByIsDeletedFood(isdelete);
+        List<Food> foodList = foodService.findByIsDeletedFood(isdelete, EStatusFood.INSTOCK);
         return foodList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(foodList, HttpStatus.OK);
     }
 

@@ -6,11 +6,8 @@ import com.example.amai.core.order.entity.contans.EStatusOrder;
 import com.example.amai.core.order.entity.listener.OrderListener;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import java.util.List;
 
 @Entity

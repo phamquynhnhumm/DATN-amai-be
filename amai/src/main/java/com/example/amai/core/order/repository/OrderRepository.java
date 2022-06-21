@@ -16,7 +16,12 @@ public interface OrderRepository extends JpaRepository<Oder, Integer> {
      * @param idDeleteOder true = 1 = đã xóa, false =0= chưa xóa
      * @return
      */
-    List<Oder> findByIsDeletedAndAccount_IsDeleted(boolean idDeleteOder, boolean issDeleteAccount);
+    @Query(value = "select * from oder as od " +
+            "inner join account as ac on ac.user_name = od.account " +
+            "where od.is_deleted = :isDeleteOder " +
+            "and ac.is_deleted = :isDeleteAccount ", nativeQuery = true)
+    List<Oder> findAllByIsDeletedAndAccount_IsDeleted(@Param("isDeleteOder") boolean idDeleteOder,
+                                                      @Param("isDeleteAccount") boolean issDeleteAccount);
 
     /**
      * Danh sách đơn hàng theo tài khoản
