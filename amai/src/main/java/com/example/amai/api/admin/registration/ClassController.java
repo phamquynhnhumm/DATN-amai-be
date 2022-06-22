@@ -1,6 +1,5 @@
 package com.example.amai.api.admin.registration;
 
-import com.example.amai.core.Food.entity.Material;
 import com.example.amai.core.registration.entity.Registration;
 import com.example.amai.core.registration.entity.contans.EStatuasHandle;
 import com.example.amai.core.registration.service.RegistrationService;
@@ -75,11 +74,22 @@ public class ClassController {
         List<Registration> registrationList = registrationService.findAllByIsDeleted(isdelete);
         return registrationList.isEmpty() ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(registrationList, HttpStatus.OK);
     }
+
     @GetMapping("/search")
     public ResponseEntity<List<Registration>> searcMaterial(@RequestParam("isDelete") boolean isDelete,
-                                                        @RequestParam("name") String name,
-                                                        @RequestParam("phone") String phone) {
+                                                            @RequestParam("name") String name,
+                                                            @RequestParam("phone") String phone) {
         List<Registration> registrations = registrationService.findSearch(isDelete, name, phone);
         return registrations.isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) : new ResponseEntity<>(registrations, HttpStatus.OK);
+    }
+
+    @PutMapping("confirm")
+    public ResponseEntity<Registration> confirmCLass(@RequestBody Registration registration) {
+        Optional<Registration> registrationOptional = registrationService.getById(registration.getId());
+        registration.setHandle(EStatuasHandle.CONTACTED);
+        if (!registrationOptional.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(registrationService.save(registration), HttpStatus.OK);
     }
 }
