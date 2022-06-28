@@ -62,6 +62,23 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
+    /**
+     * Khóa tài khoản người dùng
+     *
+     * @param id ID người dùng
+     * @return người dùng đã được cập nhật cờ xóa
+     */
+    @PutMapping("enable/{id}")
+    public ResponseEntity<Users> enableUser(@PathVariable("id") Integer id) {
+        Users users = userService.getById(id).orElse(null);
+        if (users.equals(null)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            users.getAccount().setEnable(false);
+            userService.save(users);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
 
     /**
      * Hàm Xem chi tiết một người dùng

@@ -68,11 +68,6 @@ public class Material {
     private Supplier supplierList;
 
     /**
-     * Đơn vị tính
-     */
-    private String unit;
-
-    /**
      * Số lượng
      */
     private Integer quantity;
@@ -87,15 +82,6 @@ public class Material {
      */
     private String name;
 
-    /**
-     * Khối lượng nhập vào
-     */
-    private Float importKg;
-
-    /**
-     * Khối lượng còn lại
-     */
-    private Float remainingKg;
 
     @OneToMany(mappedBy = "material")
     @JsonIgnore
