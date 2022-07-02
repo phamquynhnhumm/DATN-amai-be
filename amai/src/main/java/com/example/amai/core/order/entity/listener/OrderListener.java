@@ -46,6 +46,7 @@ public class OrderListener implements EntityListeners {
         oder.setAccount(userRequest.getAccount());
         oder.setUpdatedBy(userRequest.getAccount());
         oder.setIsDeleted(false);
+        oder.setPay(false);
     }
 
     /**

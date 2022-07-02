@@ -101,6 +101,21 @@ public class oderUserController {
     }
 
     /**
+     * Cập nhật địa chỉ đơn hangf
+     *
+     * @param oder
+     * @return
+     */
+    @PutMapping("/address")
+    public ResponseEntity<Oder> updteOrderAddress(@RequestBody Oder oder) {
+        Optional<Oder> oderOptional = orderService.getById(oder.getId());
+        if (!oderOptional.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(orderService.save(oder), HttpStatus.OK);
+    }
+
+    /**
      * Thêm mới orderDetail
      *
      * @param orderDetails truyền vào danh sách chi tiết đơn hàng cùng một lúc

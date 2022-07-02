@@ -105,7 +105,7 @@ public class FoodDetailController {
     }
 
     /**
-     * Cập nhật  chi tiết món
+     * Cập nhật chi tiết món
      *
      * @param foodDetail
      * @return

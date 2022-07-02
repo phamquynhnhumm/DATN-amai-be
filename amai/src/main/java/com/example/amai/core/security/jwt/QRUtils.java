@@ -18,7 +18,6 @@ public class QRUtils {
     public static String prettyObject(Object object) {
         try {
             ObjectMapper mapper = new ObjectMapper();
-
             return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
         } catch (JsonProcessingException e) {
             e.printStackTrace();

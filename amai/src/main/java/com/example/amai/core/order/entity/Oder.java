@@ -109,4 +109,8 @@ public class Oder {
      */
     @Enumerated(EnumType.STRING)
     private EPayments payments;
+    /**
+     * Trạng thái thanh toán, true đã thanh toán, false chưa thanh toán
+     */
+    private Boolean pay;
 }

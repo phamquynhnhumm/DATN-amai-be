@@ -87,11 +87,11 @@ public class OrderServiceImpl implements OrderService {
             helper.setTo(email);
             helper.setSubject("Thong Tin Don Hang");
             helper.setText("<h3>Xin chao quy khach !</h3>" +
-                    "<p>Ten xac nhan :" + oder.getFullName() + "</p>" +
-                    "<p>Dia chi : " + oder.getAddress() + "</span></p>" +
+                    "<p>Ma don hang :" + oder.getId() + "</p>" +
+                    "<p>Ten nguoi nhan :" + oder.getFullName() + "</p>" +
                     "<p>So dien thoai :" + oder.getPhone() + "</p>" +
                     "<p>Ma OR:" +
-                    " <img src=\"" + oder.getQrcode() + "\" alt='mã qrr'></p>" +
+                    " <img src=\"" + oder.getQrcode() + "\" alt='Ma qrr'></p>" +
                     " <p>Link dan den trang chu: <a style='color: red; text-decoration: underline' href='http://localhost:4200'>bam vao day</a></p>", true
             );
             this.javaMailSender.send(message);
