@@ -15,8 +15,10 @@ public class JwtUtil {
 
     private static final String SECRET_KEY = "secret";
 
+    /**
+     * 12h
+     */
     private static final long TIME_TOKEN = 1000 * 60 * 60 * 12;
-//    private static final long TIME_TOKEN = 12;
 
     //Get Username from Token
     public String extractUsername(String token) {

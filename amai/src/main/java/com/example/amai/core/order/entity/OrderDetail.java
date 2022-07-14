@@ -75,4 +75,9 @@ public class OrderDetail {
     @ManyToOne
     @JoinColumn(name = "food_id")
     private Food food;
+
+    /**
+     * Giá của món
+     */
+    private Float price;
 }
